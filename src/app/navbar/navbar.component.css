@@ -1,10 +1,10 @@
 ul {
+  height: fit-content;
   list-style-type: none;
-  width: fit-content;
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333333;
+  background-color: #333;
 }
 
 li {
@@ -12,13 +12,28 @@ li {
 }
 
 li a {
-  display: block;
+  display: flex;
   color: white;
-  text-align: center;
-  padding: 16px;
+  height: 6vh;
+  width: 5vw;
   text-decoration: none;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
-li a:hover {
-  background-color: #111111;
+li a:hover:not(.active) {
+  height: 6vh;
+  background-color: #111;
+}
+
+.active {
+  height: 6vh;
+  background-color: lightpink;
+}
+.navbar {
+  height: 6vh;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
 }

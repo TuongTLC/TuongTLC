@@ -69,6 +69,7 @@ p {
   margin-top: 10vh;
   margin-left: 1vw;
   float: left;
+  cursor: pointer;
 }
 
 img {
