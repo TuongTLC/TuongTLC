@@ -1,0 +1,30 @@
+<div [class.background]="true">
+  <div [class.logo]="true">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
+      rel="stylesheet"
+    />
+  </div>
+  <div [class.innerDiv]="true">
+    <div [class.welcome]="true">
+      <input name="email" type="text" placeholder="Email" />
+      <br />
+      <input name="fullname" type="text" placeholder="Full name" />
+      <input name="username" type="text" placeholder="Username" />
+      <br />
+      <input name="password" type="password" placeholder="Password" />
+      <br />
+      <input name="repassword" type="password" placeholder="Confirm password" />
+      <br />
+      <div [class.loginBtn]="true">
+        <a routerLink="/login">Back</a>
+      </div>
+      <button [class.loginBtn]="true" type="button">Register</button>
+    </div>
+  </div>
+</div>

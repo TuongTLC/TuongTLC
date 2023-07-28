@@ -1,2 +1,49 @@
-<p>Welcome page</p>
-<button routerLink="home">Home</button>
+<div [class.background]="true">
+  <div [class.logo]="true">
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
+      rel="stylesheet"
+    />
+  </div>
+  <div [class.innerDiv]="true">
+    <div [class.welcome]="true">
+      <h1>Welcome</h1>
+      <p>Website under developing...</p>
+    </div>
+    <div [class.para]="true">
+      <p>This website belong to TuongTLC</p>
+      <p>Everything on this website is developed by TuongTLC.</p>
+      <p>
+        This website was created
+        <br />
+        to share coding knowlegdes, technology tips and tricks.
+      </p>
+      <div [class.homeBtn]="true">
+        <a routerLink="home">Home</a>
+      </div>
+      <br />
+      <div [class.loginBtn]="true">
+        <a routerLink="login">Login</a>
+      </div>
+    </div>
+    <div [class.socialContainer]="true">
+      <a href="https://www.facebook.com/trinhtuong242/">
+        <img
+          src="https://tuongtlc.ddns.net:8080/resource/fbicon.png"
+          alt="fbico"
+        />
+      </a>
+      <a href="https://www.instagram.com/trinhtuong242/">
+        <img
+          src="https://tuongtlc.ddns.net:8080/resource/instaicon.png"
+          alt="instaico"
+        />
+      </a>
+    </div>
+  </div>
+</div>

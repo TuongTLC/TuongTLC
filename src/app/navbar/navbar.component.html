@@ -1,4 +1,4 @@
-<div *ngIf="hasRoute()">
+<div *ngIf="hideNavbar()">
   <nav>
     <ul>
       <li>
@@ -15,8 +15,19 @@
         >
       </li>
       <li>
-        <a routerLink="/**" routerLinkActive="active" ariaCurrentWhenActive="page"
-          >Error</a
+        <a
+          routerLink="/tutorials"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Tutorials</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/tips"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Tech Tips</a
         >
       </li>
     </ul>
