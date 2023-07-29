@@ -9,6 +9,7 @@ import { TutorialsPageComponent } from './tutorials-page/tutorials-page.componen
 import { TipsPageComponent } from './tips-page/tips-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     TipsPageComponent,
     LoginPageComponent,
     RegisterPageComponent,
+    AboutPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

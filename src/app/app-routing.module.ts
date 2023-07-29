@@ -7,6 +7,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { TutorialsPageComponent } from './tutorials-page/tutorials-page.component';
 import { TipsPageComponent } from './tips-page/tips-page.component';
+import { AboutPageComponent } from './about-page/about-page.component';
 const routes: Routes = [
   { path: '', component: WelcomePageComponent },
   { path: 'home', component: HomePageComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: 'tutorials', component: TutorialsPageComponent },
   { path: 'tips', component: TipsPageComponent },
+  { path: 'about', component: AboutPageComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 

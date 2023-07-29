@@ -4,7 +4,9 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #333;
+  background-color: white;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
 li {
@@ -14,8 +16,8 @@ li {
 li a {
   font-family: "Itim", cursive;
   display: flex;
-  color: white;
-  height: 6vh;
+  color: hotpink;
+  height: 5.5vh;
   width: 5vw;
   text-decoration: none;
   text-align: center;
@@ -24,16 +26,19 @@ li a {
 }
 
 li a:hover:not(.active) {
-  height: 6vh;
+  height: 5.5vh;
   background-color: hotpink;
+  color: white;
+  border-radius: 5px;
 }
-
 .active {
-  height: 6vh;
+  height: 5.5vh;
   background-color: rgb(227, 176, 214);
+  border-radius: 5px;
+  color: white !important;
 }
 .navbar {
-  height: 6vh;
+  height: 5.5vh;
   width: 100%;
   position: absolute;
   z-index: 1;
