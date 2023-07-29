@@ -1,1 +1,22 @@
-<p>Error 404!!!</p>
+<div [class.background]="true">
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Itim&display=swap"
+    rel="stylesheet"
+  />
+  <div [class.innerDiv]="true">
+    <div [class.welcome]="true">
+      <h2>
+        Oops, it's 404!<br />The page you're looking for is not available.<br />Please
+        check for url typo.
+      </h2>
+      <div [class.loginBtn]="true">
+        <a routerLink="/home">Back to home</a>
+      </div>
+    </div>
+  </div>
+</div>

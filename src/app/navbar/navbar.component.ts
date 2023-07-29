@@ -9,11 +9,11 @@ import { Router } from '@angular/router';
 export class NavbarComponent {
   constructor(private router: Router) {}
   hideNavbar() {
-    let hideUrls = ['/', '/login', '/register'];
-    let isHidden = true;
+    let hideUrls = ['/home', '/tutorials', '/tips'];
+    let isHidden = false;
     hideUrls.forEach((url) => {
       if (url === this.router.url) {
-        isHidden = false;
+        isHidden = true;
       }
     });
     return isHidden;

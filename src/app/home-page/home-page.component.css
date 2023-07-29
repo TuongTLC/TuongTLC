@@ -1,5 +1,4 @@
 .background {
-  background-image: url("https://tuongtlc.ddns.net:8080/resource/background/homebackground.jpg");
   height: 100vh;
   width: 100vw;
   background-position: center;
@@ -12,7 +11,7 @@
   padding: 0;
 }
 .innerDiv {
-  background-color: lightpink;
+  background-color: rgb(227, 176, 214);
   color: white;
   height: 93.5vh;
   width: 70%;

@@ -12,6 +12,7 @@ li {
 }
 
 li a {
+  font-family: "Itim", cursive;
   display: flex;
   color: white;
   height: 6vh;
@@ -24,12 +25,12 @@ li a {
 
 li a:hover:not(.active) {
   height: 6vh;
-  background-color: #111;
+  background-color: hotpink;
 }
 
 .active {
   height: 6vh;
-  background-color: lightpink;
+  background-color: rgb(227, 176, 214);
 }
 .navbar {
   height: 6vh;

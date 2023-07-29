@@ -1,37 +1,28 @@
-.background {
-  background-image: url("https://tuongtlc.ddns.net:8080/resource/background/background.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
-  width: 100vw;
-  overflow: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
 .background::-webkit-scrollbar {
   display: none;
 }
 .innerDiv {
   float: left;
   margin-top: 5%;
-  background-color: #e3afbc;
+  background-color: rgb(227, 176, 214);
   color: white;
   vertical-align: middle;
   height: auto;
   width: 60%;
   border-radius: 20px;
-  opacity: 0.95;
+  opacity: 0.9;
 }
 .logo {
-  margin: 1%;
   background-image: url("https://tuongtlc.ddns.net:8080/resource/logo.png");
-  height: 30%;
-  width: 20%;
+  height: 30vh;
+  width: 20vw;
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  margin-top: 10vh;
+  margin-left: 1vw;
   float: left;
+  cursor: pointer;
 }
 .welcome {
   text-align: center;
