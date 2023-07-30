@@ -1,16 +1,17 @@
 <div>
-  <div [class.logo]="true" onclick="window.location.href='/'">
-  </div>
+  <div [class.logo]="true" onclick="window.location.href='/'"></div>
   <div [class.innerDiv]="true">
     <div [class.welcome]="true">
       <input name="username" type="text" placeholder="Username" />
       <br />
       <input name="password" type="password" placeholder="Password" />
       <br />
-      <a [class.loginBtn]="true">Login</a>
+      <div [class.loginBtn]="true" routerLink="/">
+        <a>Login</a>
+      </div>
       <br />
-      <div [class.loginBtn]="true">
-        <a routerLink="/register">Register</a>
+      <div [class.loginBtn]="true" routerLink="/register">
+        <a>Register</a>
       </div>
     </div>
   </div>

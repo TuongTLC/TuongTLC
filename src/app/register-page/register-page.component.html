@@ -1,6 +1,5 @@
 <div>
-  <div [class.logo]="true" onclick="window.location.href='/'">
-  </div>
+  <div [class.logo]="true" onclick="window.location.href='/'"></div>
   <div [class.innerDiv]="true">
     <div [class.welcome]="true">
       <input name="email" type="text" placeholder="Email" />
@@ -12,10 +11,10 @@
       <br />
       <input name="repassword" type="password" placeholder="Confirm password" />
       <br />
-      <div [class.loginBtn]="true">
-        <a routerLink="/login">Back</a>
+      <div [class.loginBtn]="true" routerLink="/login">
+        <a>Back</a>
       </div>
-      <a [class.loginBtn]="true">Register</a>
+      <div [class.loginBtn]="true"><a>Register</a></div>
     </div>
   </div>
 </div>
