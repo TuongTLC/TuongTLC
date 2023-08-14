@@ -1,25 +1,30 @@
 ul {
   height: fit-content;
+  width: 100%;
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow: auto;
+  white-space: nowrap;
   background-color: white;
-  border-bottom-right-radius: 15px;
-  border-bottom-left-radius: 15px;
+  border-radius: 5px;
 }
 
 li {
-  float: left;
+  display: inline-block;
+
   width: fit-content;
 }
-
+ul::-webkit-scrollbar {
+  display: none;
+}
 li a {
   font-family: "Itim", cursive;
   display: flex;
   color: hotpink;
   height: 5.5vh;
-  width: fit-content;
+  font-size: 2vh;
+  width: 8vh;
   text-decoration: none;
   text-align: center;
   justify-content: center;
@@ -45,4 +50,9 @@ li a:hover:not(.active) {
   width: 100%;
   position: absolute;
   z-index: 1;
+}
+@media only screen and (max-width: 768px) {
+  li a {
+    width: 10vh;
+  }
 }
