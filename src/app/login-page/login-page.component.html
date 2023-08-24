@@ -2,17 +2,32 @@
   <div [class.logo]="true" onclick="window.location.href='/'"></div>
   <div [class.innerDiv]="true">
     <div [class.welcome]="true">
-      <input name="username" type="text" placeholder="Username" />
+      <input
+        name="username"
+        type="text"
+        placeholder="Username"
+        id="username"
+        required
+        [(ngModel)]="loginInfo.username"
+      />
       <br />
-      <input name="password" type="password" placeholder="Password" />
+      <input
+        name="password"
+        type="password"
+        placeholder="Password"
+        id="password"
+        required
+        [(ngModel)]="loginInfo.password"
+      />
       <br />
-      <div [class.loginBtn]="true" routerLink="/">
+      <div [class.loginBtn]="true" (click)="login()">
         <a>Login</a>
       </div>
       <br />
       <div [class.loginBtn]="true" routerLink="/register">
         <a>Register</a>
       </div>
+      <p>{{ userInfo.userInfo.fullname }}</p>
     </div>
   </div>
 </div>

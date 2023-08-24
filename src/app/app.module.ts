@@ -10,7 +10,8 @@ import { TipsPageComponent } from './tips-page/tips-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     WelcomePageComponent,
@@ -24,7 +25,7 @@ import { AboutPageComponent } from './about-page/about-page.component';
     RegisterPageComponent,
     AboutPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [NavbarComponent],
 })
