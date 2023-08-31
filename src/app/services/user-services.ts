@@ -8,6 +8,6 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   login(user: userLoginModel) {
-    return this.http.post('/user/login', user);
+    return this.http.post('https://tuongtlc.ddns.net:8081/user/login', user);
   }
 }

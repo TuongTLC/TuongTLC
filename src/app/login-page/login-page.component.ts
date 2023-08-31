@@ -13,10 +13,17 @@ export class LoginPageComponent {
     password: '',
   };
   userInfo: any;
+  loginError: any;
   constructor(private userService: UserService) {}
   login() {
-    this.userService.login(this.loginInfo).subscribe((res) => {
-      this.userInfo = res;
-    });
+    this.loginError = null;
+    this.userInfo = null ;
+    this.userService.login(this.loginInfo).subscribe({
+      next : (res) => {
+        this.userInfo = res
+      }, error: (error) =>{
+        this.loginError = error.error;
+      }
+    })
   }
 }

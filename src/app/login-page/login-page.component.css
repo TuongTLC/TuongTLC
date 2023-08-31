@@ -59,7 +59,7 @@ input {
   margin: 1%;
   text-align: center;
   width: 30vw;
-  height: 5vh;
+  height: 5vh fit-content;
   font-size: 1.5vw;
 }
 input::placeholder {

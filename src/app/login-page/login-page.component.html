@@ -27,7 +27,8 @@
       <div [class.loginBtn]="true" routerLink="/register">
         <a>Register</a>
       </div>
-      <p>{{ userInfo.userInfo.fullname }}</p>
+      <p *ngIf="userInfo">{{userInfo.userInfo.fullname}}</p>
+      <p *ngIf="loginError">{{loginError}}</p>
     </div>
   </div>
 </div>
