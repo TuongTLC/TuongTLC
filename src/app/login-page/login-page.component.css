@@ -56,7 +56,7 @@ input {
   font-family: "Itim", cursive;
   border-color: hotpink;
   border-style: solid;
-  margin: 1%;
+  margin-top: 1%;
   text-align: center;
   width: 30vw;
   height: 5vh fit-content;
@@ -67,6 +67,20 @@ input::placeholder {
   font-size: 2vw;
   opacity: 50%;
 }
-button {
-  border: none;
+
+.loginError {
+  font-family: "Itim", cursive;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+  text-align: center;
+  display: inline-block;
+}
+.emptyError {
+  font-family: "Itim", cursive;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  font-size: 1.25vw;
+  display: inline-block;
 }

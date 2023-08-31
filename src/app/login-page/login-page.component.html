@@ -10,6 +10,9 @@
         required
         [(ngModel)]="loginInfo.username"
       />
+      <p [class.emptyError]="true" *ngIf="usernameEmpty">
+        Username can not be empty!
+      </p>
       <br />
       <input
         name="password"
@@ -19,6 +22,12 @@
         required
         [(ngModel)]="loginInfo.password"
       />
+      <p [class.emptyError]="true" *ngIf="passwordEmpty">
+        Password can not be empty!
+      </p>
+      <p [class.loginError]="true" *ngIf="loginError">
+        Wrong username or password!
+      </p>
       <br />
       <div [class.loginBtn]="true" (click)="login()">
         <a>Login</a>
@@ -27,8 +36,6 @@
       <div [class.loginBtn]="true" routerLink="/register">
         <a>Register</a>
       </div>
-      <p *ngIf="userInfo">{{userInfo.userInfo.fullname}}</p>
-      <p *ngIf="loginError">{{loginError.error}}</p>
     </div>
   </div>
 </div>
