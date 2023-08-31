@@ -28,7 +28,7 @@
         <a>Register</a>
       </div>
       <p *ngIf="userInfo">{{userInfo.userInfo.fullname}}</p>
-      <p *ngIf="loginError">{{loginError}}</p>
+      <p *ngIf="loginError">{{loginError.error}}</p>
     </div>
   </div>
 </div>
