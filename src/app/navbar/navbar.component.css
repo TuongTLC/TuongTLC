@@ -12,7 +12,6 @@ ul {
 
 li {
   display: inline-block;
-
   width: fit-content;
 }
 ul::-webkit-scrollbar {
@@ -23,8 +22,9 @@ li a {
   display: flex;
   color: hotpink;
   height: 5.5vh;
-  font-size: 2vh;
-  width: 8vh;
+  min-height: 50px;
+  font-size: 2vh 20px;
+  width: 8vh fit-content;
   text-decoration: none;
   text-align: center;
   justify-content: center;
@@ -50,6 +50,59 @@ li a:hover:not(.active) {
   width: 100%;
   position: absolute;
   z-index: 1;
+}
+.dropdown {
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-family: "Itim", cursive;
+  color: white;
+  font-size: 16px;
+  height: 5.5vh;
+  min-height: 50px;
+  width: fit-content;
+  min-width: 150px;
+  width: 9vw;
+  border: none;
+  outline: none;
+  margin: 0;
+  border-radius: 5px;
+  background-color: rgb(227, 176, 214);
+}
+
+.navbar a:hover,
+.dropdown:hover .dropbtn {
+  background-color: hotpink;
+  color: white;
+}
+
+.dropdown-content {
+  margin: 0 auto;
+  padding: 0;
+  display: none;
+  min-height: 50px;
+  position: absolute;
+  height: fit-content;
+  min-width: 150px;
+  width: 9vw;
+  background-color: white;
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.dropdown-content a {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  height: fit-content;
+  color: hotpink;
+  text-decoration: none;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  cursor: pointer;
 }
 @media only screen and (max-width: 768px) {
   li a {

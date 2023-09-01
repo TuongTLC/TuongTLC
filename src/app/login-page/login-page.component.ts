@@ -45,7 +45,14 @@ export class LoginPageComponent {
       next: (res) => {
         this.userInfo = res;
         if (this.userInfo) {
-          this.router.navigate(['/home']);
+          sessionStorage.setItem('token', this.userInfo.token);
+          sessionStorage.setItem(
+            'userInfo',
+            JSON.stringify(this.userInfo.userInfo)
+          );
+          this.router.navigate(['/home']).then(() => {
+            window.location.reload();
+          });
         }
       },
       error: (error) => {

@@ -2,19 +2,49 @@
   <div [class.logo]="true" onclick="window.location.href='/'"></div>
   <div [class.innerDiv]="true">
     <div [class.welcome]="true">
-      <input name="email" type="text" placeholder="Email" />
+      <input
+        name="username"
+        type="text"
+        placeholder="Username"
+        [(ngModel)]="registerInfo.username"
+      />
       <br />
-      <input name="fullname" type="text" placeholder="Full name" />
-      <input name="username" type="text" placeholder="Username" />
-      <br />
-      <input name="password" type="password" placeholder="Password" />
+      <input
+        name="password"
+        type="password"
+        placeholder="Password"
+        [(ngModel)]="registerInfo.password"
+      />
       <br />
       <input name="repassword" type="password" placeholder="Confirm password" />
+      <br />
+      <input
+        name="email"
+        type="text"
+        placeholder="Email"
+        [(ngModel)]="registerInfo.email"
+      />
+      <br />
+      <input
+        name="fullname"
+        type="text"
+        placeholder="Full name"
+        [(ngModel)]="registerInfo.fullname"
+      />
+      <br />
+      <input
+        name="phone"
+        type="text"
+        placeholder="Phone number"
+        [(ngModel)]="registerInfo.phone"
+      />
+      <br />
+      <input name="birthday" type="date" [(ngModel)]="registerInfo.birthday" />
       <br />
       <div [class.loginBtn]="true" routerLink="/login">
         <a>Back</a>
       </div>
-      <div [class.loginBtn]="true"><a>Register</a></div>
+      <div [class.loginBtn]="true" (click)="register()"><a>Register</a></div>
     </div>
   </div>
 </div>

@@ -25,13 +25,33 @@
           >Tech Tips</a
         >
       </li>
-      <li style="float: right">
+      <li>
         <a
           routerLink="/about"
           routerLinkActive="active"
           ariaCurrentWhenActive="page"
           >About</a
         >
+      </li>
+      <li *ngIf="!userInfo" style="float: right">
+        <a
+          routerLink="/login"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Login</a
+        >
+      </li>
+      <li *ngIf="userInfo" style="float: right">
+        <div [class.dropdown]="true">
+          <button [class.dropbtn]="true">
+            {{ userInfo.fullname }}
+          </button>
+          <div [class.dropdown-content]="true">
+            <a href="#">Change password</a>
+            <a href="#">Update information</a>
+            <a (click)="logout()">Logout</a>
+          </div>
+        </div>
       </li>
     </ul>
   </nav>

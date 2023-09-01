@@ -18,4 +18,16 @@ export class NavbarComponent {
     });
     return isHidden;
   }
+  userInfo: any;
+  ngOnInit(): void {
+    const userJson = sessionStorage.getItem('userInfo');
+    if (userJson !== null) {
+      this.userInfo = JSON.parse(userJson);
+    }
+  }
+  logout() {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userInfo');
+    this.router.navigate(['/login']);
+  }
 }
