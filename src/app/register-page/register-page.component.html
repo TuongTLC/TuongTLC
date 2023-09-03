@@ -47,4 +47,11 @@
       <div [class.loginBtn]="true" (click)="register()"><a>Register</a></div>
     </div>
   </div>
+  <app-popup-modal
+    *ngIf="showIt"
+    title="{{ popupTitle }}"
+    message="{{ popupMessage }}"
+    (close)="closeModal()"
+  >
+  </app-popup-modal>
 </div>

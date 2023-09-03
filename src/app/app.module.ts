@@ -12,6 +12,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { PopupModalComponent } from './popup-modal/popup-modal.component';
 @NgModule({
   declarations: [
     WelcomePageComponent,
@@ -24,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     LoginPageComponent,
     RegisterPageComponent,
     AboutPageComponent,
+    PopupModalComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

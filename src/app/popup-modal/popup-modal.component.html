@@ -1,0 +1,11 @@
+<div class="modal">
+  <h1>{{ title }}</h1>
+  <p>{{ message }}</p>
+  <div class="btn">
+    <button type="button" (click)="ok()">OK</button>
+    <button *ngIf="closeShow === '1'" type="button" (click)="cancel()">
+      Close
+    </button>
+  </div>
+</div>
+<div class="overlay"></div>
