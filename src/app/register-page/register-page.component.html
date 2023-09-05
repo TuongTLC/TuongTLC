@@ -39,12 +39,19 @@
         [(ngModel)]="registerInfo.phone"
       />
       <br />
-      <input name="birthday" type="date" [(ngModel)]="registerInfo.birthday" />
+      <input
+        name="birthdate"
+        type="text"
+        placeholder="Birthdate"
+        onfocus="(this.type ='date')"
+      />
       <br />
       <div [class.loginBtn]="true" routerLink="/login">
         <a>Back</a>
       </div>
-      <div [class.loginBtn]="true" (click)="register()"><a>Register</a></div>
+      <div [class.loginBtn]="true" (click)="validateRegister()">
+        <a>Register</a>
+      </div>
     </div>
   </div>
   <app-popup-modal

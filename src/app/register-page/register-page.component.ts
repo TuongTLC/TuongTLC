@@ -1,8 +1,7 @@
 import { UserService } from './../services/user-services';
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { userRegisterModel } from '../models/user-models';
 import { Router } from '@angular/router';
-import { PopupModalComponent } from '../popup-modal/popup-modal.component';
 
 @Component({
   selector: 'app-register-page',
@@ -16,13 +15,67 @@ export class RegisterPageComponent {
     password: '',
     email: '',
     fullname: '',
-    birthday: undefined,
     phone: '',
+    birthdate: new Date(),
   };
+
   userInfo: any;
+
   registerError: any;
+
   popupTitle = '';
   popupMessage = '';
+
+  validateUsernameError = false;
+  validatePasswordError = false;
+  validateEmailError = false;
+  validateFullnameError = false;
+  validatePhoneError = false;
+  validateBirthdateError = false;
+
+  validateRegister() {
+    this.validateUsernameError = false;
+    this.validatePasswordError = false;
+    this.validateEmailError = false;
+    this.validateFullnameError = false;
+    this.validatePhoneError = false;
+    this.validatePhoneError = false;
+
+    if (this.registerInfo.username.length <= 6) {
+      this.validateUsernameError = true;
+    }
+    let passwordRegex = new RegExp(
+      '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
+    );
+    if (!passwordRegex.test(this.registerInfo.password)) {
+      this.validatePasswordError = true;
+    }
+    let emailRegex = new RegExp(
+      "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+    );
+    if (!emailRegex.test(this.registerInfo.email)) {
+      this.validateEmailError = true;
+    }
+    if (this.registerInfo.fullname.length <= 5) {
+      this.validateFullnameError = true;
+    }
+    if (this.registerInfo.phone.length <= 10) {
+      this.validatePhoneError = true;
+    }
+    var timeDiff = Math.abs(
+      Date.now() - new Date(this.registerInfo.birthdate).getTime()
+    );
+    if (Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25) < 7) {
+      this.validateBirthdateError = true;
+    }
+    console.log(this.registerInfo);
+    console.log('username: ' + this.validateUsernameError);
+    console.log('password: ' + this.validatePasswordError);
+    console.log('email: ' + this.validateEmailError);
+    console.log('fullname: ' + this.validateFullnameError);
+    console.log('phone: ' + this.validatePhoneError);
+    console.log('birthdate: ' + this.validateBirthdateError);
+  }
   register() {
     this.userInfo = null;
     this.registerError = null;

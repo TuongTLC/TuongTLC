@@ -3,10 +3,10 @@ export class userLoginModel {
   password?: string;
 }
 export class userRegisterModel {
-  username?: string;
-  password?: string;
-  email?: string;
-  fullname?: string;
-  phone?: string;
-  birthday?: Date;
+  username!: string;
+  password!: string;
+  email!: string;
+  fullname!: string;
+  phone!: string;
+  birthdate!: Date;
 }
