@@ -8,48 +8,57 @@
         placeholder="Username"
         [(ngModel)]="registerInfo.username"
       />
-      <br />
+      <p class="error" *ngIf="validateUsernameError">Username invalid!</p>
       <input
         name="password"
         type="password"
         placeholder="Password"
         [(ngModel)]="registerInfo.password"
       />
-      <br />
-      <input name="repassword" type="password" placeholder="Confirm password" />
-      <br />
+      <p class="error" *ngIf="validatePasswordError">Password invalid!</p>
+      <input
+        name="repassword"
+        type="password"
+        [(ngModel)]="confirmPassword"
+        placeholder="Confirm password"
+      />
+      <p class="error" *ngIf="validateConfirmPasswordError">
+        Confirm Password invalid!
+      </p>
       <input
         name="email"
         type="text"
         placeholder="Email"
         [(ngModel)]="registerInfo.email"
       />
-      <br />
+      <p class="error" *ngIf="validateEmailError">Email invalid!</p>
       <input
         name="fullname"
         type="text"
         placeholder="Full name"
         [(ngModel)]="registerInfo.fullname"
       />
-      <br />
+      <p class="error" *ngIf="validateFullnameError">Full name invalid!</p>
       <input
         name="phone"
         type="text"
         placeholder="Phone number"
         [(ngModel)]="registerInfo.phone"
       />
-      <br />
+      <p class="error" *ngIf="validatePhoneError">Phone invalid!</p>
       <input
         name="birthdate"
         type="text"
         placeholder="Birthdate"
+        [(ngModel)]="registerInfo.birthdate"
         onfocus="(this.type ='date')"
       />
+      <p class="error" *ngIf="validateBirthdateError">Birthdate invalid!</p>
       <br />
       <div [class.loginBtn]="true" routerLink="/login">
         <a>Back</a>
       </div>
-      <div [class.loginBtn]="true" (click)="validateRegister()">
+      <div [class.loginBtn]="true" (click)="register()">
         <a>Register</a>
       </div>
     </div>

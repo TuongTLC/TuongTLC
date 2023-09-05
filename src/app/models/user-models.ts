@@ -8,5 +8,5 @@ export class userRegisterModel {
   email!: string;
   fullname!: string;
   phone!: string;
-  birthdate!: Date;
+  birthdate!: any;
 }

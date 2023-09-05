@@ -16,7 +16,7 @@ export class RegisterPageComponent {
     email: '',
     fullname: '',
     phone: '',
-    birthdate: new Date(),
+    birthdate: '',
   };
 
   userInfo: any;
@@ -28,6 +28,8 @@ export class RegisterPageComponent {
 
   validateUsernameError = false;
   validatePasswordError = false;
+  validateConfirmPasswordError = false;
+  confirmPassword = '';
   validateEmailError = false;
   validateFullnameError = false;
   validatePhoneError = false;
@@ -36,10 +38,13 @@ export class RegisterPageComponent {
   validateRegister() {
     this.validateUsernameError = false;
     this.validatePasswordError = false;
+    this.validateConfirmPasswordError = false;
     this.validateEmailError = false;
     this.validateFullnameError = false;
     this.validatePhoneError = false;
-    this.validatePhoneError = false;
+    this.validateBirthdateError = false;
+
+    let validateFailed = false;
 
     if (this.registerInfo.username.length <= 6) {
       this.validateUsernameError = true;
@@ -49,24 +54,36 @@ export class RegisterPageComponent {
     );
     if (!passwordRegex.test(this.registerInfo.password)) {
       this.validatePasswordError = true;
+      validateFailed = true;
+    }
+    if (this.registerInfo.password !== this.confirmPassword) {
+      this.validateConfirmPasswordError = true;
+      validateFailed = true;
     }
     let emailRegex = new RegExp(
       "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
     );
     if (!emailRegex.test(this.registerInfo.email)) {
       this.validateEmailError = true;
+      validateFailed = true;
     }
     if (this.registerInfo.fullname.length <= 5) {
       this.validateFullnameError = true;
+      validateFailed = true;
     }
-    if (this.registerInfo.phone.length <= 10) {
+    if (this.registerInfo.phone.length < 10) {
       this.validatePhoneError = true;
+      validateFailed = true;
     }
     var timeDiff = Math.abs(
       Date.now() - new Date(this.registerInfo.birthdate).getTime()
     );
-    if (Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25) < 7) {
+    if (
+      Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25) < 7 ||
+      this.registerInfo.birthdate === ''
+    ) {
       this.validateBirthdateError = true;
+      validateFailed = true;
     }
     console.log(this.registerInfo);
     console.log('username: ' + this.validateUsernameError);
@@ -75,29 +92,32 @@ export class RegisterPageComponent {
     console.log('fullname: ' + this.validateFullnameError);
     console.log('phone: ' + this.validatePhoneError);
     console.log('birthdate: ' + this.validateBirthdateError);
+    return validateFailed;
   }
   register() {
-    this.userInfo = null;
-    this.registerError = null;
-    this.userService.register(this.registerInfo).subscribe({
-      next: (res) => {
-        this.userInfo = res;
-        if (this.userInfo) {
-          console.log(JSON.stringify(this.userInfo));
-          this.popupTitle = 'Congratulations!';
-          this.popupMessage =
-            'Your account has been created. You can now login and enjoy.';
+    if (!this.validateRegister()) {
+      this.userInfo = null;
+      this.registerError = null;
+      this.userService.register(this.registerInfo).subscribe({
+        next: (res) => {
+          this.userInfo = res;
+          if (this.userInfo) {
+            console.log(JSON.stringify(this.userInfo));
+            this.popupTitle = 'Congratulations!';
+            this.popupMessage =
+              'Your account has been created. You can now login and enjoy.';
+            this.showModal();
+          }
+        },
+        error: (error) => {
+          this.registerError = error;
+          console.log(this.registerError);
+          this.popupTitle = 'Error!';
+          this.popupMessage = this.registerError.error;
           this.showModal();
-        }
-      },
-      error: (error) => {
-        this.registerError = error;
-        console.log(this.registerError);
-        this.popupTitle = 'Error!';
-        this.popupMessage = this.registerError.error;
-        this.showModal();
-      },
-    });
+        },
+      });
+    }
   }
 
   showIt = false;
