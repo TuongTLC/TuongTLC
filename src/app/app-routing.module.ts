@@ -8,6 +8,8 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { TutorialsPageComponent } from './tutorials-page/tutorials-page.component';
 import { TipsPageComponent } from './tips-page/tips-page.component';
 import { AboutPageComponent } from './about-page/about-page.component';
+import { PasswordPageComponent } from './password-page/password-page.component';
+import { UserInfoPageComponent } from './user-info-page/user-info-page.component';
 const routes: Routes = [
   { path: '', component: WelcomePageComponent },
   { path: 'home', component: HomePageComponent },
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'tutorials', component: TutorialsPageComponent },
   { path: 'tips', component: TipsPageComponent },
   { path: 'about', component: AboutPageComponent },
+  { path: 'user-info', component: UserInfoPageComponent },
+  { path: 'password', component: PasswordPageComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 

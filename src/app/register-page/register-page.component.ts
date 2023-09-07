@@ -1,6 +1,6 @@
 import { UserService } from './../services/user-services';
 import { Component } from '@angular/core';
-import { userRegisterModel } from '../models/user-models';
+import { UserRegisterModel } from '../models/user-models';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterPageComponent {
   constructor(private userService: UserService, private router: Router) {}
-  registerInfo: userRegisterModel = {
+  registerInfo: UserRegisterModel = {
     username: '',
     password: '',
     email: '',

@@ -1,12 +1,17 @@
-export class userLoginModel {
+export class UserLoginModel {
   username?: string;
   password?: string;
 }
-export class userRegisterModel {
+export class UserRegisterModel {
   username!: string;
   password!: string;
   email!: string;
   fullname!: string;
   phone!: string;
   birthdate!: any;
+}
+export class UserChangePasswordModel{
+ username!: string;
+ oldPassword!: string;
+ newPassword!: string;
 }

@@ -47,8 +47,18 @@
             {{ userInfo.fullname }}
           </button>
           <div [class.dropdown-content]="true">
-            <a href="#">Change password</a>
-            <a href="#">Update information</a>
+            <a
+              routerLink="/password"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              >Change password</a
+            >
+            <a
+              routerLink="/user-info"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              >Update information</a
+            >
             <a (click)="logout()">Logout</a>
           </div>
         </div>

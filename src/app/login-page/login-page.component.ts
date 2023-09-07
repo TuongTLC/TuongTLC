@@ -1,6 +1,6 @@
 import { UserService } from './../services/user-services';
 import { Component } from '@angular/core';
-import { userLoginModel } from '../models/user-models';
+import { UserLoginModel } from '../models/user-models';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-page.component.css'],
 })
 export class LoginPageComponent {
-  loginInfo: userLoginModel = {
+  loginInfo: UserLoginModel = {
     username: '',
     password: '',
   };

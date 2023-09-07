@@ -13,6 +13,8 @@ import { AboutPageComponent } from './about-page/about-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PopupModalComponent } from './popup-modal/popup-modal.component';
+import { PasswordPageComponent } from './password-page/password-page.component';
+import { UserInfoPageComponent } from './user-info-page/user-info-page.component';
 @NgModule({
   declarations: [
     WelcomePageComponent,
@@ -26,6 +28,8 @@ import { PopupModalComponent } from './popup-modal/popup-modal.component';
     RegisterPageComponent,
     AboutPageComponent,
     PopupModalComponent,
+    PasswordPageComponent,
+    UserInfoPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
