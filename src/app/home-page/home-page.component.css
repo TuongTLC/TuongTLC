@@ -10,6 +10,7 @@
   margin: 0;
   padding: 0;
 }
+
 .innerDiv {
   background-color: rgb(227, 176, 214);
   color: white;
@@ -28,6 +29,12 @@
   justify-content: center;
   align-items: center;
 }
+
 .innerDiv::-webkit-scrollbar {
   display: none;
+}
+
+.para {
+  width: 60vw;
+  color: hotpink;
 }
