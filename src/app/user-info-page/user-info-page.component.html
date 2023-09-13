@@ -1,1 +1,60 @@
-<p>user-info-page works!</p>
+<div>
+  <div [class.logo]="true" onclick="window.location.href='/'"></div>
+  <div [class.innerDiv]="true">
+    <div [class.welcome]="true">
+      <h2 class="account">Account: <br/>{{username}}</h2>
+      <label>Fullname:</label><br/>
+      <input
+        [(ngModel)]="userInfo.fullname"
+        name="fullname"
+        required
+        type="text"
+      /><br/>
+      <p *ngIf="fullNameError" [class.emptyError]="true">Fullname invalid!</p>
+      <label>Email:</label><br/>
+      <input
+        [(ngModel)]="userInfo.email"
+        name="email"
+        required
+        type="text"
+      /><br/>
+      <p *ngIf="emailError" [class.emptyError]="true">Email invalid!</p>
+
+      <label>Phone number:</label><br/>
+      <input
+        [(ngModel)]="userInfo.phone"
+        name="phone"
+        required
+        type="text"
+      /><br/>
+      <p *ngIf="phoneError" [class.emptyError]="true">Phone invalid!</p>
+      <label>Birthdate:</label><br/>
+      <input
+        #a #b
+        (focus)="a.type='date'" (focusout)="b.type='text'"
+        [(ngModel)]="birthdate"
+        name="birthdate"
+        required
+        type="text"
+      /><br/>
+      <p *ngIf="birthDayError" [class.emptyError]="true">Birthday invalid!</p>
+
+      <br/>
+      <div (click)="updateUserInfo()" [class.loginBtn]="true">
+        <a>Confirm</a>
+      </div>
+      <br/>
+      <div [class.loginBtn]="true" routerLink="/home">
+        <a>Home</a>
+      </div>
+    </div>
+  </div>
+</div>
+<app-popup-modal
+  (close)="closeModal()"
+  *ngIf="showIt"
+  message="{{ popupMessage }}"
+  title="{{ popupTitle }}"
+>
+</app-popup-modal>
+

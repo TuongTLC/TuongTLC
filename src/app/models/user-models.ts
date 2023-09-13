@@ -15,3 +15,10 @@ export class UserChangePasswordModel{
  oldPassword!: string;
  newPassword!: string;
 }
+export class UserUpdateModel{
+  fullname!: string;
+  email!: string;
+  phone!: string;
+  birthday!: any;
+}
+
