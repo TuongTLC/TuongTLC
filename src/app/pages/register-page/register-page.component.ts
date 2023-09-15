@@ -1,7 +1,7 @@
-import { UserService } from './../services/user-services';
-import { Component } from '@angular/core';
-import { UserRegisterModel } from '../models/user-models';
-import { Router } from '@angular/router';
+import {UserService} from '../../services/user-services';
+import {Component} from '@angular/core';
+import {UserRegisterModel} from '../../models/user-models';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./register-page.component.css'],
 })
 export class RegisterPageComponent {
-  constructor(private userService: UserService, private router: Router) {}
   registerInfo: UserRegisterModel = {
     username: '',
     password: '',
@@ -18,14 +17,10 @@ export class RegisterPageComponent {
     phone: '',
     birthdate: '',
   };
-
   userInfo: any;
-
   registerError: any;
-
   popupTitle = '';
   popupMessage = '';
-
   validateUsernameError = false;
   validatePasswordError = false;
   validateConfirmPasswordError = false;
@@ -34,6 +29,10 @@ export class RegisterPageComponent {
   validateFullnameError = false;
   validatePhoneError = false;
   validateBirthdateError = false;
+  showIt = false;
+
+  constructor(private userService: UserService, private router: Router) {
+  }
 
   validateRegister() {
     this.validateUsernameError = false;
@@ -94,6 +93,7 @@ export class RegisterPageComponent {
     console.log('birthdate: ' + this.validateBirthdateError);
     return validateFailed;
   }
+
   register() {
     if (!this.validateRegister()) {
       this.userInfo = null;
@@ -120,11 +120,10 @@ export class RegisterPageComponent {
     }
   }
 
-  showIt = false;
-
   showModal() {
     this.showIt = true;
   }
+
   closeModal() {
     this.showIt = false;
     if (this.registerError === null) {

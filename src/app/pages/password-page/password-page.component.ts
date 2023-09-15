@@ -1,7 +1,7 @@
-import { UserService } from './../services/user-services';
-import { Router } from '@angular/router';
-import { Component } from '@angular/core';
-import { UserChangePasswordModel } from '../models/user-models';
+import {UserService} from '../../services/user-services';
+import {Router} from '@angular/router';
+import {Component} from '@angular/core';
+import {UserChangePasswordModel} from '../../models/user-models';
 
 @Component({
   selector: 'app-password-page',
@@ -9,29 +9,28 @@ import { UserChangePasswordModel } from '../models/user-models';
   styleUrls: ['./password-page.component.css'],
 })
 export class PasswordPageComponent {
-  constructor(private router: Router, private userService: UserService) {}
-
   changePassModel: UserChangePasswordModel = {
     username: '',
     oldPassword: '',
     newPassword: '',
   };
-
   userInfo: any;
-
   newPassConfirm = '';
-
   oldPassError = false;
   newPassError = false;
   newPassConfirmError = false;
-
   popupTitle = '';
   popupMessage = '';
   showIt = false;
   changeSuccess = false;
+
+  constructor(private router: Router, private userService: UserService) {
+  }
+
   showModal() {
     this.showIt = true;
   }
+
   closeModal() {
     this.showIt = false;
     if (this.changeSuccess) {
@@ -46,6 +45,7 @@ export class PasswordPageComponent {
     }
     this.changePassModel.username = JSON.parse(this.userInfo).username;
   }
+
   validateInfomation() {
     this.oldPassError = false;
     this.newPassError = false;
@@ -65,11 +65,13 @@ export class PasswordPageComponent {
     }
     return error;
   }
+
   logout() {
     sessionStorage.removeItem('token');
     sessionStorage.removeItem('userInfo');
     this.router.navigate(['/login']);
   }
+
   changePassword() {
     if (!this.validateInfomation()) {
       this.userService.changePassword(this.changePassModel).subscribe({

@@ -1,7 +1,7 @@
-import { UserService } from './../services/user-services';
-import { Component } from '@angular/core';
-import { UserLoginModel } from '../models/user-models';
-import { Router } from '@angular/router';
+import {UserService} from '../../services/user-services';
+import {Component} from '@angular/core';
+import {UserLoginModel} from '../../models/user-models';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -17,7 +17,10 @@ export class LoginPageComponent {
   loginError: any;
   usernameEmpty: any;
   passwordEmpty: any;
-  constructor(private userService: UserService, private router: Router) {}
+
+  constructor(private userService: UserService, private router: Router) {
+  }
+
   validateLoginInfo() {
     if (this.loginInfo.username?.length == 0) {
       this.usernameEmpty = true;
@@ -31,6 +34,7 @@ export class LoginPageComponent {
       return true;
     }
   }
+
   login() {
     this.usernameEmpty = false;
     this.passwordEmpty = false;
@@ -40,7 +44,6 @@ export class LoginPageComponent {
     if (this.validateLoginInfo() == false) {
       return;
     }
-
     this.userService.login(this.loginInfo).subscribe({
       next: (res) => {
         this.userInfo = res;

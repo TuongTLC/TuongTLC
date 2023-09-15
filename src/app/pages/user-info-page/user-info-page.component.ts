@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {UserService} from "../services/user-services";
-import {UserUpdateModel} from "../models/user-models";
+import {UserService} from "../../services/user-services";
+import {UserUpdateModel} from "../../models/user-models";
 
 @Component({
   selector: 'app-user-info-page',

@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {FormControl, FormGroup} from "@angular/forms";
-import jsonDoc from "../doc";
+import jsonDoc from "../../doc";
 import {Editor, toHTML, Toolbar, Validators} from "ngx-editor";
 
 @Component({
