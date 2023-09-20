@@ -11,8 +11,8 @@
   padding: 0;
 }
 .innerDiv {
-  background-color: rgb(227, 176, 214);
-  color: white;
+  background-color: var(--mid-color);
+  color: var(--text-color);
   height: 93.5vh;
   width: 80%;
   margin-top: 6vh;

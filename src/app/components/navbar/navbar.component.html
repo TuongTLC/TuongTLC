@@ -33,7 +33,7 @@
           >About</a
         >
       </li>
-      <li *ngIf="!userInfo" style="float: right">
+      <li *ngIf="!userInfo" class="userBox">
         <a
           routerLink="/login"
           routerLinkActive="active"
@@ -41,7 +41,7 @@
           >Login</a
         >
       </li>
-      <li *ngIf="userInfo" style="float: right">
+      <li *ngIf="userInfo" class="userBox">
         <div [class.dropdown]="true">
           <button [class.dropbtn]="true">
             {{ userInfo.fullname }}

@@ -1,6 +1,6 @@
 .innerDiv {
-  background-color: rgb(227, 176, 214);
-  color: white;
+  background-color: var(--mid-color);
+  color: var(--text-color);
   vertical-align: middle;
   height: auto;
   width: 40vw;
@@ -17,7 +17,7 @@
   width: 100%;
   height: 30%;
   float: left;
-  color: hotpink;
+  color: var(--dark-color);
   font-size: 2vw;
 }
 .logo {
@@ -35,9 +35,9 @@
 .loginBtn {
   font-family: "Itim", cursive;
   margin: 1%;
-  background-color: hotpink;
+  background-color: var(--dark-color);
   border-radius: 2ex;
-  color: white;
+  color: var(--text-color);
   padding-right: 3%;
   padding-left: 3%;
   text-align: center;
@@ -48,13 +48,13 @@
   padding: 1vh;
 }
 .loginBtn a {
-  color: white;
+  color: var(--text-color);
   text-decoration: none;
 }
 input {
   border-radius: 1ex;
   font-family: "Itim", cursive;
-  border-color: hotpink;
+  border-color: var(--dark-color);
   border-style: solid;
   margin: 1%;
   text-align: center;
@@ -75,4 +75,30 @@ input::placeholder {
   margin: 0 auto;
   font-family: "Itim", cursive;
   font-size: 1ex;
+}
+@media only screen and (max-width: 768px) {
+  .logo {
+    margin-left: 25%;
+    height: 30vh;
+    width: 50vw;
+    float: left;
+    margin-top: 0;
+  }
+  .innerDiv {
+    width: 95vw;
+    margin-top: 10vh;
+  }
+  input {
+    width: 70vw;
+    height: 5vh;
+    border-radius: 10px;
+  }
+  .loginBtn {
+    width: 20vw fit-content;
+    height: 5vh fit-content;
+    font-size: 3em;
+  }
+  input::placeholder {
+    font-size: 3em;
+  }
 }

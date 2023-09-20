@@ -6,7 +6,7 @@ ul {
   padding: 0;
   overflow: auto;
   white-space: nowrap;
-  background-color: white;
+  background-color: var(--light-color);
   border-radius: 5px;
 }
 
@@ -20,7 +20,7 @@ ul::-webkit-scrollbar {
 li a {
   font-family: "Itim", cursive;
   display: flex;
-  color: hotpink;
+  color: var(--dark-color);
   height: 5.5vh;
   min-height: 50px;
   font-size: 2vh 20px;
@@ -32,18 +32,20 @@ li a {
   padding-left: 1vh;
   padding-right: 1vh;
 }
-
+.userBox {
+  float: right;
+}
 li a:hover:not(.active) {
   height: 5.5vh;
-  background-color: hotpink;
-  color: white;
+  background-color: var(--dark-color);
+  color: var(--text-color);
   border-radius: 5px;
 }
 .active {
   height: 5.5vh;
-  background-color: rgb(227, 176, 214);
+  background-color: var(--mid-color);
   border-radius: 5px;
-  color: white !important;
+  color: var(--text-color) !important;
 }
 .navbar {
   height: 5.5vh;
@@ -57,7 +59,7 @@ li a:hover:not(.active) {
 
 .dropdown .dropbtn {
   font-family: "Itim", cursive;
-  color: white;
+  color: var(--text-color);
   font-size: 16px;
   height: 5.5vh;
   min-height: 50px;
@@ -68,13 +70,13 @@ li a:hover:not(.active) {
   outline: none;
   margin: 0;
   border-radius: 5px;
-  background-color: rgb(227, 176, 214);
+  background-color: var(--mid-color);
 }
 
 .navbar a:hover,
 .dropdown:hover .dropbtn {
-  background-color: hotpink;
-  color: white;
+  background-color: var(--dark-color);
+  color: var(--text-color);
 }
 
 .dropdown-content {
@@ -86,7 +88,7 @@ li a:hover:not(.active) {
   height: fit-content;
   min-width: 150px;
   width: 9vw;
-  background-color: white;
+  background-color: var(--light-color);
   z-index: 1;
   border-radius: 5px;
 }
@@ -96,7 +98,7 @@ li a:hover:not(.active) {
   padding: 0;
   width: 100%;
   height: fit-content;
-  color: hotpink;
+  color: var(--dark-color);
   text-decoration: none;
 }
 
@@ -107,5 +109,9 @@ li a:hover:not(.active) {
 @media only screen and (max-width: 768px) {
   li a {
     width: 10vh;
+  }
+  .userBox {
+    float: none;
+    margin-left: 5vw;
   }
 }

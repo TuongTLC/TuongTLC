@@ -8,3 +8,9 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
 }
+:root {
+  --dark-color: rgb(252, 103, 178);
+  --mid-color: rgb(255, 197, 242);
+  --light-color: white;
+  --text-color: white;
+}

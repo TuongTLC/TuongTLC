@@ -14,13 +14,13 @@
   top: 50%;
   transform: translate(-50%, -50%);
   z-index: 1001;
-  background-color: white;
-  border: 5px solid hotpink;
+  background-color: var(--light-color);
+  border: 5px solid var(--dark-color);
   border-radius: 15px;
   padding: 1%;
 }
 h1 {
-  color: hotpink;
+  color: var(--dark-color);
   font-family: "Itim", cursive;
   font-size: 5ex;
   text-align: center;
@@ -34,8 +34,8 @@ button {
   border: none;
   border-radius: 10px;
   font-family: "Itim", cursive;
-  color: white;
-  background-color: hotpink;
+  color: var(--text-color);
+  background-color: var(--dark-color);
   cursor: pointer;
   margin: 5px;
 }
