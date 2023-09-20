@@ -21,7 +21,7 @@ li a {
   font-family: "Itim", cursive;
   display: flex;
   color: var(--dark-color);
-  height: 5.5vh;
+  height: 6vh;
   min-height: 50px;
   font-size: 2vh 20px;
   width: 8vh fit-content;
@@ -43,7 +43,7 @@ li a:hover:not(.active) {
 }
 .active {
   height: 5.5vh;
-  background-color: var(--mid-color);
+  background-color: var(--dark-color);
   border-radius: 5px;
   color: var(--text-color) !important;
 }
@@ -54,7 +54,7 @@ li a:hover:not(.active) {
   z-index: 1;
 }
 .dropdown {
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .dropdown .dropbtn {
@@ -68,9 +68,9 @@ li a:hover:not(.active) {
   width: 9vw;
   border: none;
   outline: none;
-  margin: 0;
+  margin: 0 auto;
   border-radius: 5px;
-  background-color: var(--mid-color);
+  background-color: var(--dark-color);
 }
 
 .navbar a:hover,
@@ -85,6 +85,7 @@ li a:hover:not(.active) {
   display: none;
   min-height: 50px;
   position: absolute;
+  right: 0;
   height: fit-content;
   min-width: 150px;
   width: 9vw;
@@ -108,7 +109,7 @@ li a:hover:not(.active) {
 }
 @media only screen and (max-width: 768px) {
   li a {
-    width: 10vh;
+    width: 13vh;
   }
   .userBox {
     float: none;

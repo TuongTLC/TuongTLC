@@ -14,9 +14,9 @@
 .innerDiv {
   background-color: var(--mid-color);
   color: var(--text-color);
-  height: 93.5vh;
+  height: 92vh;
   width: 80%;
-  margin-top: 6vh;
+  margin-top: 8vh;
   border-top: white solid 5px;
   border-left: white solid 5px;
   border-right: white solid 5px;
@@ -35,6 +35,16 @@
 }
 
 .para {
-  width: 60vw;
+  width: 95%;
   color: var(--dark-color);
+}
+@media only screen and (max-width: 768px) {
+  .innerDiv {
+    width: 95vw;
+    margin-top: 20%;
+  }
+  .para {
+    width: 99%;
+    margin-top: 2%;
+  }
 }

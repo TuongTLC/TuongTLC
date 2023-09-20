@@ -60,11 +60,11 @@ input {
   text-align: center;
   width: 30vw;
   height: 5vh fit-content;
-  font-size: 1.5vw;
+  font-size: 1em;
 }
 input::placeholder {
   font-family: "Itim", cursive;
-  font-size: 2vw;
+  font-size: 1em;
   opacity: 50%;
 }
 
@@ -100,6 +100,7 @@ input::placeholder {
     width: 70vw;
     height: 5vh;
     border-radius: 10px;
+    font-size: 3em;
   }
   .loginBtn {
     width: 20vw fit-content;
@@ -107,6 +108,6 @@ input::placeholder {
     font-size: 3em;
   }
   input::placeholder {
-    font-size: 3em;
+    font-size: 1em;
   }
 }
