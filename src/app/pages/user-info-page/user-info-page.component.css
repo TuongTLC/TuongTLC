@@ -137,4 +137,10 @@ label {
   label {
     font-size: 2em;
   }
+  .loginError {
+    font-size: 2em;
+  }
+  .emptyError {
+    font-size: 2em;
+  }
 }
