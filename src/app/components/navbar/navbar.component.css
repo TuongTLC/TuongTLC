@@ -9,10 +9,42 @@ ul {
   background-color: var(--light-color);
   border-radius: 5px;
 }
-
+.navbar {
+  height: fit-content;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+}
+img {
+  height: 100%;
+}
+.menu {
+  height: 5.5vh;
+  min-height: 45px;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
+  cursor: pointer;
+}
+.menu :hover {
+  background-color: var(--mid-color);
+  border-radius: 50px;
+}
+.homeMenu {
+  height: 3vh;
+  min-height: 30px;
+  width: auto;
+  padding: 5px;
+  margin: 0;
+}
 li {
   display: inline-block;
   width: fit-content;
+  vertical-align: middle;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 ul::-webkit-scrollbar {
   display: none;
@@ -49,12 +81,7 @@ li a:hover:not(.active) {
   border-radius: 5px;
   color: var(--text-color) !important;
 }
-.navbar {
-  height: fit-content;
-  width: 100%;
-  position: absolute;
-  z-index: 1;
-}
+
 .dropdown {
   overflow: scroll;
 }

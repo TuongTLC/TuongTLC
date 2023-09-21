@@ -1,13 +1,12 @@
 <div [class.navbar]="true" *ngIf="hideNavbar()">
   <nav>
     <ul>
+      <li class="menu">
+        <img src="/favicon.ico" alt="homelogo" routerLink="/home" />
+        <div class="menuImage"></div>
+      </li>
       <li>
-        <a
-          routerLink="/home"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-          >Home</a
-        >
+        <img src="/assets/menu.png" alt="menu" class="homeMenu" />
       </li>
       <li>
         <a
