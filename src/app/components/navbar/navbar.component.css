@@ -36,19 +36,19 @@ li a {
   float: right;
 }
 li a:hover:not(.active) {
-  height: 5.5vh;
+  height: 6vh;
   background-color: var(--dark-color);
   color: var(--text-color);
   border-radius: 5px;
 }
 .active {
-  height: 5.5vh;
+  height: 6vh;
   background-color: var(--dark-color);
   border-radius: 5px;
   color: var(--text-color) !important;
 }
 .navbar {
-  height: 5.5vh;
+  height: 6vh;
   width: 100%;
   position: absolute;
   z-index: 1;
@@ -61,7 +61,7 @@ li a:hover:not(.active) {
   font-family: "Itim", cursive;
   color: var(--text-color);
   font-size: 16px;
-  height: 5.5vh;
+  height: 6vh;
   min-height: 50px;
   width: fit-content;
   min-width: 150px;

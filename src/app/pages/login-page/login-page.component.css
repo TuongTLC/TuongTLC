@@ -110,4 +110,10 @@ input::placeholder {
   input::placeholder {
     font-size: 1em;
   }
+  .loginError {
+    font-size: 2em;
+  }
+  .emptyError {
+    font-size: 2em;
+  }
 }

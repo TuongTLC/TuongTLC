@@ -102,4 +102,7 @@ input::placeholder {
   input::placeholder {
     font-size: 1em;
   }
+  .error {
+    font-size: 2em;
+  }
 }
