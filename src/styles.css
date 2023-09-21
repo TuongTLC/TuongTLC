@@ -9,6 +9,9 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 :root {
   --dark-color: rgb(252, 103, 178);
   --mid-color: rgb(255, 197, 242);

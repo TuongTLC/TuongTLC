@@ -10,12 +10,13 @@
   margin: 0;
   padding: 0;
 }
+
 .innerDiv {
   background-color: var(--mid-color);
   color: var(--text-color);
-  height: 92vh;
+  height: 91vh;
   width: 80%;
-  margin-top: 8vh;
+  margin-top: 9vh;
   border-top: white solid 5px;
   border-left: white solid 5px;
   border-right: white solid 5px;
