@@ -30,4 +30,7 @@ export class NavbarComponent {
     sessionStorage.removeItem('userInfo');
     this.router.navigate(['/login']);
   }
+  menuClick(x: { classList: { toggle: (arg0: string) => void } }) {
+    x.classList.toggle('change');
+  }
 }
