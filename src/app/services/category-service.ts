@@ -13,9 +13,6 @@ export class CategoryService {
   ) {}
 
   getCategories(status: string) {
-    if (!this.auth.checkToken()) {
-      this.router.navigate(['/login']);
-    }
     return this.http.get(
       'https://tuongtlc.ddns.net:8081/category/get-categories?status=' + status
     );

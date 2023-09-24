@@ -1,15 +1,22 @@
 import {
   UserRegisterModel,
   UserLoginModel,
-  UserChangePasswordModel, UserUpdateModel,
+  UserChangePasswordModel,
+  UserUpdateModel,
 } from './../models/user-models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Auth } from '../auth';
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private auth: Auth
+  ) {}
 
   login(userLoginModel: UserLoginModel) {
     return this.http.post(
@@ -24,6 +31,9 @@ export class UserService {
     );
   }
   changePassword(userChangePasswordModel: UserChangePasswordModel) {
+    if (!this.auth.checkToken()) {
+      this.router.navigate(['/login']);
+    }
     let token = sessionStorage.getItem('token');
     return this.http.post(
       'https://tuongtlc.ddns.net:8081/user/change-password',
@@ -31,7 +41,10 @@ export class UserService {
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }
-  updateUserInfo(newUserInfo: UserUpdateModel){
+  updateUserInfo(newUserInfo: UserUpdateModel) {
+    if (!this.auth.checkToken()) {
+      this.router.navigate(['/login']);
+    }
     let token = sessionStorage.getItem('token');
     return this.http.post(
       'https://tuongtlc.ddns.net:8081/user/update',

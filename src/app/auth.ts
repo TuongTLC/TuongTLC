@@ -9,14 +9,16 @@ export class Auth {
     let valid = false;
     try {
       this.token = sessionStorage.getItem('token') ?? '';
-      console.log(this.token);
+      if (this.token.length < 1) {
+        return valid;
+      }
       const decodedToken: any = jwt_decode(this.token);
       const currentTimestamp = Math.floor(Date.now() / 1000);
       if (decodedToken.exp > currentTimestamp) {
         valid = true;
       }
       return valid;
-    } catch (error) {
+    } catch {
       return valid;
     }
   }

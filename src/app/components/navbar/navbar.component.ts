@@ -13,7 +13,7 @@ export class NavbarComponent {
     private categoryService: CategoryService
   ) {}
   hideNavbar() {
-    let hideUrls = ['/home', '/tutorials', '/tips', '/about', '/create', ''];
+    let hideUrls = ['/home', '/tutorials', '/tips', '/about', '/create'];
     let isHidden = false;
     hideUrls.forEach((url) => {
       if (url === this.router.url) {

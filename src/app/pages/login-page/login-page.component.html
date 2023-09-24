@@ -1,7 +1,7 @@
 <div>
   <div [class.logo]="true" onclick="window.location.href='/'"></div>
   <div [class.innerDiv]="true">
-    <div [class.welcome]="true">
+    <div [class.welcome]="true" (keyup.enter)="login()">
       <input
         name="username"
         type="text"
