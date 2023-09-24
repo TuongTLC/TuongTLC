@@ -34,7 +34,6 @@ export class NavbarComponent {
     this.categoryService.getCategories('active').subscribe({
       next: (res) => {
         this.categories = res;
-        console.log(this.categories);
       },
       error: (error) => {
         console.error(error);

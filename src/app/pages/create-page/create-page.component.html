@@ -1,16 +1,81 @@
 <div [class.background]="true">
   <div [class.innerDiv]="true">
-    <div [class.para]="true">
-      <form [formGroup]="form">
-        <div>
-          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
-          </ngx-editor-menu>
-          <ngx-editor [editor]="editor" formControlName="editorContent">
-          </ngx-editor>
-        </div>
-      </form>
-      <button (click)="save()">Save</button>
-      <p [innerHTML]="saveContent | sanitizeHtml"></p>
+    <div class="create-header">
+      <a (click)="activatePost()">Post</a>
+      <a (click)="activateCategory()">Catgory</a>
+      <a (click)="activateTag()">Tag</a>
     </div>
+    <div *ngIf="activePost" class="para">
+      <div class="postInfo">
+        <label>Post name:</label><br />
+        <input type="text" placeholder="Post name" /><br />
+
+        <label>Post summary:</label><br />
+        <textarea cols="50" rows="3" placeholder="Post summary"></textarea
+        ><br />
+
+        <label>Post thumbnail url:</label><br />
+        <input type="text" placeholder="Post thumbnail url" /><br />
+
+        <label>Post categories:</label
+        ><select
+          [(ngModel)]="selectedCategoryValue"
+          (ngModelChange)="selectCategory()"
+        >
+          <option disabled>Select Category</option>
+          <option *ngFor="let cate of categories" [ngValue]="cate">
+            {{ cate.categoryName }}
+          </option></select
+        ><br />
+        <a *ngFor="let category of selectedCategories; let lastItem = last">
+          {{ category.categoryName
+          }}<button (click)="removeSelectedCategory(category)">X</button
+          ><a *ngIf="!lastItem">,</a> </a
+        ><br />
+
+        <label>Post Tags:</label>
+        <select [(ngModel)]="selectedTagValue" (ngModelChange)="selectTag()">
+          <option disabled>Select Tag</option>
+          <option *ngFor="let tag of tags" [ngValue]="tag">
+            {{ tag.tagName }}
+          </option></select
+        ><br />
+        <a *ngFor="let tag of selectedTags; let lastItem = last">
+          {{ tag.tagName }}<button (click)="removeSelectedTag(tag)">X</button
+          ><a *ngIf="!lastItem">,</a>
+        </a>
+      </div>
+      <div class="upload">
+        <input type="file" (change)="fileChange($event)" multiple />
+        <button (click)="uploadFile()">Upload</button>
+        <p>Uploaded:</p>
+        <p *ngFor="let url of uploadUrlList">
+          {{ url.uploadDate | date : "d-MMM-yyyy HH:mm:ss" }}:<br />
+          <a [href]="url.path">{{
+            url.path.replace(
+              "https://tuongtlc.ddns.net:8080/FileStorage/Pictures/" +
+                url.uploadedBy +
+                "/",
+              ""
+            )
+          }}</a
+          ><button (click)="removeFile(url.path)">Delete</button>
+        </p>
+      </div>
+      <div class="editor">
+        <form [formGroup]="form">
+          <div>
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+            </ngx-editor-menu>
+            <ngx-editor [editor]="editor" formControlName="editorContent">
+            </ngx-editor>
+          </div>
+        </form>
+        <button (click)="save()">Save</button>
+        <p [innerHTML]="saveContent | sanitizeHtml"></p>
+      </div>
+    </div>
+    <div *ngIf="activeCategory">Cate</div>
+    <div *ngIf="activeTag">Tag</div>
   </div>
 </div>

@@ -11,7 +11,16 @@
   margin: 0;
   padding: 0;
 }
-
+.postInfo {
+  height: fit-content;
+  width: 50%;
+  float: left;
+}
+.upload {
+  height: fit-content;
+  width: 50%;
+  float: left;
+}
 .innerDiv {
   background-color: var(--mid-color);
   color: var(--text-color);
@@ -21,21 +30,53 @@
   border: solid white 5px;
   border-radius: 15px;
   overflow: scroll;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 }
-
+.editor {
+  float: left;
+}
 .innerDiv::-webkit-scrollbar {
   display: none;
 }
-
 .para {
+  margin: 0 auto;
   width: 95%;
   color: var(--dark-color);
   background-color: white;
+  border-radius: 5px;
+}
+label {
+  font-family: "Itim", cursive;
+  font-size: 2em;
+}
+input {
+  font-family: "Itim", cursive;
+  font-size: 1em;
+}
+textarea {
+  font-family: "Itim", cursive;
+  font-size: 1em;
+}
+.create-header {
+  background-color: var(--light-color);
+  font-family: "Itim", cursive;
+  height: fit-content;
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  border-radius: 12px;
+}
+.create-header a {
+  color: var(--dark-color);
+  font-size: 2em;
+  cursor: pointer;
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+.create-header a:hover {
+  background-color: var(--dark-color);
+  color: var(--text-color);
+  border-radius: 12px;
 }
 @media only screen and (max-width: 768px) {
   .innerDiv {
