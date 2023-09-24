@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CategoryService } from 'src/app/services/category-service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private categoryService: CategoryService
+  ) {}
   hideNavbar() {
-    let hideUrls = ['/home', '/tutorials', '/tips', '/about'];
+    let hideUrls = ['/home', '/tutorials', '/tips', '/about', '/create'];
     let isHidden = false;
     hideUrls.forEach((url) => {
       if (url === this.router.url) {
@@ -18,12 +22,24 @@ export class NavbarComponent {
     });
     return isHidden;
   }
+
   userInfo: any;
+  categories: any;
+
   ngOnInit(): void {
     const userJson = sessionStorage.getItem('userInfo');
     if (userJson !== null) {
       this.userInfo = JSON.parse(userJson);
     }
+    this.categoryService.getCategories('active').subscribe({
+      next: (res) => {
+        this.categories = res;
+        console.log(this.categories);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
   logout() {
     sessionStorage.removeItem('token');

@@ -11,22 +11,10 @@
           <div class="bar3"></div>
         </div>
         <div [class.menu-dropdown-content]="true">
-          <a>123</a>
-          <a>456</a>
-          <a>789</a>
+          <a *ngFor="let category of categories; let i = index">{{
+            category.categoryName
+          }}</a>
         </div>
-      </li>
-
-      <li>
-        <a
-          routerLink="/tutorials"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-          >Tutorials</a
-        >
-      </li>
-      <li>
-        <a routerLink="/tips">Tech Tips</a>
       </li>
       <li>
         <a
@@ -36,6 +24,7 @@
           >About</a
         >
       </li>
+
       <li *ngIf="!userInfo" class="userBox">
         <a
           routerLink="/login"
@@ -44,6 +33,7 @@
           >Login</a
         >
       </li>
+
       <li *ngIf="userInfo" class="userBox">
         <div [class.dropdown]="true">
           <button [class.dropbtn]="true">
@@ -65,6 +55,14 @@
             <a (click)="logout()">Logout</a>
           </div>
         </div>
+      </li>
+      <li *ngIf="userInfo" style="float: right">
+        <a
+          routerLink="/create"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Create</a
+        >
       </li>
     </ul>
   </nav>

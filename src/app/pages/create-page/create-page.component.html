@@ -1,0 +1,16 @@
+<div [class.background]="true">
+  <div [class.innerDiv]="true">
+    <div [class.para]="true">
+      <form [formGroup]="form">
+        <div>
+          <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+          </ngx-editor-menu>
+          <ngx-editor [editor]="editor" formControlName="editorContent">
+          </ngx-editor>
+        </div>
+      </form>
+      <button (click)="save()">Save</button>
+      <p [innerHTML]="saveContent | sanitizeHtml"></p>
+    </div>
+  </div>
+</div>
