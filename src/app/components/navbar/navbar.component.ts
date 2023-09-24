@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category-service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-navbar',
@@ -27,9 +28,15 @@ export class NavbarComponent {
   categories: any;
 
   ngOnInit(): void {
-    const userJson = sessionStorage.getItem('userInfo');
+    let token = sessionStorage.getItem('token') ?? 'Not found';
+    let userJson = sessionStorage.getItem('userInfo');
     if (userJson !== null) {
       this.userInfo = JSON.parse(userJson);
+    }
+    const decodedToken: any = jwt_decode(token);
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+    if (decodedToken.exp && decodedToken.exp < currentTimestamp) {
+      this.logout();
     }
     this.categoryService.getCategories('active').subscribe({
       next: (res) => {
