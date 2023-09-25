@@ -10,16 +10,35 @@
   align-items: center;
   margin: 0;
   padding: 0;
+  font-family: "Itim", cursive;
 }
 .postInfo {
-  height: fit-content;
+  padding: -50px;
+  height: 55vh;
   width: 50%;
   float: left;
+  overflow: scroll;
+  background-color: var(--light-color);
+  outline: 2px solid var(--dark-color);
+  outline-offset: -2px;
+  border-radius: 5px;
+}
+.postInfo::-webkit-scrollbar {
+  display: none;
 }
 .upload {
-  height: fit-content;
+  text-align: center;
+  height: 55vh;
   width: 50%;
+  overflow-y: scroll;
   float: left;
+  background-color: var(--light-color);
+  outline: 2px solid var(--dark-color);
+  outline-offset: -2px;
+  border-radius: 5px;
+}
+.upload::-webkit-scrollbar {
+  display: none;
 }
 .innerDiv {
   background-color: var(--mid-color);
@@ -30,9 +49,16 @@
   border: solid white 5px;
   border-radius: 15px;
   overflow: scroll;
+  scroll-snap-align: start none;
 }
 .editor {
+  font-family: none;
   float: left;
+  width: 100%;
+  margin-top: 2vh;
+  background-color: var(--light-color);
+  border: solid var(--dark-color) 2px;
+  border-radius: 5px;
 }
 .innerDiv::-webkit-scrollbar {
   display: none;
@@ -45,20 +71,39 @@
   border-radius: 5px;
 }
 label {
-  font-family: "Itim", cursive;
+  margin: 10px;
   font-size: 2em;
+}
+a {
+  margin-left: 10px;
 }
 input {
   font-family: "Itim", cursive;
+  margin: 10px;
   font-size: 1em;
+  border: solid var(--dark-color) 2px;
+  border-radius: 5px;
+  width: 96%;
 }
-textarea {
-  font-family: "Itim", cursive;
+button {
   font-size: 1em;
+  font-family: "Itim", cursive;
+  border: solid var(--dark-color) 1px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+textarea {
+  margin: 10px;
+  border: solid var(--dark-color) 2px;
+  border-radius: 5px;
+  font-size: 1em;
+  width: 96%;
+  font-family: "Itim", cursive;
 }
 .create-header {
   background-color: var(--light-color);
-  font-family: "Itim", cursive;
+
   height: fit-content;
   width: fit-content;
   margin: 0 auto;
@@ -86,5 +131,11 @@ textarea {
   .para {
     width: 99%;
     margin-top: 2%;
+  }
+  .postInfo {
+    width: 99%;
+  }
+  .upload {
+    width: 99%;
   }
 }

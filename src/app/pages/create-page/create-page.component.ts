@@ -3,9 +3,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 import jsonDoc from '../../doc';
 import { Editor, toHTML, Toolbar, Validators } from 'ngx-editor';
 import { CategoryService } from 'src/app/services/category-service';
-import { categoryModel } from 'src/app/models/category-models';
 import { TagService } from 'src/app/services/tag-service';
 import { FileService } from 'src/app/services/file-service';
+import { postCreateModel } from 'src/app/models/post-model';
+import { timer } from 'rxjs';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-create-page',
@@ -16,8 +18,17 @@ export class CreatePageComponent {
   constructor(
     private categoryService: CategoryService,
     private tagService: TagService,
-    private fileService: FileService
+    private fileService: FileService,
+    private clipboardService: ClipboardService
   ) {}
+  postModel: postCreateModel = {
+    postName: '',
+    summary: '',
+    content: '',
+    thumbnail: '',
+    categoriesIds: [],
+    tagsIds: [],
+  };
   activePost = true;
   activeCategory = false;
   activeTag = false;
@@ -43,13 +54,85 @@ export class CreatePageComponent {
       Validators.required()
     ),
   });
-
+  postNameError = false;
+  postSummaryError = false;
+  postThumbnailError = false;
+  postCatesError = false;
+  postTagsError = false;
+  validatePost() {
+    this.postNameError = false;
+    this.postSummaryError = false;
+    this.postThumbnailError = false;
+    this.postCatesError = false;
+    this.postTagsError = false;
+    let error = false;
+    this.popupTitle = '';
+    this.popupMessage = '';
+    if (this.postModel.postName != null && this.postModel.postName.length < 6) {
+      error = true;
+      this.postNameError = true;
+      this.popupTitle = 'Post name invalid!';
+      this.popupMessage = 'Post name must have atleast 5 character!';
+    }
+    if (this.postModel.summary != null && this.postModel.summary.length < 6) {
+      error = true;
+      this.postSummaryError = true;
+      this.popupTitle = 'Post summary invalid!';
+      this.popupMessage = 'Post summary must have atleast 5 character!';
+    }
+    if (
+      this.postModel.thumbnail != null &&
+      this.postModel.thumbnail.length < 6
+    ) {
+      error = true;
+      this.postThumbnailError = true;
+      this.popupTitle = 'Post thumbnail invalid!';
+      this.popupMessage = 'Post thumbnail must have atleast 5 character!';
+    }
+    if (
+      this.postModel.categoriesIds == null ||
+      this.postModel.categoriesIds.length == 0
+    ) {
+      error = true;
+      this.postCatesError = true;
+      this.popupTitle = 'Post category invalid!';
+      this.popupMessage = 'Please select atleast 1 category!';
+    }
+    if (this.postModel.tagsIds == null || this.postModel.tagsIds.length == 0) {
+      error = true;
+      this.postTagsError = true;
+      this.popupTitle = 'Post tag invalid!';
+      this.popupMessage = 'Please select atleast 1 tag!';
+    }
+    if (error) {
+      this.showIt = true;
+    }
+    return error;
+  }
+  showIt = false;
+  popupTitle = '';
+  popupMessage = '';
+  closeModal() {
+    this.showIt = false;
+  }
   saveContent: any;
-
   save() {
     this.editordoc = this.form.get('editorContent')?.value;
     this.saveContent = toHTML(this.editordoc);
-    console.log(this.saveContent);
+    this.postModel.categoriesIds = [];
+    this.selectedCategories.forEach((category) => {
+      this.postModel.categoriesIds?.push(category.id);
+    });
+    this.postModel.tagsIds = [];
+    this.selectedTags.forEach((tag) => {
+      this.postModel.tagsIds?.push(tag.id);
+    });
+    this.postModel.content = this.saveContent;
+    if (!this.validatePost()) {
+      console.log(this.postModel);
+    } else {
+      console.error('Post invalid!');
+    }
   }
 
   ngOnInit(): void {
@@ -72,12 +155,22 @@ export class CreatePageComponent {
       },
     });
     this.getUserUrls();
+    if (this.selectedFiles.length < 1) {
+      this.uploadBtnDisable = true;
+    }
   }
 
   ngOnDestroy(): void {
     this.editor.destroy();
   }
-
+  coppiedUrl = '';
+  copyBtn(url: string) {
+    this.clipboardService.copyFromContent(url);
+    this.coppiedUrl = url;
+    timer(2000).subscribe(() => {
+      this.coppiedUrl = '';
+    });
+  }
   activatePost() {
     this.activePost = true;
     this.activeCategory = false;
@@ -119,12 +212,26 @@ export class CreatePageComponent {
       (obj) => obj.id !== tagRevmove.id
     );
   }
-
   selectedFiles: File[] = [];
+  fileSizeError = false;
+  uploadBtnDisable = false;
   fileChange(event: any) {
+    this.fileSizeError = false;
+    this.uploadBtnDisable = false;
     const files: FileList = event.target.files;
+    if (files.length < 1) {
+      this.uploadBtnDisable = true;
+    }
     for (let i = 0; i < files.length; i++) {
-      this.selectedFiles.push(files[i]);
+      if (files[i].size > 1024 * 1024 * 2) {
+        this.fileSizeError = true;
+        this.uploadBtnDisable = true;
+      }
+    }
+    if (!this.fileSizeError) {
+      for (let i = 0; i < files.length; i++) {
+        this.selectedFiles.push(files[i]);
+      }
     }
   }
   uploadFile() {

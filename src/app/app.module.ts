@@ -16,6 +16,7 @@ import { UserInfoPageComponent } from './pages/user-info-page/user-info-page.com
 import { NgxEditorModule } from 'ngx-editor';
 import { SanitizeHtmlPipes } from './sanitizer';
 import { CreatePageComponent } from './pages/create-page/create-page.component';
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CreatePageComponent } from './pages/create-page/create-page.component';
     FormsModule,
     NgxEditorModule,
     ReactiveFormsModule,
+    ClipboardModule,
   ],
   providers: [],
   bootstrap: [NavbarComponent],

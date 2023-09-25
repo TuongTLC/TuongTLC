@@ -7,15 +7,30 @@
     </div>
     <div *ngIf="activePost" class="para">
       <div class="postInfo">
+        <h1 style="text-align: center">Post Info</h1>
         <label>Post name:</label><br />
-        <input type="text" placeholder="Post name" /><br />
+        <input
+          type="text"
+          placeholder="Post name"
+          [(ngModel)]="postModel.postName"
+        />
+        <br />
 
         <label>Post summary:</label><br />
-        <textarea cols="50" rows="3" placeholder="Post summary"></textarea
+        <textarea
+          cols="50"
+          rows="3"
+          placeholder="Post summary"
+          [(ngModel)]="postModel.summary"
+        ></textarea
         ><br />
 
         <label>Post thumbnail url:</label><br />
-        <input type="text" placeholder="Post thumbnail url" /><br />
+        <input
+          type="text"
+          placeholder="Post thumbnail url"
+          [(ngModel)]="postModel.thumbnail"
+        /><br />
 
         <label>Post categories:</label
         ><select
@@ -27,10 +42,9 @@
             {{ cate.categoryName }}
           </option></select
         ><br />
-        <a *ngFor="let category of selectedCategories; let lastItem = last">
+        <a *ngFor="let category of selectedCategories">
           {{ category.categoryName
-          }}<button (click)="removeSelectedCategory(category)">X</button
-          ><a *ngIf="!lastItem">,</a> </a
+          }}<button (click)="removeSelectedCategory(category)">X</button> </a
         ><br />
 
         <label>Post Tags:</label>
@@ -40,18 +54,29 @@
             {{ tag.tagName }}
           </option></select
         ><br />
-        <a *ngFor="let tag of selectedTags; let lastItem = last">
-          {{ tag.tagName }}<button (click)="removeSelectedTag(tag)">X</button
-          ><a *ngIf="!lastItem">,</a>
+        <a *ngFor="let tag of selectedTags">
+          {{ tag.tagName }}<button (click)="removeSelectedTag(tag)">X</button>
         </a>
       </div>
       <div class="upload">
-        <input type="file" (change)="fileChange($event)" multiple />
-        <button (click)="uploadFile()">Upload</button>
-        <p>Uploaded:</p>
+        <h1>URLs</h1>
+        <p>Upload files to get urls(2MB per file)</p>
+        <input
+          type="file"
+          (change)="fileChange($event)"
+          multiple
+          style="width: 80%"
+        />
+        <button (click)="uploadFile()" [disabled]="uploadBtnDisable">
+          Upload
+        </button>
+        <p *ngIf="fileSizeError" style="color: red">
+          A file you selected exceed 2MB!
+        </p>
+        <h2>You uploaded:</h2>
         <p *ngFor="let url of uploadUrlList">
-          {{ url.uploadDate | date : "d-MMM-yyyy HH:mm:ss" }}:<br />
-          <a [href]="url.path">{{
+          {{ url.uploadDate | date : "d-MMM-yyyy HH:mm:ss" }}<br />
+          <a [href]="url.path" target="_blank">{{
             url.path.replace(
               "https://tuongtlc.ddns.net:8080/FileStorage/Pictures/" +
                 url.uploadedBy +
@@ -59,12 +84,19 @@
               ""
             )
           }}</a
-          ><button (click)="removeFile(url.path)">Delete</button>
+          ><button (click)="copyBtn(url.path)" *ngIf="url.path !== coppiedUrl">
+            Copy url
+          </button>
+          <button (click)="copyBtn(url.path)" *ngIf="url.path === coppiedUrl">
+            Coppied
+          </button>
+          <button (click)="removeFile(url.path)">Delete</button>
         </p>
       </div>
       <div class="editor">
         <form [formGroup]="form">
           <div>
+            <h1 style="text-align: center; font-family: Itim">Post content</h1>
             <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
             </ngx-editor-menu>
             <ngx-editor [editor]="editor" formControlName="editorContent">
@@ -72,10 +104,16 @@
           </div>
         </form>
         <button (click)="save()">Save</button>
-        <p [innerHTML]="saveContent | sanitizeHtml"></p>
       </div>
     </div>
     <div *ngIf="activeCategory">Cate</div>
     <div *ngIf="activeTag">Tag</div>
   </div>
 </div>
+<app-popup-modal
+*ngIf="showIt"
+title="{{ popupTitle }}"
+message="{{ popupMessage }}"
+(close)="closeModal()"
+>
+</app-popup-modal>
