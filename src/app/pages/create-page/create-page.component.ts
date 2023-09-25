@@ -142,6 +142,7 @@ export class CreatePageComponent {
     });
   }
   getUserUrls() {
+    this.uploadUrlList = null;
     this.fileService.getFiles().subscribe({
       next: (res) => {
         this.uploadUrlList = res;
