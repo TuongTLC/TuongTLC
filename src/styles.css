@@ -17,4 +17,5 @@ body::-webkit-scrollbar {
   --mid-color: rgb(255, 197, 242);
   --light-color: white;
   --text-color: white;
+  --navbar-height: 8vh;
 }

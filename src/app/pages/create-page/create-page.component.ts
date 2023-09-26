@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { tagModel } from './../../models/tag-models';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import jsonDoc from '../../doc';
-import { Editor, toHTML, Toolbar, Validators } from 'ngx-editor';
+import { Editor, toDoc, toHTML, Toolbar, Validators } from 'ngx-editor';
 import { CategoryService } from 'src/app/services/category-service';
 import { TagService } from 'src/app/services/tag-service';
 import { FileService } from 'src/app/services/file-service';
 import { postCreateModel } from 'src/app/models/post-model';
 import { timer } from 'rxjs';
 import { ClipboardService } from 'ngx-clipboard';
+import { PostService } from 'src/app/services/post-service';
+import { categoryModel } from 'src/app/models/category-models';
 
 @Component({
   selector: 'app-create-page',
@@ -16,6 +19,7 @@ import { ClipboardService } from 'ngx-clipboard';
 })
 export class CreatePageComponent {
   constructor(
+    private postService: PostService,
     private categoryService: CategoryService,
     private tagService: TagService,
     private fileService: FileService,
@@ -32,8 +36,8 @@ export class CreatePageComponent {
   activePost = true;
   activeCategory = false;
   activeTag = false;
-  categories: any;
-  tags: any;
+  categories: categoryModel[] = [];
+  tags: tagModel[] = [];
   uploadUrlList: any;
   editordoc: any;
   editor!: Editor;
@@ -48,12 +52,6 @@ export class CreatePageComponent {
     ['align_left', 'align_center', 'align_right', 'align_justify'],
   ];
 
-  form = new FormGroup({
-    editorContent: new FormControl(
-      { value: jsonDoc, disabled: false },
-      Validators.required()
-    ),
-  });
   postNameError = false;
   postSummaryError = false;
   postThumbnailError = false;
@@ -114,10 +112,18 @@ export class CreatePageComponent {
   popupMessage = '';
   closeModal() {
     this.showIt = false;
+    this.scrollTopDiv();
+  }
+  @ViewChild('innerDiv')
+  innerDiv: ElementRef | undefined;
+  scrollTopDiv() {
+    if (this.innerDiv) {
+      this.innerDiv.nativeElement.scrollTop = 0;
+    }
   }
   saveContent: any;
   save() {
-    this.editordoc = this.form.get('editorContent')?.value;
+    this.editordoc = this.form.get('editorContent').value;
     this.saveContent = toHTML(this.editordoc);
     this.postModel.categoriesIds = [];
     this.selectedCategories.forEach((category) => {
@@ -129,15 +135,70 @@ export class CreatePageComponent {
     });
     this.postModel.content = this.saveContent;
     if (!this.validatePost()) {
-      console.log(this.postModel);
+      this.postService.createPost(this.postModel).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.popupTitle = 'Post save successful!';
+          this.popupMessage =
+            'Your post have been save and will be reviewed by admin!';
+          this.showIt = true;
+        },
+        error: (error) => {
+          this.popupTitle = 'Post save failed!';
+          this.popupMessage = 'Something happen while trying to save post!';
+          this.showIt = true;
+          console.error(error);
+        },
+      });
     } else {
       console.error('Post invalid!');
     }
   }
-
+  savedraft() {
+    this.editordoc = this.form.get('editorContent')?.value;
+    this.saveContent = toHTML(this.editordoc);
+    this.postModel.categoriesIds = [];
+    this.selectedCategories.forEach((category) => {
+      this.postModel.categoriesIds?.push(category.id);
+    });
+    this.postModel.tagsIds = [];
+    this.selectedTags.forEach((tag) => {
+      this.postModel.tagsIds?.push(tag.id);
+    });
+    this.postModel.content = this.saveContent;
+    localStorage.setItem('draft-post', JSON.stringify(this.postModel));
+    this.popupTitle = 'Post draft saved !';
+    this.popupMessage =
+      'Your post draft have been saved, you can load it later!';
+    this.showIt = true;
+  }
+  loadDraft() {
+    this.selectedCategories = [];
+    this.selectedTags = [];
+    let postDraft = localStorage.getItem('draft-post');
+    if (postDraft != null) {
+      this.postModel = JSON.parse(postDraft);
+      console.log(this.postModel);
+      this.categories.forEach((cate) => {
+        this.postModel.categoriesIds.forEach((cateSaved) => {
+          if (cate.id == cateSaved) {
+            this.selectedCategories.push(cate);
+          }
+        });
+      });
+      this.tags.forEach((tag) => {
+        this.postModel.tagsIds.forEach((tagSaved) => {
+          if (tag.id == tagSaved) {
+            this.selectedTags.push(tag);
+          }
+        });
+      });
+    }
+    this.form.get('editorContent').setValue(toDoc(this.postModel.content));
+  }
   ngOnInit(): void {
+    this.scrollTopDiv();
     this.editor = new Editor();
-    this.editordoc = jsonDoc;
     this.categoryService.getCategories('active').subscribe({
       next: (res) => {
         this.categories = res;
@@ -158,17 +219,21 @@ export class CreatePageComponent {
     if (this.selectedFiles.length < 1) {
       this.uploadBtnDisable = true;
     }
+    this.form = new FormGroup({
+      editorContent: new FormControl(jsonDoc, Validators.required()),
+    });
   }
 
+  form: any;
   ngOnDestroy(): void {
     this.editor.destroy();
   }
-  coppiedUrl = '';
+  copiedUrl = '';
   copyBtn(url: string) {
     this.clipboardService.copyFromContent(url);
-    this.coppiedUrl = url;
+    this.copiedUrl = url;
     timer(2000).subscribe(() => {
-      this.coppiedUrl = '';
+      this.copiedUrl = '';
     });
   }
   activatePost() {
@@ -186,7 +251,7 @@ export class CreatePageComponent {
     this.activeCategory = false;
     this.activeTag = true;
   }
-  selectedCategoryValue: any;
+  selectedCategoryValue = '';
   selectedCategories: any[] = [];
 
   selectCategory() {
@@ -199,7 +264,7 @@ export class CreatePageComponent {
       (obj) => obj.id !== cateRevmove.id
     );
   }
-  selectedTagValue: any;
+  selectedTagValue = '';
   selectedTags: any[] = [];
 
   selectTag() {

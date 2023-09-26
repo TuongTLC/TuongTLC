@@ -1,10 +1,11 @@
 <div [class.background]="true">
-  <div [class.innerDiv]="true">
+  <div [class.innerDiv]="true" #innerDiv>
     <div class="create-header">
       <a (click)="activatePost()">Post</a>
       <a (click)="activateCategory()">Catgory</a>
       <a (click)="activateTag()">Tag</a>
     </div>
+    <button (click)="loadDraft()" style="margin-left: 2vw">Load draft</button>
     <div *ngIf="activePost" class="para">
       <div class="postInfo">
         <h1 style="text-align: center">Post Info</h1>
@@ -37,7 +38,7 @@
           [(ngModel)]="selectedCategoryValue"
           (ngModelChange)="selectCategory()"
         >
-          <option disabled>Select Category</option>
+          <option hidden value="" disabled selected>Select Category</option>
           <option *ngFor="let cate of categories" [ngValue]="cate">
             {{ cate.categoryName }}
           </option></select
@@ -49,7 +50,7 @@
 
         <label>Post Tags:</label>
         <select [(ngModel)]="selectedTagValue" (ngModelChange)="selectTag()">
-          <option disabled>Select Tag</option>
+          <option hidden value="" disabled selected>Select Tag</option>
           <option *ngFor="let tag of tags" [ngValue]="tag">
             {{ tag.tagName }}
           </option></select
@@ -84,11 +85,11 @@
               ""
             )
           }}</a
-          ><button (click)="copyBtn(url.path)" *ngIf="url.path !== coppiedUrl">
+          ><button (click)="copyBtn(url.path)" *ngIf="url.path !== copiedUrl">
             Copy url
           </button>
-          <button (click)="copyBtn(url.path)" *ngIf="url.path === coppiedUrl">
-            Coppied
+          <button (click)="copyBtn(url.path)" *ngIf="url.path === copiedUrl">
+            Copied
           </button>
           <button (click)="removeFile(url.path)">Delete</button>
         </p>
@@ -103,7 +104,10 @@
             </ngx-editor>
           </div>
         </form>
-        <button (click)="save()">Save</button>
+      </div>
+      <div class="savePostBtns">
+        <button (click)="save()" class="savePostBtn">Save post</button>
+        <button (click)="savedraft()" class="savePostBtn">Save draft</button>
       </div>
     </div>
     <div *ngIf="activeCategory">Cate</div>
@@ -111,9 +115,9 @@
   </div>
 </div>
 <app-popup-modal
-*ngIf="showIt"
-title="{{ popupTitle }}"
-message="{{ popupMessage }}"
-(close)="closeModal()"
+  *ngIf="showIt"
+  title="{{ popupTitle }}"
+  message="{{ popupMessage }}"
+  (close)="closeModal()"
 >
 </app-popup-modal>

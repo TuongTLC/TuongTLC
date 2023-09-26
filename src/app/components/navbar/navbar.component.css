@@ -1,36 +1,28 @@
+.navbar {
+  display: flex;
+  height: fit-content;
+  width: 100vw;
+  white-space: nowrap;
+  overflow: scroll;
+  z-index: 1;
+  background-color: var(--light-color);
+  justify-content: space-between;
+}
 ul {
   height: fit-content;
-  width: 100%;
+  max-height: 16vh;
+  width: fit-content;
   margin: 0;
   padding: 0;
-  overflow-y: hidden;
-  overflow-x: scroll;
-  white-space: nowrap;
-  background-color: var(--light-color);
   border-radius: 5px;
 }
-.navbar {
-  height: fit-content;
-  width: 100%;
-  position: absolute;
-  z-index: 1;
-}
+
 img {
   height: 100%;
 }
-.menu {
-  height: 5vh;
-  min-height: 40px;
-  width: auto;
-  padding: 0;
-  margin: 0;
-  padding-left: 0.5vw;
-  padding-right: 0.5vw;
-  cursor: pointer;
-}
-.menu :hover {
-  transform: scale(1.1);
-  transition-duration: 0.2s;
+.rightContainer {
+  height: fit-content;
+  width: fit-content;
 }
 li {
   display: inline-block;
@@ -41,6 +33,9 @@ li {
   margin-right: 1px;
 }
 ul::-webkit-scrollbar {
+  display: none;
+}
+.navbar::-webkit-scrollbar {
   display: none;
 }
 li a {
@@ -58,12 +53,7 @@ li a {
   padding-left: 1.5vw;
   padding-right: 1.5vw;
 }
-.userBox {
-  height: 6vh;
-  min-height: fit-content;
-  width: auto;
-  float: right;
-}
+
 li a:hover:not(.active) {
   height: 6vh;
   background-color: var(--dark-color);
@@ -103,13 +93,13 @@ li a:hover:not(.active) {
   padding: 0;
   display: none;
   min-height: 50px;
-  position: absolute;
   right: 0;
+  position: absolute;
   height: fit-content;
   min-width: 150px;
   width: 9vw;
   background-color: var(--light-color);
-  z-index: 1;
+  z-index: 2;
   border-radius: 5px;
 }
 
@@ -121,14 +111,16 @@ li a:hover:not(.active) {
   color: var(--dark-color);
   text-decoration: none;
 }
-
+.dropdown:hover {
+  cursor: pointer;
+}
 .dropdown:hover .dropdown-content {
   display: block;
   cursor: pointer;
   min-width: fit-content;
 }
 .container {
-  display: inline-block;
+  display: block;
   cursor: pointer;
   margin: 0;
   padding: 0;
@@ -143,40 +135,39 @@ li a:hover:not(.active) {
 .bar3 {
   width: 2vw;
   min-width: 35px;
-  height: 0.5vh;
+  height: 0.6vh;
   min-height: 5px;
   background-color: var(--dark-color);
-  margin: 0.5vh;
+  margin: 0.6vh;
   margin-left: 5px;
   margin-right: 5px;
   transition: 0.4s;
   border-radius: 5px;
 }
 .bar1 {
-  margin-top: 1.75vh;
-}
-@media only screen and (max-width: 768px) {
-  li a {
-    width: 13vh;
-  }
-  .userBox {
-    float: none;
-    margin-left: 5vw;
-    padding: 0;
-    margin: 0;
-  }
-  .userBox button {
-    padding-left: 3vw;
-    padding-right: 3vw;
-  }
+  margin-top: 1.76vh;
 }
 /* ******************** */
+.menu {
+  height: 6vh;
+  min-height: 40px;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
+  cursor: pointer;
+}
+.menu :hover {
+  transform: scale(1.1);
+  transition-duration: 0.2s;
+}
 .menu-dropdown {
   min-height: 45px;
   height: 6vh;
 }
 .menu-dropdown-content {
-  margin: -5px;
+  margin-top: -1.8vh;
   display: none;
   min-height: 50px;
   position: absolute;
@@ -203,4 +194,19 @@ li a:hover:not(.active) {
   display: block;
   cursor: pointer;
   min-width: fit-content;
+}
+/* ************************* */
+@media only screen and (max-width: 768px) {
+  li a {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+  ul {
+    height: fit-content;
+  }
+
+  .userBox button {
+    padding-left: 3vw;
+    padding-right: 3vw;
+  }
 }

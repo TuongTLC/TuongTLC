@@ -1,5 +1,5 @@
-<div [class.navbar]="true" *ngIf="hideNavbar()">
-  <nav>
+<div style="position: absolute">
+  <div [class.navbar]="true" *ngIf="hideNavbar()">
     <ul>
       <li class="menu">
         <img src="/favicon.ico" alt="homelogo" routerLink="/home" />
@@ -16,6 +16,7 @@
           }}</a>
         </div>
       </li>
+
       <li>
         <a
           routerLink="/about"
@@ -25,7 +26,7 @@
         >
       </li>
 
-      <li *ngIf="!userInfo" class="userBox">
+      <li *ngIf="!userInfo">
         <a
           routerLink="/login"
           routerLinkActive="active"
@@ -33,8 +34,17 @@
           >Login</a
         >
       </li>
-
-      <li *ngIf="userInfo" class="userBox">
+    </ul>
+    <div class="rightContainer">
+      <li *ngIf="userInfo">
+        <a
+          routerLink="/create"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Create</a
+        >
+      </li>
+      <li *ngIf="userInfo">
         <div [class.dropdown]="true">
           <button [class.dropbtn]="true">
             {{ userInfo.fullname }}
@@ -56,15 +66,7 @@
           </div>
         </div>
       </li>
-      <li *ngIf="userInfo" style="float: right">
-        <a
-          routerLink="/create"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-          >Create</a
-        >
-      </li>
-    </ul>
-  </nav>
+    </div>
+  </div>
 </div>
 <router-outlet></router-outlet>

@@ -17,9 +17,11 @@ export class PostService {
     if (!this.auth.checkToken()) {
       this.router.navigate(['/login']);
     }
+    let token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/category/get-categories?status=',
-      postModel
+      'https://tuongtlc.ddns.net:8081/post/create-post',
+      postModel,
+      { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }
   getPost(pageNum: number, pageSize: number) {
