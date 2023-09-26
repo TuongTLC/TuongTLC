@@ -14,7 +14,7 @@
 }
 .postInfo {
   padding: -50px;
-  height: 55vh;
+  height: 60vh;
   width: 50%;
   float: left;
   overflow: scroll;
@@ -28,7 +28,7 @@
 }
 .upload {
   text-align: center;
-  height: 55vh;
+  height: 60vh;
   width: 50%;
   overflow-y: scroll;
   float: left;
@@ -39,6 +39,14 @@
 }
 .upload::-webkit-scrollbar {
   display: none;
+}
+.uploadImgBox {
+  height: 20vh;
+  min-height: fit-content;
+  width: 30%;
+  min-width: fit-content;
+  float: left;
+  margin: 1vh;
 }
 .innerDiv {
   background-color: var(--mid-color);
@@ -151,6 +159,10 @@ textarea {
   }
   .editor {
     width: 100%;
+  }
+  .uploadImgBox {
+    width: 96%;
+    margin: 0;
   }
 }
 select::-ms-expand {

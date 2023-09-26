@@ -193,8 +193,12 @@ export class CreatePageComponent {
           }
         });
       });
+      this.form.get('editorContent').setValue(toDoc(this.postModel.content));
+    } else {
+      this.popupTitle = 'No post draft to load!';
+      this.popupMessage = 'You have not save any draft to load!';
+      this.showIt = true;
     }
-    this.form.get('editorContent').setValue(toDoc(this.postModel.content));
   }
   ngOnInit(): void {
     this.scrollTopDiv();

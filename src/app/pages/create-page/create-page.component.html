@@ -75,21 +75,22 @@
           A file you selected exceed 2MB!
         </p>
         <h2>You uploaded:</h2>
-        <p *ngFor="let url of uploadUrlList" style="float: left; margin: 1vw">
-          {{ url.uploadDate | date : "d-MMM HH:mm:ss" }}<br /><img
-            [src]="url.path"
-            width="100px"
-            height="auto"
-          /><br />
-
-          <button (click)="copyBtn(url.path)" *ngIf="url.path !== copiedUrl">
-            Copy url
-          </button>
-          <button (click)="copyBtn(url.path)" *ngIf="url.path === copiedUrl">
-            Copied
-          </button>
-          <button (click)="removeFile(url.path)">Delete</button>
-        </p>
+        <div class="uploadImgBox" *ngFor="let url of uploadUrlList">
+          <p>
+            {{ url.uploadDate | date : "d-MMM HH:mm:ss" }}<br /><img
+              [src]="url.path"
+              width="100px"
+              height="auto"
+            /><br />
+            <button (click)="copyBtn(url.path)" *ngIf="url.path !== copiedUrl">
+              Copy url
+            </button>
+            <button (click)="copyBtn(url.path)" *ngIf="url.path === copiedUrl">
+              Copied
+            </button>
+            <button (click)="removeFile(url.path)">Delete</button>
+          </p>
+        </div>
       </div>
       <div class="editor">
         <form [formGroup]="form">
