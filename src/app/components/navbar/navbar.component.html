@@ -25,7 +25,8 @@
           >About</a
         >
       </li>
-
+    </ul>
+    <div class="rightContainer">
       <li *ngIf="!userInfo">
         <a
           routerLink="/login"
@@ -34,8 +35,6 @@
           >Login</a
         >
       </li>
-    </ul>
-    <div class="rightContainer">
       <li *ngIf="userInfo">
         <a
           routerLink="/create"

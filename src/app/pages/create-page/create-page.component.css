@@ -192,3 +192,7 @@ select {
   background-color: var(--dark-color);
   color: var(--light-color);
 }
+img:hover {
+  transform: scale(3);
+  transition-duration: 0.2s;
+}

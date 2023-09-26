@@ -75,17 +75,14 @@
           A file you selected exceed 2MB!
         </p>
         <h2>You uploaded:</h2>
-        <p *ngFor="let url of uploadUrlList">
-          {{ url.uploadDate | date : "d-MMM-yyyy HH:mm:ss" }}<br />
-          <a [href]="url.path" target="_blank">{{
-            url.path.replace(
-              "https://tuongtlc.ddns.net:8080/FileStorage/Pictures/" +
-                url.uploadedBy +
-                "/",
-              ""
-            )
-          }}</a
-          ><button (click)="copyBtn(url.path)" *ngIf="url.path !== copiedUrl">
+        <p *ngFor="let url of uploadUrlList" style="float: left; margin: 1vw">
+          {{ url.uploadDate | date : "d-MMM HH:mm:ss" }}<br /><img
+            [src]="url.path"
+            width="100px"
+            height="auto"
+          /><br />
+
+          <button (click)="copyBtn(url.path)" *ngIf="url.path !== copiedUrl">
             Copy url
           </button>
           <button (click)="copyBtn(url.path)" *ngIf="url.path === copiedUrl">
