@@ -142,6 +142,7 @@ export class CreatePageComponent {
           this.popupMessage =
             'Your post have been save and will be reviewed by admin!';
           this.showIt = true;
+          this.resetPostModel();
         },
         error: (error) => {
           this.popupTitle = 'Post save failed!';
@@ -153,6 +154,14 @@ export class CreatePageComponent {
     } else {
       console.error('Post invalid!');
     }
+  }
+  resetPostModel() {
+    this.postModel.postName = '';
+    this.postModel.summary = '';
+    this.postModel.content = '';
+    this.postModel.thumbnail = '';
+    this.postModel.categoriesIds = [];
+    this.postModel.tagsIds = [];
   }
   savedraft() {
     this.editordoc = this.form.get('editorContent')?.value;
