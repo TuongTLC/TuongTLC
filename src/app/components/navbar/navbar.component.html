@@ -49,18 +49,20 @@
             {{ userInfo.fullname }}
           </button>
           <div [class.dropdown-content]="true">
-            <a
+            <button
               routerLink="/password"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
-              >Change password</a
             >
-            <a
+              Change password
+            </button>
+            <button
               routerLink="/user-info"
               routerLinkActive="active"
               ariaCurrentWhenActive="page"
-              >Update information</a
             >
+              Update information
+            </button>
             <button (click)="logout()">Logout</button>
           </div>
         </div>

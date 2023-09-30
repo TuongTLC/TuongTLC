@@ -1,17 +1,17 @@
 export class categoryCreateModel {
-  categoryName?: string;
-  description?: string;
+  categoryName = '';
+  description = '';
 }
 export class categoryUpdateModel {
-  id?: string;
-  categoryName?: string;
-  description?: string;
+  id = '';
+  categoryName = '';
+  description = '';
 }
 export class categoryModel {
-  id?: string;
-  categoryName?: string;
-  description?: string;
-  createdBy?: string;
-  createdDate?: string;
-  status?: boolean;
+  id = '';
+  categoryName = '';
+  description = '';
+  createdBy = '';
+  createdDate = '';
+  status = false;
 }

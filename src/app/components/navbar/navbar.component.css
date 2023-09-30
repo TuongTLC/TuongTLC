@@ -82,7 +82,7 @@ li a:hover:not(.active) {
   background-color: var(--dark-color);
 }
 
-.navbar a:hover,
+.navbar button:hover,
 .dropdown:hover .dropbtn {
   background-color: var(--dark-color);
   color: var(--text-color);
@@ -103,13 +103,21 @@ li a:hover:not(.active) {
   border-radius: 5px;
 }
 
-.dropdown-content a {
+.dropdown-content button {
   margin: 0 auto;
   padding: 0;
   width: 100%;
   height: fit-content;
+  font-family: "Itim", cursive;
+  display: flex;
   color: var(--dark-color);
-  text-decoration: none;
+  min-height: 50px;
+  font-size: 1em;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: var(--light-color);
 }
 .dropdown:hover {
   cursor: pointer;

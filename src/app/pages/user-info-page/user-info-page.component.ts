@@ -1,23 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {UserService} from "../../services/user-services";
-import {UserUpdateModel} from "../../models/user-models";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from '../../services/user-services';
+import { UserModel, UserUpdateModel } from '../../models/user-models';
 
 @Component({
   selector: 'app-user-info-page',
   templateUrl: './user-info-page.component.html',
-  styleUrls: ['./user-info-page.component.css']
+  styleUrls: ['./user-info-page.component.css'],
 })
-export class UserInfoPageComponent implements OnInit  {
-  userInfo: any;
+export class UserInfoPageComponent implements OnInit {
+  userInfo: UserModel = new UserModel();
   username = '';
-  birthdate = '';
-  userUpdateInfo: UserUpdateModel = {
-    fullname: '',
-    email: '',
-    birthday: '',
-    phone: ''
-  }
+  birthdate = '24/02/1998';
+  userUpdateInfo: UserUpdateModel = new UserUpdateModel();
   popupTitle = '';
   popupMessage = '';
   showIt = false;
@@ -27,8 +22,7 @@ export class UserInfoPageComponent implements OnInit  {
   birthDayError = false;
   tokeInvalid = false;
 
-  constructor(private router: Router, private userService: UserService) {
-  }
+  constructor(private router: Router, private userService: UserService) {}
 
   ngOnInit() {
     const getUserInfo = sessionStorage.getItem('userInfo');
@@ -47,30 +41,27 @@ export class UserInfoPageComponent implements OnInit  {
 
   closeModal() {
     if (this.tokeInvalid) {
-
       sessionStorage.removeItem('token');
       sessionStorage.removeItem('userInfo');
       this.router.navigate(['/login']);
-
     } else {
       this.showIt = false;
       window.location.reload();
     }
-
   }
 
   validate() {
     this.userInfo.birthday = new Date(this.birthdate);
-    this.userUpdateInfo.birthday = this.userInfo.birthday
+    this.userUpdateInfo.birthday = this.userInfo.birthday;
 
     if (this.userInfo.fullname !== this.userUpdateInfo.fullname) {
-      this.userUpdateInfo.fullname = this.userInfo.fullname
+      this.userUpdateInfo.fullname = this.userInfo.fullname;
     }
     if (this.userInfo.email !== this.userUpdateInfo.email) {
-      this.userUpdateInfo.email = this.userInfo.email
+      this.userUpdateInfo.email = this.userInfo.email;
     }
     if (this.userInfo.phone !== this.userUpdateInfo.phone) {
-      this.userUpdateInfo.phone = this.userInfo.phone
+      this.userUpdateInfo.phone = this.userInfo.phone;
     }
 
     this.fullNameError = false;
@@ -111,15 +102,11 @@ export class UserInfoPageComponent implements OnInit  {
     if (!this.validate()) {
       this.userService.updateUserInfo(this.userUpdateInfo).subscribe({
         next: (res) => {
-          this.userInfo = res
+          this.userInfo = res;
           this.popupTitle = 'Success.';
-          this.popupMessage =
-            'User information updated successful!';
-          sessionStorage.removeItem('userInfo')
-          sessionStorage.setItem(
-            'userInfo',
-            this.userInfo
-          );
+          this.popupMessage = 'User information updated successful!';
+          sessionStorage.removeItem('userInfo');
+          sessionStorage.setItem('userInfo', JSON.stringify(this.userInfo));
           this.showModal();
         },
         error: (error) => {
@@ -134,11 +121,8 @@ export class UserInfoPageComponent implements OnInit  {
             this.popupMessage = 'User information updated failed!';
             this.showModal();
           }
-
         },
       });
     }
-
   }
-
 }

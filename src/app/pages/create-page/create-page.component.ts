@@ -1,5 +1,11 @@
 import { tagModel } from './../../models/tag-models';
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import jsonDoc from '../../doc';
 import { Editor, toDoc, toHTML, Toolbar, Validators } from 'ngx-editor';
@@ -209,8 +215,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       this.showIt = true;
     }
   }
-  ngOnInit(): void {
-    this.scrollTopDiv();
+  ngOnInit() {
     this.editor = new Editor();
     this.categoryService.getCategories('active').subscribe({
       next: (res) => {
@@ -223,6 +228,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     this.tagService.getTags('active').subscribe({
       next: (res) => {
         this.tags = res;
+        this.scrollTopDiv();
       },
       error: (error) => {
         console.error(error);

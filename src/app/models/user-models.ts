@@ -1,24 +1,33 @@
 export class UserLoginModel {
-  username?: string;
-  password?: string;
+  username = '';
+  password = '';
 }
 export class UserRegisterModel {
-  username!: string;
-  password!: string;
-  email!: string;
-  fullname!: string;
-  phone!: string;
-  birthdate!: any;
+  username = '';
+  password = '';
+  email = '';
+  fullname = '';
+  phone = '';
+  birthdate = '';
 }
-export class UserChangePasswordModel{
- username!: string;
- oldPassword!: string;
- newPassword!: string;
+export class UserChangePasswordModel {
+  username = '';
+  oldPassword = '';
+  newPassword = '';
 }
-export class UserUpdateModel{
-  fullname!: string;
-  email!: string;
-  phone!: string;
-  birthday!: any;
+export class UserUpdateModel {
+  fullname = '';
+  email = '';
+  phone = '';
+  birthday = new Date();
 }
-
+export class UserModel {
+  birthday = new Date();
+  email = '';
+  fullname = '';
+  id = '';
+  phone = '';
+  roleName = '';
+  status = false;
+  username = '';
+}

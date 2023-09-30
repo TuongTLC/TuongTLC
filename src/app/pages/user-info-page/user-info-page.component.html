@@ -46,14 +46,12 @@
         Confirm
       </button>
       <br />
-      <div [class.loginBtn]="true" routerLink="/home">
-        <a>Home</a>
-      </div>
+      <button [class.loginBtn]="true" routerLink="/home">Home</button>
     </div>
   </div>
 </div>
 <app-popup-modal
-  (close)="closeModal()"
+  (closeEvt)="closeModal()"
   *ngIf="showIt"
   message="{{ popupMessage }}"
   title="{{ popupTitle }}"

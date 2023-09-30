@@ -55,19 +55,17 @@
       />
       <p class="error" *ngIf="validateBirthdateError">Birthdate invalid!</p>
       <br />
-      <div [class.loginBtn]="true" routerLink="/login">
+      <button [class.loginBtn]="true" routerLink="/login">
         <a>Back</a>
-      </div>
-      <button [class.loginBtn]="true" (click)="register()">
-        Register
       </button>
+      <button [class.loginBtn]="true" (click)="register()">Register</button>
     </div>
   </div>
   <app-popup-modal
     *ngIf="showIt"
     title="{{ popupTitle }}"
     message="{{ popupMessage }}"
-    (close)="closeModal()"
+    (closeEvt)="closeModal()"
   >
   </app-popup-modal>
 </div>

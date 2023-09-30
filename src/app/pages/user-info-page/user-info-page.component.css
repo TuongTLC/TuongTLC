@@ -49,6 +49,7 @@
   font-size: 2vw;
   cursor: pointer;
   padding: 1vh;
+  border: none;
 }
 
 .loginBtn a {

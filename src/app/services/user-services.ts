@@ -1,8 +1,10 @@
+import { Observable } from 'rxjs';
 import {
   UserRegisterModel,
   UserLoginModel,
   UserChangePasswordModel,
   UserUpdateModel,
+  UserModel,
 } from './../models/user-models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -41,15 +43,15 @@ export class UserService {
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }
-  updateUserInfo(newUserInfo: UserUpdateModel) {
+  updateUserInfo(newUserInfo: UserUpdateModel): Observable<UserModel> {
     if (!this.auth.checkToken()) {
       this.router.navigate(['/login']);
     }
     const token = sessionStorage.getItem('token');
-    return this.http.post(
+    return this.http.post<UserModel>(
       'https://tuongtlc.ddns.net:8081/user/update',
       newUserInfo,
-      { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
+      { headers: { Authorization: 'Bearer ' + token } }
     );
   }
 }
