@@ -2,48 +2,50 @@
   <div [class.logo]="true" onclick="window.location.href='/'"></div>
   <div [class.innerDiv]="true">
     <div [class.welcome]="true">
-      <h2 class="account">Account: <br/>{{username}}</h2>
-      <label>Fullname:</label><br/>
+      <h2 class="account">Account: <br />{{ username }}</h2>
+      <a class="title">Fullname:</a><br />
       <input
         [(ngModel)]="userInfo.fullname"
         name="fullname"
         required
         type="text"
-      /><br/>
+      /><br />
       <p *ngIf="fullNameError" [class.emptyError]="true">Fullname invalid!</p>
-      <label>Email:</label><br/>
+      <a class="title">Email:</a><br />
       <input
         [(ngModel)]="userInfo.email"
         name="email"
         required
         type="text"
-      /><br/>
+      /><br />
       <p *ngIf="emailError" [class.emptyError]="true">Email invalid!</p>
 
-      <label>Phone number:</label><br/>
+      <a class="title">Phone number:</a><br />
       <input
         [(ngModel)]="userInfo.phone"
         name="phone"
         required
         type="text"
-      /><br/>
+      /><br />
       <p *ngIf="phoneError" [class.emptyError]="true">Phone invalid!</p>
-      <label>Birthdate:</label><br/>
+      <a class="title">Birthdate:</a><br />
       <input
-        #a #b
-        (focus)="a.type='date'" (focusout)="b.type='text'"
+        #a
+        #b
+        (focus)="a.type = 'date'"
+        (focusout)="b.type = 'text'"
         [(ngModel)]="birthdate"
         name="birthdate"
         required
         type="text"
-      /><br/>
+      /><br />
       <p *ngIf="birthDayError" [class.emptyError]="true">Birthday invalid!</p>
 
-      <br/>
-      <div (click)="updateUserInfo()" [class.loginBtn]="true">
-        <a>Confirm</a>
-      </div>
-      <br/>
+      <br />
+      <button (click)="updateUserInfo()" [class.loginBtn]="true">
+        Confirm
+      </button>
+      <br />
       <div [class.loginBtn]="true" routerLink="/home">
         <a>Home</a>
       </div>
@@ -57,4 +59,3 @@
   title="{{ popupTitle }}"
 >
 </app-popup-modal>
-

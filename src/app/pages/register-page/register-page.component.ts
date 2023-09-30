@@ -48,7 +48,7 @@ export class RegisterPageComponent {
     if (this.registerInfo.username.length <= 6) {
       this.validateUsernameError = true;
     }
-    let passwordRegex = new RegExp(
+    const passwordRegex = new RegExp(
       '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
     );
     if (!passwordRegex.test(this.registerInfo.password)) {
@@ -59,7 +59,7 @@ export class RegisterPageComponent {
       this.validateConfirmPasswordError = true;
       validateFailed = true;
     }
-    let emailRegex = new RegExp(
+    const emailRegex = new RegExp(
       "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
     );
     if (!emailRegex.test(this.registerInfo.email)) {
@@ -74,7 +74,7 @@ export class RegisterPageComponent {
       this.validatePhoneError = true;
       validateFailed = true;
     }
-    var timeDiff = Math.abs(
+    const timeDiff = Math.abs(
       Date.now() - new Date(this.registerInfo.birthdate).getTime()
     );
     if (

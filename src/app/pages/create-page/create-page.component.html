@@ -1,15 +1,15 @@
 <div [class.background]="true">
   <div [class.innerDiv]="true" #innerDiv>
     <div class="create-header">
-      <a (click)="activatePost()">Post</a>
-      <a (click)="activateCategory()">Catgory</a>
-      <a (click)="activateTag()">Tag</a>
+      <button (click)="activatePost()">Post</button>
+      <button (click)="activateCategory()">Catgory</button>
+      <button (click)="activateTag()">Tag</button>
     </div>
     <button (click)="loadDraft()" style="margin-left: 2vw">Load draft</button>
     <div *ngIf="activePost" class="para">
       <div class="postInfo">
         <h1 style="text-align: center">Post Info</h1>
-        <label>Post name:</label><br />
+        <a class="title">Post name:</a><br />
         <input
           type="text"
           placeholder="Post name"
@@ -17,7 +17,7 @@
         />
         <br />
 
-        <label>Post summary:</label><br />
+        <a class="title">Post summary:</a><br />
         <textarea
           cols="50"
           rows="3"
@@ -26,14 +26,14 @@
         ></textarea
         ><br />
 
-        <label>Post thumbnail url:</label><br />
+        <a class="title">Post thumbnail url:</a><br />
         <input
           type="text"
           placeholder="Post thumbnail url"
           [(ngModel)]="postModel.thumbnail"
         /><br />
 
-        <label>Post categories:</label
+        <a class="title">Post categories:</a
         ><select
           [(ngModel)]="selectedCategoryValue"
           (ngModelChange)="selectCategory()"
@@ -48,7 +48,7 @@
           }}<button (click)="removeSelectedCategory(category)">X</button> </a
         ><br />
 
-        <label>Post Tags:</label>
+        <a class="title">Post Tags:</a>
         <select [(ngModel)]="selectedTagValue" (ngModelChange)="selectTag()">
           <option hidden value="" disabled selected>Select Tag</option>
           <option *ngFor="let tag of tags" [ngValue]="tag">
@@ -81,6 +81,7 @@
               [src]="url.path"
               width="100px"
               height="auto"
+              [alt]="url.id"
             /><br />
             <button (click)="copyBtn(url.path)" *ngIf="url.path !== copiedUrl">
               Copy url

@@ -1,6 +1,6 @@
 import {UserService} from '../../services/user-services';
 import {Router} from '@angular/router';
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserChangePasswordModel} from '../../models/user-models';
 
 @Component({
@@ -8,7 +8,7 @@ import {UserChangePasswordModel} from '../../models/user-models';
   templateUrl: './password-page.component.html',
   styleUrls: ['./password-page.component.css'],
 })
-export class PasswordPageComponent {
+export class PasswordPageComponent implements OnInit {
   changePassModel: UserChangePasswordModel = {
     username: '',
     oldPassword: '',
@@ -75,14 +75,14 @@ export class PasswordPageComponent {
   changePassword() {
     if (!this.validateInfomation()) {
       this.userService.changePassword(this.changePassModel).subscribe({
-        next: (res) => {
+        next: () => {
           this.popupTitle = 'Success.';
           this.popupMessage =
             'Your password has been change, please login again.';
           this.showModal();
           this.changeSuccess = true;
         },
-        error: (error) => {
+        error: () => {
           this.popupTitle = 'Failed.';
           this.popupMessage = 'Old password is incorrect, please try again.';
           this.showModal();

@@ -78,7 +78,7 @@
   background-color: white;
   border-radius: 5px;
 }
-label {
+.title {
   margin: 10px;
   font-size: 2em;
 }

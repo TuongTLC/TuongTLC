@@ -34,7 +34,7 @@ export class UserService {
     if (!this.auth.checkToken()) {
       this.router.navigate(['/login']);
     }
-    let token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     return this.http.post(
       'https://tuongtlc.ddns.net:8081/user/change-password',
       userChangePasswordModel,
@@ -45,7 +45,7 @@ export class UserService {
     if (!this.auth.checkToken()) {
       this.router.navigate(['/login']);
     }
-    let token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     return this.http.post(
       'https://tuongtlc.ddns.net:8081/user/update',
       newUserInfo,

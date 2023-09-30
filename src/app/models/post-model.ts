@@ -1,8 +1,8 @@
 export class postCreateModel {
-  postName: string = '';
-  summary: string = '';
-  content: string = '';
-  thumbnail: string = '';
+  postName = '';
+  summary= '';
+  content = '';
+  thumbnail = '';
   categoriesIds: string[] = [];
   tagsIds: string[] = [];
 }

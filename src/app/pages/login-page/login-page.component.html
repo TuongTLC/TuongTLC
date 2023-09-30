@@ -1,7 +1,7 @@
 <div>
   <div [class.logo]="true" onclick="window.location.href='/'"></div>
   <div [class.innerDiv]="true">
-    <div [class.welcome]="true" (keyup.enter)="login()">
+    <div [class.welcome]="true">
       <input
         name="username"
         type="text"
@@ -29,9 +29,9 @@
         Wrong username or password!
       </p>
       <br />
-      <div [class.loginBtn]="true" (click)="login()">
-        <a>Login</a>
-      </div>
+      <button [class.loginBtn]="true" (click)="login()" (keyup.enter)="login()">
+        Login
+      </button>
       <br />
       <div [class.loginBtn]="true" routerLink="/register">
         <a>Register</a>

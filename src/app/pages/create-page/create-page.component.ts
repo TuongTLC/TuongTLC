@@ -1,5 +1,5 @@
 import { tagModel } from './../../models/tag-models';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import jsonDoc from '../../doc';
 import { Editor, toDoc, toHTML, Toolbar, Validators } from 'ngx-editor';
@@ -17,7 +17,7 @@ import { categoryModel } from 'src/app/models/category-models';
   templateUrl: './create-page.component.html',
   styleUrls: ['./create-page.component.css'],
 })
-export class CreatePageComponent {
+export class CreatePageComponent implements OnInit, OnDestroy {
   constructor(
     private postService: PostService,
     private categoryService: CategoryService,
@@ -184,7 +184,7 @@ export class CreatePageComponent {
   loadDraft() {
     this.selectedCategories = [];
     this.selectedTags = [];
-    let postDraft = localStorage.getItem('draft-post');
+    const postDraft = localStorage.getItem('draft-post');
     if (postDraft != null) {
       this.postModel = JSON.parse(postDraft);
       console.log(this.postModel);

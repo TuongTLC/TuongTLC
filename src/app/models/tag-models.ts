@@ -1,8 +1,8 @@
 export class tagModel {
-  id: string = '';
-  tagName: string = '';
-  description: string = '';
-  createdBy: string = '';
-  createdDate: string = '';
-  status: boolean = false;
+  id = '';
+  tagName = '';
+  description = '';
+  createdBy = '';
+  createdDate = '';
+  status = false;
 }

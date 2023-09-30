@@ -1,4 +1,4 @@
-import jwt_decode from 'jwt-decode';
+import jwt_decode, { JwtPayload } from 'jwt-decode';
 import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
@@ -12,9 +12,9 @@ export class Auth {
       if (this.token.length < 1) {
         return valid;
       }
-      const decodedToken: any = jwt_decode(this.token);
+      const decodedToken = jwt_decode<JwtPayload>(this.token);
       const currentTimestamp = Math.floor(Date.now() / 1000);
-      if (decodedToken.exp > currentTimestamp) {
+      if (decodedToken.exp != undefined && decodedToken.exp > currentTimestamp) {
         valid = true;
       }
       return valid;

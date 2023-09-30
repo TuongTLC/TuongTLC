@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CategoryService } from 'src/app/services/category-service';
 
@@ -7,13 +7,13 @@ import { CategoryService } from 'src/app/services/category-service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit{
   constructor(
     private router: Router,
     private categoryService: CategoryService
   ) {}
   hideNavbar() {
-    let hideUrls = ['/home', '/tutorials', '/tips', '/about', '/create'];
+    const hideUrls = ['/home', '/tutorials', '/tips', '/about', '/create'];
     let isHidden = false;
     hideUrls.forEach((url) => {
       if (url === this.router.url) {
@@ -27,7 +27,7 @@ export class NavbarComponent {
   categories: any;
 
   ngOnInit(): void {
-    let userJson = sessionStorage.getItem('userInfo');
+    const userJson = sessionStorage.getItem('userInfo');
     if (userJson !== null) {
       this.userInfo = JSON.parse(userJson);
     }

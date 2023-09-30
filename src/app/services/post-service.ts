@@ -17,7 +17,7 @@ export class PostService {
     if (!this.auth.checkToken()) {
       this.router.navigate(['/login']);
     }
-    let token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     return this.http.post(
       'https://tuongtlc.ddns.net:8081/post/create-post',
       postModel,

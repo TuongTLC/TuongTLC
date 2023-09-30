@@ -10,15 +10,15 @@ export class PopupModalComponent {
   @Input() message = '';
   @Input() closeShow = '0';
 
-  @Output() close = new EventEmitter<boolean>();
+  @Output() closeEvt = new EventEmitter<boolean>();
   action = true;
   ok() {
     this.action = true;
-    this.close.emit(this.action);
+    this.closeEvt.emit(this.action);
   }
 
   cancel() {
     this.action = false;
-    this.close.emit(this.action);
+    this.closeEvt.emit(this.action);
   }
 }

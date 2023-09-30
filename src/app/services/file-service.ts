@@ -16,7 +16,7 @@ export class FileService {
     if (!this.auth.checkToken()) {
       this.router.navigate(['/login']);
     }
-    let token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     return this.http.post(
       'https://tuongtlc.ddns.net:8081/file/upload-files',
       data,
@@ -27,7 +27,7 @@ export class FileService {
     if (!this.auth.checkToken()) {
       this.router.navigate(['/login']);
     }
-    let token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     return this.http.get('https://tuongtlc.ddns.net:8081/file/get-files', {
       headers: { Authorization: 'Bearer ' + token },
     });
@@ -36,7 +36,7 @@ export class FileService {
     if (!this.auth.checkToken()) {
       this.router.navigate(['/login']);
     }
-    let token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     return this.http.delete(
       'https://tuongtlc.ddns.net:8081/file/delete-file?fileUrl=' + fileUrl,
       {

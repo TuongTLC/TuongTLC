@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user-services";
 import {UserUpdateModel} from "../../models/user-models";
@@ -8,7 +8,7 @@ import {UserUpdateModel} from "../../models/user-models";
   templateUrl: './user-info-page.component.html',
   styleUrls: ['./user-info-page.component.css']
 })
-export class UserInfoPageComponent {
+export class UserInfoPageComponent implements OnInit  {
   userInfo: any;
   username = '';
   birthdate = '';
@@ -31,7 +31,7 @@ export class UserInfoPageComponent {
   }
 
   ngOnInit() {
-    let getUserInfo = sessionStorage.getItem('userInfo');
+    const getUserInfo = sessionStorage.getItem('userInfo');
     if (!getUserInfo) {
       this.router.navigate(['/login']);
     } else {
@@ -83,7 +83,7 @@ export class UserInfoPageComponent {
       this.fullNameError = true;
     }
 
-    let emailRegex = new RegExp(
+    const emailRegex = new RegExp(
       "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
     );
     if (!emailRegex.test(this.userUpdateInfo.email)) {
@@ -94,7 +94,7 @@ export class UserInfoPageComponent {
       this.phoneError = true;
       validateFailed = true;
     }
-    var timeDiff = Math.abs(
+    const timeDiff = Math.abs(
       Date.now() - new Date(this.userUpdateInfo.birthday).getTime()
     );
     if (
