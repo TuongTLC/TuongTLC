@@ -1,7 +1,7 @@
-import {UserService} from '../../services/user-services';
-import {Component} from '@angular/core';
-import {UserRegisterModel} from '../../models/user-models';
-import {Router} from '@angular/router';
+import { UserService } from '../../services/user-services';
+import { Component } from '@angular/core';
+import { UserModel, UserRegisterModel } from '../../models/user-models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-page',
@@ -17,8 +17,8 @@ export class RegisterPageComponent {
     phone: '',
     birthdate: '',
   };
-  userInfo: any;
-  registerError: any;
+  userInfo: UserModel = new UserModel();
+  registerError = '';
   popupTitle = '';
   popupMessage = '';
   validateUsernameError = false;
@@ -31,8 +31,7 @@ export class RegisterPageComponent {
   validateBirthdateError = false;
   showIt = false;
 
-  constructor(private userService: UserService, private router: Router) {
-  }
+  constructor(private userService: UserService, private router: Router) {}
 
   validateRegister() {
     this.validateUsernameError = false;
@@ -96,8 +95,8 @@ export class RegisterPageComponent {
 
   register() {
     if (!this.validateRegister()) {
-      this.userInfo = null;
-      this.registerError = null;
+      this.userInfo = new UserModel();
+      this.registerError = '';
       this.userService.register(this.registerInfo).subscribe({
         next: (res) => {
           this.userInfo = res;
@@ -113,7 +112,7 @@ export class RegisterPageComponent {
           this.registerError = error;
           console.log(this.registerError);
           this.popupTitle = 'Error!';
-          this.popupMessage = this.registerError.error;
+          this.popupMessage = this.registerError;
           this.showModal();
         },
       });

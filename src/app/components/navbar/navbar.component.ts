@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { categoryModel } from 'src/app/models/category-models';
+import { UserModel } from 'src/app/models/user-models';
 import { CategoryService } from 'src/app/services/category-service';
 
 @Component({
@@ -23,8 +25,8 @@ export class NavbarComponent implements OnInit{
     return isHidden;
   }
 
-  userInfo: any;
-  categories: any;
+  userInfo = new UserModel;
+  categories: categoryModel[] = [];
 
   ngOnInit(): void {
     const userJson = sessionStorage.getItem('userInfo');

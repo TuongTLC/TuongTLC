@@ -1,7 +1,7 @@
-import {UserService} from '../../services/user-services';
-import {Component} from '@angular/core';
-import {UserLoginModel} from '../../models/user-models';
-import {Router} from '@angular/router';
+import { UserService } from '../../services/user-services';
+import { Component } from '@angular/core';
+import { UserLoginModel, UserLoginResModel } from '../../models/user-models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -13,13 +13,12 @@ export class LoginPageComponent {
     username: '',
     password: '',
   };
-  userInfo: any;
-  loginError: any;
-  usernameEmpty: any;
-  passwordEmpty: any;
+  userInfo: UserLoginResModel = new UserLoginResModel();
+  loginError: Error | null = null;
+  usernameEmpty = false;
+  passwordEmpty = false;
 
-  constructor(private userService: UserService, private router: Router) {
-  }
+  constructor(private userService: UserService, private router: Router) {}
 
   validateLoginInfo() {
     if (this.loginInfo.username?.length == 0) {
@@ -39,7 +38,7 @@ export class LoginPageComponent {
     this.usernameEmpty = false;
     this.passwordEmpty = false;
     this.loginError = null;
-    this.userInfo = null;
+    this.userInfo = new UserLoginResModel();
 
     if (this.validateLoginInfo() == false) {
       return;

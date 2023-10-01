@@ -5,6 +5,7 @@ import {
   UserChangePasswordModel,
   UserUpdateModel,
   UserModel,
+  UserLoginResModel,
 } from './../models/user-models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -20,14 +21,14 @@ export class UserService {
     private auth: Auth
   ) {}
 
-  login(userLoginModel: UserLoginModel) {
-    return this.http.post(
+  login(userLoginModel: UserLoginModel): Observable<UserLoginResModel> {
+    return this.http.post<UserLoginResModel>(
       'https://tuongtlc.ddns.net:8081/user/login',
       userLoginModel
     );
   }
-  register(userRegisterModel: UserRegisterModel) {
-    return this.http.post(
+  register(userRegisterModel: UserRegisterModel): Observable<UserModel> {
+    return this.http.post<UserModel>(
       'https://tuongtlc.ddns.net:8081/user/register',
       userRegisterModel
     );

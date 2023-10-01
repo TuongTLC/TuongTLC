@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from '../auth';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -23,12 +24,12 @@ export class FileService {
       { headers: { Authorization: 'Bearer ' + token } }
     );
   }
-  getFiles() {
+  getFiles(): Observable<[]> {
     if (!this.auth.checkToken()) {
       this.router.navigate(['/login']);
     }
     const token = sessionStorage.getItem('token');
-    return this.http.get('https://tuongtlc.ddns.net:8081/file/get-files', {
+    return this.http.get<[]>('https://tuongtlc.ddns.net:8081/file/get-files', {
       headers: { Authorization: 'Bearer ' + token },
     });
   }

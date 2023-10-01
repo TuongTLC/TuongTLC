@@ -31,3 +31,7 @@ export class UserModel {
   status = false;
   username = '';
 }
+export class UserLoginResModel {
+  token = '';
+  userInfo = new UserModel();
+}

@@ -1,7 +1,7 @@
-import {UserService} from '../../services/user-services';
-import {Router} from '@angular/router';
-import {Component, OnInit} from '@angular/core';
-import {UserChangePasswordModel} from '../../models/user-models';
+import { UserService } from '../../services/user-services';
+import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { UserChangePasswordModel, UserModel } from '../../models/user-models';
 
 @Component({
   selector: 'app-password-page',
@@ -14,7 +14,7 @@ export class PasswordPageComponent implements OnInit {
     oldPassword: '',
     newPassword: '',
   };
-  userInfo: any;
+  userInfo: UserModel = new UserModel();
   newPassConfirm = '';
   oldPassError = false;
   newPassError = false;
@@ -24,8 +24,7 @@ export class PasswordPageComponent implements OnInit {
   showIt = false;
   changeSuccess = false;
 
-  constructor(private router: Router, private userService: UserService) {
-  }
+  constructor(private router: Router, private userService: UserService) {}
 
   showModal() {
     this.showIt = true;
@@ -39,11 +38,11 @@ export class PasswordPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userInfo = sessionStorage.getItem('userInfo');
+    this.userInfo = JSON.parse(sessionStorage.getItem('userInfo') ?? '');
     if (!this.userInfo) {
       this.router.navigate(['/login']);
     }
-    this.changePassModel.username = JSON.parse(this.userInfo).username;
+    this.changePassModel.username = this.userInfo.username;
   }
 
   validateInfomation() {

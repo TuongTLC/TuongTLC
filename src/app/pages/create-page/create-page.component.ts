@@ -44,8 +44,8 @@ export class CreatePageComponent implements OnInit, OnDestroy {
   activeTag = false;
   categories: categoryModel[] = [];
   tags: tagModel[] = [];
-  uploadUrlList: any;
-  editordoc: any;
+  uploadUrlList = [];
+  editordoc = jsonDoc;
   editor!: Editor;
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -127,7 +127,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       this.innerDiv.nativeElement.scrollTop = 0;
     }
   }
-  saveContent: any;
+  saveContent = '';
   save() {
     this.editordoc = this.form.get('editorContent').value;
     this.saveContent = toHTML(this.editordoc);
@@ -215,6 +215,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       this.showIt = true;
     }
   }
+  form: any;
   ngOnInit() {
     this.editor = new Editor();
     this.categoryService.getCategories('active').subscribe({
@@ -238,12 +239,12 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     if (this.selectedFiles.length < 1) {
       this.uploadBtnDisable = true;
     }
+
     this.form = new FormGroup({
       editorContent: new FormControl(jsonDoc, Validators.required()),
     });
   }
 
-  form: any;
   ngOnDestroy(): void {
     this.editor.destroy();
   }
@@ -270,28 +271,28 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     this.activeCategory = false;
     this.activeTag = true;
   }
-  selectedCategoryValue = '';
-  selectedCategories: any[] = [];
+  selectedCategoryValue = new categoryModel();
+  selectedCategories: categoryModel[] = [];
 
   selectCategory() {
     if (!this.selectedCategories.includes(this.selectedCategoryValue)) {
       this.selectedCategories.push(this.selectedCategoryValue);
     }
   }
-  removeSelectedCategory(cateRevmove: any) {
+  removeSelectedCategory(cateRevmove: categoryModel) {
     this.selectedCategories = this.selectedCategories.filter(
       (obj) => obj.id !== cateRevmove.id
     );
   }
-  selectedTagValue = '';
-  selectedTags: any[] = [];
+  selectedTagValue = new tagModel();
+  selectedTags: tagModel[] = [];
 
   selectTag() {
     if (!this.selectedTags.includes(this.selectedTagValue)) {
       this.selectedTags.push(this.selectedTagValue);
     }
   }
-  removeSelectedTag(tagRevmove: any) {
+  removeSelectedTag(tagRevmove: tagModel) {
     this.selectedTags = this.selectedTags.filter(
       (obj) => obj.id !== tagRevmove.id
     );
@@ -299,22 +300,29 @@ export class CreatePageComponent implements OnInit, OnDestroy {
   selectedFiles: File[] = [];
   fileSizeError = false;
   uploadBtnDisable = false;
-  fileChange(event: any) {
+  fileChange(event: Event) {
     this.fileSizeError = false;
     this.uploadBtnDisable = false;
-    const files: FileList = event.target.files;
-    if (files.length < 1) {
-      this.uploadBtnDisable = true;
-    }
-    for (let i = 0; i < files.length; i++) {
-      if (files[i].size > 1024 * 1024 * 2) {
-        this.fileSizeError = true;
+    const inputElement = event.target as HTMLInputElement | null;
+
+    if (inputElement !== null && inputElement.files !== null) {
+      const files: FileList = inputElement.files;
+
+      if (files.length < 1) {
         this.uploadBtnDisable = true;
       }
-    }
-    if (!this.fileSizeError) {
+
       for (let i = 0; i < files.length; i++) {
-        this.selectedFiles.push(files[i]);
+        if (files[i].size > 1024 * 1024 * 2) {
+          this.fileSizeError = true;
+          this.uploadBtnDisable = true;
+        }
+      }
+
+      if (!this.fileSizeError) {
+        for (let i = 0; i < files.length; i++) {
+          this.selectedFiles.push(files[i]);
+        }
       }
     }
   }
@@ -333,7 +341,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     });
   }
   getUserUrls() {
-    this.uploadUrlList = null;
+    this.uploadUrlList = [];
     this.fileService.getFiles().subscribe({
       next: (res) => {
         this.uploadUrlList = res;
