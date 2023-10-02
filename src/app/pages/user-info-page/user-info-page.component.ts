@@ -32,6 +32,7 @@ export class UserInfoPageComponent implements OnInit {
       this.userInfo = JSON.parse(getUserInfo);
       this.username = this.userInfo.username;
       this.birthdate = new Date(this.userInfo.birthday).toLocaleDateString();
+      
     }
   }
 
@@ -88,10 +89,7 @@ export class UserInfoPageComponent implements OnInit {
     const timeDiff = Math.abs(
       Date.now() - new Date(this.userUpdateInfo.birthday).getTime()
     );
-    if (
-      Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25) < 7 ||
-      this.birthdate === ''
-    ) {
+    if (Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25) < 7) {
       this.birthDayError = true;
       validateFailed = true;
     }

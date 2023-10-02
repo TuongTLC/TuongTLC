@@ -88,8 +88,9 @@ a {
 input {
   font-family: "Itim", cursive;
   margin: 10px;
+  height: 3vh;
   font-size: 1em;
-  border: solid var(--dark-color) 2px;
+  border: solid var(--dark-color) 1px;
   border-radius: 5px;
   width: 96%;
 }
@@ -105,7 +106,7 @@ button {
 
 textarea {
   margin: 10px;
-  border: solid var(--dark-color) 2px;
+  border: solid var(--dark-color) 1px;
   border-radius: 5px;
   font-size: 1em;
   width: 96%;
@@ -133,38 +134,7 @@ textarea {
   color: var(--text-color);
   border-radius: 12px;
 }
-@media only screen and (max-width: 768px) {
-  .innerDiv {
-    width: 95vw;
-    margin-top: 6vh;
-  }
-  .para {
-    width: 100%;
-    margin-top: 2%;
-  }
-  .postInfo {
-    width: 100%;
-    height: fit-content;
-    padding: 1vh;
-  }
-  .upload {
-    width: 100%;
-    height: fit-content;
-  }
-  input {
-    width: 92%;
-  }
-  textarea {
-    width: 92%;
-  }
-  .editor {
-    width: 100%;
-  }
-  .uploadImgBox {
-    width: 96%;
-    margin: 0;
-  }
-}
+
 select::-ms-expand {
   display: none;
 }
@@ -207,4 +177,82 @@ select {
 img:hover {
   transform: scale(3);
   transition-duration: 0.2s;
+}
+.cate-tag-create {
+  color: var(--dark-color);
+  width: 40vw;
+  margin: 0 auto;
+  margin-top: 3vh;
+  background-color: var(--light-color);
+  outline: 1px solid var(--dark-color);
+  outline-offset: -2px;
+  border-radius: 5px;
+  text-align: center;
+}
+.cate-tag-create input {
+  height: 3vh;
+  text-align: center;
+  width: 25vw;
+}
+.cate-tag-create button {
+  height: 4vh;
+  margin: 1vh;
+}
+.cate-tag-update {
+  color: var(--dark-color);
+  width: 40vw;
+  margin: 0 auto;
+  margin-top: 3vh;
+  background-color: var(--light-color);
+  outline: 1px solid var(--dark-color);
+  outline-offset: -2px;
+  border-radius: 5px;
+  text-align: center;
+  overflow: scroll;
+}
+.cate-tag-update::-webkit-scrollbar {
+  display: none;
+}
+table {
+  margin: 0 auto;
+}
+@media only screen and (max-width: 768px) {
+  .innerDiv {
+    width: 95vw;
+    margin-top: 6vh;
+  }
+  .para {
+    width: 100%;
+    margin-top: 2%;
+  }
+  .postInfo {
+    width: 100%;
+    height: fit-content;
+  }
+  .upload {
+    width: 100%;
+    height: fit-content;
+  }
+  input {
+    width: 92%;
+  }
+  textarea {
+    width: 92%;
+  }
+  .editor {
+    width: 100%;
+  }
+  .uploadImgBox {
+    width: 96%;
+    margin: 0;
+  }
+  .cate-tag-create {
+    width: 95%;
+  }
+  .cate-tag-create input {
+    width: 90%;
+  }
+  .cate-tag-update {
+    width: 95%;
+  }
 }

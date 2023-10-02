@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { categoryModel } from 'src/app/models/category-models';
+import { CategoryModel } from 'src/app/models/category-models';
 import { UserModel } from 'src/app/models/user-models';
 import { CategoryService } from 'src/app/services/category-service';
 
@@ -9,7 +9,7 @@ import { CategoryService } from 'src/app/services/category-service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
   constructor(
     private router: Router,
     private categoryService: CategoryService
@@ -25,8 +25,8 @@ export class NavbarComponent implements OnInit{
     return isHidden;
   }
 
-  userInfo = new UserModel;
-  categories: categoryModel[] = [];
+  userInfo!: UserModel;
+  categories: CategoryModel[] = [];
 
   ngOnInit(): void {
     const userJson = sessionStorage.getItem('userInfo');

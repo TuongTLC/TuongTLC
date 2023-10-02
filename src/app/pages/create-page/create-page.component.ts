@@ -1,4 +1,8 @@
-import { tagModel } from './../../models/tag-models';
+import {
+  TagCreateModel,
+  TagModel,
+  TagUpdateModel,
+} from './../../models/tag-models';
 import {
   Component,
   ElementRef,
@@ -16,7 +20,13 @@ import { postCreateModel } from 'src/app/models/post-model';
 import { timer } from 'rxjs';
 import { ClipboardService } from 'ngx-clipboard';
 import { PostService } from 'src/app/services/post-service';
-import { categoryModel } from 'src/app/models/category-models';
+import {
+  CategoryCreateModel,
+  CategoryModel,
+  CategoryUpdateModel,
+} from 'src/app/models/category-models';
+import { FileModel } from 'src/app/models/file-model';
+import { UserModel } from 'src/app/models/user-models';
 
 @Component({
   selector: 'app-create-page',
@@ -42,9 +52,14 @@ export class CreatePageComponent implements OnInit, OnDestroy {
   activePost = true;
   activeCategory = false;
   activeTag = false;
-  categories: categoryModel[] = [];
-  tags: tagModel[] = [];
-  uploadUrlList = [];
+  userInfo: UserModel = new UserModel();
+  categoryCreateModel: CategoryCreateModel = new CategoryCreateModel();
+  categories: CategoryModel[] = [];
+  categoriesAdmin: CategoryModel[] = [];
+  tagCreateModel: TagCreateModel = new TagCreateModel();
+  tags: TagModel[] = [];
+  tagsAdmin: TagModel[] = [];
+  uploadUrlList: FileModel[] = [];
   editordoc = jsonDoc;
   editor!: Editor;
   toolbar: Toolbar = [
@@ -216,8 +231,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     }
   }
   form: any;
-  ngOnInit() {
-    this.editor = new Editor();
+  getCategories() {
     this.categoryService.getCategories('active').subscribe({
       next: (res) => {
         this.categories = res;
@@ -226,6 +240,18 @@ export class CreatePageComponent implements OnInit, OnDestroy {
         console.error(error);
       },
     });
+  }
+  getCategoriesAdmin() {
+    this.categoryService.getCategories('all').subscribe({
+      next: (res) => {
+        this.categoriesAdmin = res;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+  getTags() {
     this.tagService.getTags('active').subscribe({
       next: (res) => {
         this.tags = res;
@@ -235,9 +261,29 @@ export class CreatePageComponent implements OnInit, OnDestroy {
         console.error(error);
       },
     });
+  }
+  getTagsAdmin() {
+    this.tagService.getTags('all').subscribe({
+      next: (res) => {
+        this.tagsAdmin = res;
+        this.scrollTopDiv();
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+  ngOnInit() {
+    this.editor = new Editor();
+    this.getCategories();
+    this.getTags();
     this.getUserUrls();
     if (this.selectedFiles.length < 1) {
       this.uploadBtnDisable = true;
+    }
+    const getUserInfo = sessionStorage.getItem('userInfo');
+    if (getUserInfo) {
+      this.userInfo = JSON.parse(getUserInfo);
     }
 
     this.form = new FormGroup({
@@ -265,34 +311,36 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     this.activePost = false;
     this.activeCategory = true;
     this.activeTag = false;
+    this.getCategoriesAdmin();
   }
   activateTag() {
     this.activePost = false;
     this.activeCategory = false;
     this.activeTag = true;
+    this.getTagsAdmin();
   }
-  selectedCategoryValue = new categoryModel();
-  selectedCategories: categoryModel[] = [];
+  selectedCategoryValue = new CategoryModel();
+  selectedCategories: CategoryModel[] = [];
 
   selectCategory() {
     if (!this.selectedCategories.includes(this.selectedCategoryValue)) {
       this.selectedCategories.push(this.selectedCategoryValue);
     }
   }
-  removeSelectedCategory(cateRevmove: categoryModel) {
+  removeSelectedCategory(cateRevmove: CategoryModel) {
     this.selectedCategories = this.selectedCategories.filter(
       (obj) => obj.id !== cateRevmove.id
     );
   }
-  selectedTagValue = new tagModel();
-  selectedTags: tagModel[] = [];
+  selectedTagValue = new TagModel();
+  selectedTags: TagModel[] = [];
 
   selectTag() {
     if (!this.selectedTags.includes(this.selectedTagValue)) {
       this.selectedTags.push(this.selectedTagValue);
     }
   }
-  removeSelectedTag(tagRevmove: tagModel) {
+  removeSelectedTag(tagRevmove: TagModel) {
     this.selectedTags = this.selectedTags.filter(
       (obj) => obj.id !== tagRevmove.id
     );
@@ -358,6 +406,149 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error(error);
+      },
+    });
+  }
+  createCategory() {
+    if (
+      this.categoryCreateModel.categoryName.length < 6 ||
+      this.categoryCreateModel.description.length < 6
+    ) {
+      this.popupTitle = 'Category invalid!';
+      this.popupMessage =
+        'Category name or description must be atleast 6 characters!';
+      this.showIt = true;
+    } else {
+      this.categoryService.createCategory(this.categoryCreateModel).subscribe({
+        next: () => {
+          this.getCategories();
+          this.getCategoriesAdmin();
+          this.popupTitle = 'Category created!';
+          this.popupMessage = 'Category created and ready to use!';
+          this.showIt = true;
+          this.categoryCreateModel = new CategoryCreateModel();
+        },
+        error: (error) => {
+          this.popupTitle = 'Create error!';
+          this.popupMessage = error.error;
+          this.showIt = true;
+        },
+      });
+    }
+  }
+  updateCategory(category: CategoryModel) {
+    const categoryupdateModel: CategoryUpdateModel = {
+      id: category.id,
+      categoryName: category.categoryName,
+      description: category.description,
+    };
+    if (
+      categoryupdateModel.categoryName.length < 6 ||
+      categoryupdateModel.description.length < 6
+    ) {
+      this.popupTitle = 'Category invalid!';
+      this.popupMessage =
+        'Category name or description must be atleast 6 characters!';
+      this.showIt = true;
+    } else {
+      this.categoryService.updateCategory(categoryupdateModel).subscribe({
+        next: () => {
+          this.getCategories();
+          this.getCategoriesAdmin();
+          this.popupTitle = 'Category Updated!';
+          this.popupMessage = 'Category updated and ready to use!';
+          this.showIt = true;
+        },
+        error: (error) => {
+          this.popupTitle = 'Update error!';
+          this.popupMessage = error.error;
+          this.showIt = true;
+        },
+      });
+    }
+  }
+  changeCategoryStatus(id: string, status: boolean) {
+    this.categoryService.updateCategoryStatus(id, status).subscribe({
+      next: () => {
+        this.getCategories();
+        this.getCategoriesAdmin();
+        this.popupTitle = 'Category Updated!';
+        this.popupMessage = 'Category updated and ready to use!';
+        this.showIt = true;
+      },
+      error: (error) => {
+        this.popupTitle = 'Update error!';
+        this.popupMessage = error.error;
+        console.log(error);
+
+        this.showIt = true;
+      },
+    });
+  }
+  createTag() {
+    this.tagService.createTag(this.tagCreateModel).subscribe({
+      next: () => {
+        this.popupTitle = 'Tag created!';
+        this.popupMessage = 'Tag created and ready to use!';
+        this.showIt = true;
+        this.getTags();
+        this.getTagsAdmin();
+        this.tagCreateModel = new TagCreateModel();
+      },
+      error: (error) => {
+        this.popupTitle = 'Create error!';
+        this.popupMessage = error.error;
+        this.showIt = true;
+      },
+    });
+  }
+  updateTag(tag: TagModel) {
+    const tagupdateModel: TagUpdateModel = {
+      id: tag.id,
+      tagName: tag.tagName,
+      description: tag.description,
+    };
+    if (
+      tagupdateModel.tagName.length < 6 ||
+      tagupdateModel.description.length < 6
+    ) {
+      this.popupTitle = 'Tag invalid!';
+      this.popupMessage =
+        'Tag name or description must be atleast 6 characters!';
+      this.showIt = true;
+    } else {
+      this.tagService.updateTag(tagupdateModel).subscribe({
+        next: () => {
+          this.getTags();
+          this.getTagsAdmin();
+          this.popupTitle = 'Tag Updated!';
+          this.popupMessage = 'Tag updated!';
+          this.showIt = true;
+        },
+        error: (error) => {
+          this.popupTitle = 'Update error!';
+          this.popupMessage = error.error;
+          this.showIt = true;
+        },
+      });
+    }
+  }
+  changeTagStatus(id: string, status: boolean) {
+    this.tagService.updateTagStatus(id, status).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getTags();
+        this.getTagsAdmin();
+        this.popupTitle = 'Tag Updated!';
+        this.popupMessage = 'Tag updated!';
+        this.showIt = true;
+      },
+      error: (error) => {
+        this.popupTitle = 'Update error!';
+        this.popupMessage = error.error;
+        console.log(error);
+
+        this.showIt = true;
       },
     });
   }

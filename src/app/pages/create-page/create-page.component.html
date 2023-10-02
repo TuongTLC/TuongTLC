@@ -2,10 +2,16 @@
   <div [class.innerDiv]="true" #innerDiv>
     <div class="create-header">
       <button (click)="activatePost()">Post</button>
-      <button (click)="activateCategory()">Catgory</button>
-      <button (click)="activateTag()">Tag</button>
+      <button
+        *ngIf="userInfo.roleName === 'Admin'"
+        (click)="activateCategory()"
+      >
+        Catgory
+      </button>
+      <button *ngIf="userInfo.roleName === 'Admin'" (click)="activateTag()">
+        Tag
+      </button>
     </div>
-    <button (click)="loadDraft()" style="margin-left: 2vw">Load draft</button>
     <div *ngIf="activePost" class="para">
       <div class="postInfo">
         <h1 style="text-align: center">Post Info</h1>
@@ -105,12 +111,135 @@
         </form>
       </div>
       <div class="savePostBtns">
-        <button (click)="save()" class="savePostBtn">Save post</button>
+        <button (click)="loadDraft()" class="savePostBtn">Load draft</button>
         <button (click)="savedraft()" class="savePostBtn">Save draft</button>
+        <button (click)="save()" class="savePostBtn">Save post</button>
       </div>
     </div>
-    <div *ngIf="activeCategory">Cate</div>
-    <div *ngIf="activeTag">Tag</div>
+    <div *ngIf="activeCategory">
+      <div class="cate-tag-create">
+        <h1>Create category</h1>
+        <a class="title">Category name:</a><br />
+        <input
+          type="text"
+          placeholder="Category name"
+          [(ngModel)]="categoryCreateModel.categoryName"
+        /><br />
+        <a class="title">Category description:</a><br />
+        <input
+          type="text"
+          placeholder="Category description"
+          [(ngModel)]="categoryCreateModel.description"
+        /><br />
+        <button (click)="createCategory()">Create Category</button>
+      </div>
+      <div class="cate-tag-update">
+        <h1>Update categories</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Category name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let cateUpdate of categoriesAdmin">
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="cateUpdate.categoryName"
+                style="width: 10vw"
+              />
+            </td>
+            <td>
+              <textarea
+                type="text"
+                [(ngModel)]="cateUpdate.description"
+                style="width: 10vw"
+              ></textarea>
+            </td>
+            <td>
+              <button (click)="updateCategory(cateUpdate)">Update</button>
+            </td>
+            <td>
+              <button
+                *ngIf="cateUpdate.status === true"
+                (click)="changeCategoryStatus(cateUpdate.id, false)"
+              >
+                Disable
+              </button>
+              <button
+                *ngIf="cateUpdate.status === false"
+                (click)="changeCategoryStatus(cateUpdate.id, true)"
+              >
+                Enable
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="activeTag">
+      <div class="cate-tag-create">
+        <h1>Create tag</h1>
+        <a class="title">Tag name:</a><br />
+        <input
+          type="text"
+          placeholder="Tag name"
+          [(ngModel)]="tagCreateModel.tagName"
+        /><br />
+        <a class="title">Tag description:</a><br />
+        <input
+          type="text"
+          placeholder="Tag description"
+          [(ngModel)]="tagCreateModel.description"
+        /><br />
+        <button (click)="createTag()">Create Tag</button>
+      </div>
+      <div class="cate-tag-update">
+        <h1>Update categories</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Tag name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let tagUpdate of tagsAdmin">
+            <td>
+              <input
+                type="text"
+                [(ngModel)]="tagUpdate.tagName"
+                style="width: 10vw"
+              />
+            </td>
+            <td>
+              <textarea
+                type="text"
+                [(ngModel)]="tagUpdate.description"
+                style="width: 10vw"
+              ></textarea>
+            </td>
+            <td>
+              <button (click)="updateTag(tagUpdate)">Update</button>
+            </td>
+            <td>
+              <button
+                *ngIf="tagUpdate.status === true"
+                (click)="changeTagStatus(tagUpdate.id, false)"
+              >
+                Disable
+              </button>
+              <button
+                *ngIf="tagUpdate.status === false"
+                (click)="changeTagStatus(tagUpdate.id, true)"
+              >
+                Enable
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
 <app-popup-modal

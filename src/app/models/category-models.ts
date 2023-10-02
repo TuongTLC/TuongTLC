@@ -1,13 +1,13 @@
-export class categoryCreateModel {
+export class CategoryCreateModel {
   categoryName = '';
   description = '';
 }
-export class categoryUpdateModel {
+export class CategoryUpdateModel {
   id = '';
   categoryName = '';
   description = '';
 }
-export class categoryModel {
+export class CategoryModel {
   id = '';
   categoryName = '';
   description = '';

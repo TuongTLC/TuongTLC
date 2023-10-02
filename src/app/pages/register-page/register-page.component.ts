@@ -109,8 +109,7 @@ export class RegisterPageComponent {
           }
         },
         error: (error) => {
-          this.registerError = error;
-          console.log(this.registerError);
+          this.registerError = error.error;
           this.popupTitle = 'Error!';
           this.popupMessage = this.registerError;
           this.showModal();
