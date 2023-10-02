@@ -1,4 +1,5 @@
 .background {
+  font-family: "Itim", cursive;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -22,28 +23,57 @@
   border-radius: 15px;
   overflow: scroll;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 }
 
 .innerDiv::-webkit-scrollbar {
   display: none;
 }
-
-.para {
-  width: 95%;
+.select-category {
   color: var(--dark-color);
-  background-color: white;
+  height: 6vh;
+  margin-left: auto;
+  margin-right: 1vw;
+  margin-top: 1vh;
+  background-color: bisque;
+}
+.select-category a {
+  font-size: 1.5em;
+}
+.post-grid {
+  width: 100%;
+  height: fit-content;
+  background-color: var(--light-color);
+}
+.post-cell {
+  height: fit-content;
+  width: 48%;
+  float: left;
+  background-color: var(--mid-color);
+  margin: 1%;
+  border-radius: 5px;
+}
+.post-img {
+  height: fit-content;
+  float: left;
+  width: auto;
+  margin: 1%;
+}
+.post-img img {
+  height: 15vh;
+  width: 10vw;
+  border-radius: 5px;
+}
+
+.post-info {
+  height: fit-content;
+  width: 27vw;
+  float: left;
 }
 @media only screen and (max-width: 768px) {
   .innerDiv {
     width: 95vw;
     margin-top: 20%;
-  }
-  .para {
-    width: 99%;
-    margin-top: 2%;
   }
 }

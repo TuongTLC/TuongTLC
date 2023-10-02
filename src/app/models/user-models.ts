@@ -35,3 +35,8 @@ export class UserLoginResModel {
   token = '';
   userInfo = new UserModel();
 }
+export class AuthorModel {
+  id = '';
+  roleName = '';
+  fullname = '';
+}

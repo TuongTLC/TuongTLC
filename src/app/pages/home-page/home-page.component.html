@@ -1,5 +1,47 @@
 <div [class.background]="true">
   <div [class.innerDiv]="true">
-    <div [class.para]="true"></div>
+    <div class="select-category">
+      <a>Category: </a>
+      <select
+        [(ngModel)]="selectedCategory"
+        (ngModelChange)="getPostByCategory()"
+      >
+        <option hidden value="" disabled selected>Select category</option>
+        <option *ngFor="let cate of categories" [ngValue]="cate">
+          {{ cate.categoryName }}
+        </option>
+      </select>
+    </div>
+    <div class="post-grid">
+      <div *ngFor="let post of getPostsModel.listPosts" class="post-cell">
+        <div class="post-img">
+          <img [src]="post.postInfo.thumbnail" alt="thumnail" />
+        </div>
+        <div class="post-info">
+          <a>{{ post.postInfo.postName }}</a>
+          <br />
+          <p>{{ post.postInfo.summary }}</p>
+          <br />
+          <div style="float: right">
+            <a>{{ post.postInfo.createDate | date : "HH:mm d/M/yyyy" }}</a
+            ><br />
+            <a style="float: right">{{ post.postInfo.author.fullname }}</a
+            ><br />
+            <a style="float: right"
+              ><img src="./assets/like.png" alt="like" style="height: 1vh" />
+              {{ post.postInfo.like }}</a
+            >
+            <a style="float: right">
+              <img
+                src="./assets/dislike.png"
+                alt="dislike"
+                style="height: 1vh; margin-left: 1vw"
+              />
+              {{ post.postInfo.dislike }}</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

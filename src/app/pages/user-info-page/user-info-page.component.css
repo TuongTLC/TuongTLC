@@ -144,4 +144,7 @@ input::placeholder {
   .emptyError {
     font-size: 2em;
   }
+  .title {
+    font-size: 3em;
+  }
 }

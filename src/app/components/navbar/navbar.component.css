@@ -101,6 +101,7 @@ li a:hover:not(.active) {
   background-color: var(--light-color);
   z-index: 2;
   border-radius: 5px;
+  border: 1px solid var(--dark-color);
 }
 
 .dropdown-content button {
@@ -118,6 +119,7 @@ li a:hover:not(.active) {
   align-items: center;
   border: none;
   background-color: var(--light-color);
+  border-radius: 5px;
 }
 .dropdown:hover {
   cursor: pointer;
@@ -132,32 +134,15 @@ li a:hover:not(.active) {
   cursor: pointer;
   margin: 0;
   padding: 0;
-  height: 6vh;
+  height: 5vh;
+  padding-top: 0.5vh;
 }
 .container:hover {
   transform: scale(1.1);
   transition-duration: 0.2s;
 }
-.bar1,
-.bar2,
-.bar3 {
-  width: 2vw;
-  min-width: 35px;
-  height: 0.6vh;
-  min-height: 5px;
-  background-color: var(--dark-color);
-  margin: 0.6vh;
-  margin-left: 5px;
-  margin-right: 5px;
-  transition: 0.4s;
-  border-radius: 5px;
-}
-.bar1 {
-  margin-top: 1.76vh;
-}
-/* ******************** */
 .menu {
-  height: 6vh;
+  height: 5vh;
   min-height: 40px;
   width: auto;
   padding: 0;
@@ -170,40 +155,6 @@ li a:hover:not(.active) {
   transform: scale(1.1);
   transition-duration: 0.2s;
 }
-.menu-dropdown {
-  min-height: 45px;
-  height: 6vh;
-}
-.menu-dropdown-content {
-  margin-top: -1.8vh;
-  display: none;
-  min-height: 50px;
-  position: absolute;
-  height: fit-content;
-  width: fit-content;
-  width: 150px;
-  background-color: var(--light-color);
-  z-index: 1;
-  border-radius: 5px;
-}
-
-.menu-dropdown-content a {
-  margin: 0 auto;
-  padding: 0;
-  width: auto;
-  height: fit-content;
-  color: var(--dark-color);
-  text-decoration: none;
-  padding-left: 0.5vw;
-  padding-right: 0.5vw;
-}
-
-.menu-dropdown:hover .menu-dropdown-content {
-  display: block;
-  cursor: pointer;
-  min-width: fit-content;
-}
-/* ************************* */
 @media only screen and (max-width: 768px) {
   li a {
     padding-left: 5vw;
@@ -212,9 +163,15 @@ li a:hover:not(.active) {
   ul {
     height: fit-content;
   }
-
   .userBox button {
     padding-left: 3vw;
     padding-right: 3vw;
+  }
+  .menu :hover {
+    transform: scale(1.1);
+    transition-duration: 0.2s;
+  }
+  .menu-dropdown-content {
+    margin-top: 0.5vh;
   }
 }

@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { postCreateModel } from '../models/post-model';
+import { GetPostModel, postCreateModel } from '../models/post-model';
 import { Router } from '@angular/router';
 import { Auth } from '../auth';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -24,8 +25,8 @@ export class PostService {
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }
-  getPost(pageNum: number, pageSize: number) {
-    return this.http.get(
+  getPosts(pageNum: number, pageSize: number): Observable<GetPostModel> {
+    return this.http.get<GetPostModel>(
       'https://tuongtlc.ddns.net:8081/post/get-posts?pageNumber=' +
         pageNum +
         '&pageSize=' +
