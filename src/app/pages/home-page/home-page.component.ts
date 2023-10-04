@@ -21,7 +21,7 @@ export class HomePageComponent implements OnInit {
   getPostsModel = new GetPostModel();
   ngOnInit() {
     this.getCategories();
-    this.getPosts(1, 6);
+    this.getPosts(1, 6, 'all');
   }
   getCategories() {
     this.categoryService.getCategories('active').subscribe({
@@ -33,8 +33,8 @@ export class HomePageComponent implements OnInit {
       },
     });
   }
-  getPosts(pageNum: number, pageSize: number) {
-    this.postService.getPosts(pageNum, pageSize).subscribe({
+  getPosts(pageNum: number, pageSize: number, status: string) {
+    this.postService.getPosts(pageNum, pageSize, status).subscribe({
       next: (res) => {
         this.getPostsModel = res;
       },
@@ -45,6 +45,6 @@ export class HomePageComponent implements OnInit {
   }
 
   getPostByCategory() {
-    console.log('hihi');
+    console.log('Hi');
   }
 }

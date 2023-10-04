@@ -25,12 +25,18 @@ export class PostService {
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }
-  getPosts(pageNum: number, pageSize: number): Observable<GetPostModel> {
+  getPosts(
+    pageNum: number,
+    pageSize: number,
+    status: string
+  ): Observable<GetPostModel> {
     return this.http.get<GetPostModel>(
       'https://tuongtlc.ddns.net:8081/post/get-posts?pageNumber=' +
         pageNum +
         '&pageSize=' +
-        pageSize
+        pageSize +
+        '&status=' +
+        status
     );
   }
 }
