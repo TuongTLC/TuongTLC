@@ -98,6 +98,10 @@
   width: 27vw;
   float: left;
 }
+.page-select {
+  float: right;
+  font-size: 1.5em;
+}
 @media only screen and (max-width: 768px) {
   .innerDiv {
     width: 95vw;

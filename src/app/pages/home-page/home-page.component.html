@@ -55,10 +55,34 @@
         </div>
       </div>
     </div>
-    <div style="float: right">
-      <a>Page</a>
-      <button *ngFor="let page of numToArray(getPostsModel.paging.pageCount)">
-        {{ page }}
+    <div class="page-select">
+      <a>Page: </a>
+      <button
+        disabled
+        *ngIf="getPostsModel.paging.curPage === 1"
+        (click)="getPostPage(getPostsModel.paging.curPage - 1)"
+      >
+        Previous
+      </button>
+      <button
+        *ngIf="getPostsModel.paging.curPage !== 1"
+        (click)="getPostPage(getPostsModel.paging.curPage - 1)"
+      >
+        Previous
+      </button>
+      <a>{{ getPostsModel.paging.curPage }}</a>
+      <button
+        disabled
+        *ngIf="getPostsModel.paging.curPage === getPostsModel.paging.pageCount"
+        (click)="getPostPage(getPostsModel.paging.curPage + 1)"
+      >
+        Next
+      </button>
+      <button
+        *ngIf="getPostsModel.paging.curPage !== getPostsModel.paging.pageCount"
+        (click)="getPostPage(getPostsModel.paging.curPage + 1)"
+      >
+        Next
       </button>
     </div>
   </div>

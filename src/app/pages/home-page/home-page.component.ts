@@ -19,11 +19,10 @@ export class HomePageComponent implements OnInit {
   categories: CategoryModel[] = [];
   selectedCategory = new CategoryModel();
   getPostsModel = new GetPostModel();
+  getByCategory = false;
   ngOnInit() {
-    this.spinner.show();
-
     this.getCategories();
-    this.getPosts(1, 8, 'all', '', '');
+    this.getPosts(1, 6, 'all', '', '');
   }
   getCategories() {
     this.categoryService.getCategories('active').subscribe({
@@ -54,7 +53,7 @@ export class HomePageComponent implements OnInit {
       .getPosts(pageNum, pageSize, status, categoryId, tagId)
       .subscribe({
         next: (res) => {
-          this.getPostsModel = res;
+          this.getPostsModel  = res;
           this.spinner.hide();
         },
         error: (error) => {
@@ -62,12 +61,20 @@ export class HomePageComponent implements OnInit {
         },
       });
   }
-
   getPostByCategory() {
     if (JSON.stringify(this.selectedCategory).toString() === '"all"') {
-      this.getPosts(1, 8, 'all', '', '');
+      this.getPosts(1, 6, 'all', '', '');
+      this.getByCategory = false;
     } else {
-      this.getPosts(1, 8, 'all', this.selectedCategory.id, '');
+      this.getPosts(1, 6, 'all', this.selectedCategory.id, '');
+      this.getByCategory = true;
+    }
+  }
+  getPostPage(page: number) {
+    if (this.getByCategory == true) {
+      this.getPosts(page, 6, 'all', this.selectedCategory.id, '');
+    } else {
+      this.getPosts(page, 6, 'all', '', '');
     }
   }
 }
