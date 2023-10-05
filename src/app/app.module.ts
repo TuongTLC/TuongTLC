@@ -17,6 +17,8 @@ import { NgxEditorModule } from 'ngx-editor';
 import { SanitizeHtmlPipes } from './sanitizer';
 import { CreatePageComponent } from './pages/create-page/create-page.component';
 import { ClipboardModule } from 'ngx-clipboard';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { ClipboardModule } from 'ngx-clipboard';
     NgxEditorModule,
     ReactiveFormsModule,
     ClipboardModule,
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [NavbarComponent],

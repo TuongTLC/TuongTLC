@@ -26,6 +26,7 @@
               "src/web.config"
             ],
             "styles": [
+              "node_modules/ngx-spinner/animations/ball-spin.css",
               "src/styles.css"
             ],
             "scripts": []

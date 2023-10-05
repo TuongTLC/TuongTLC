@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { GetPostModel } from './../../models/post-model';
 import { Component, OnInit } from '@angular/core';
 import { CategoryModel } from 'src/app/models/category-models';
@@ -11,6 +12,7 @@ import { PostService } from 'src/app/services/post-service';
 })
 export class HomePageComponent implements OnInit {
   constructor(
+    private spinner: NgxSpinnerService,
     private categoryService: CategoryService,
     private postService: PostService
   ) {}
@@ -18,8 +20,10 @@ export class HomePageComponent implements OnInit {
   selectedCategory = new CategoryModel();
   getPostsModel = new GetPostModel();
   ngOnInit() {
+    this.spinner.show();
+
     this.getCategories();
-    this.getPosts(1, 6, 'all', '', '');
+    this.getPosts(1, 8, 'all', '', '');
   }
   getCategories() {
     this.categoryService.getCategories('active').subscribe({
@@ -45,11 +49,13 @@ export class HomePageComponent implements OnInit {
     categoryId: string,
     tagId: string
   ) {
+    this.spinner.show();
     this.postService
       .getPosts(pageNum, pageSize, status, categoryId, tagId)
       .subscribe({
         next: (res) => {
           this.getPostsModel = res;
+          this.spinner.hide();
         },
         error: (error) => {
           console.error(error);
@@ -59,9 +65,9 @@ export class HomePageComponent implements OnInit {
 
   getPostByCategory() {
     if (JSON.stringify(this.selectedCategory).toString() === '"all"') {
-      this.getPosts(1, 6, 'all', '', '');
+      this.getPosts(1, 8, 'all', '', '');
     } else {
-      this.getPosts(1, 6, 'all', this.selectedCategory.id, '');
+      this.getPosts(1, 8, 'all', this.selectedCategory.id, '');
     }
   }
 }

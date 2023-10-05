@@ -1,5 +1,13 @@
 <div [class.background]="true">
   <div [class.innerDiv]="true">
+    <ngx-spinner
+      bdColor="rgba(0, 0, 0, 0.8)"
+      size="medium"
+      color="#fff"
+      type="ball-spin"
+      [fullScreen]="false"
+    ></ngx-spinner>
+
     <div class="select-category">
       <div class="select-category-box">
         <a>Category: </a>
@@ -7,7 +15,7 @@
           [(ngModel)]="selectedCategory"
           (ngModelChange)="getPostByCategory()"
         >
-          <option hidden value="" disabled selected>Select category</option>
+          <option hidden value="" disabled>Select category</option>
           <option *ngFor="let cate of categories" [ngValue]="cate">
             {{ cate.categoryName }}
           </option>
@@ -47,7 +55,7 @@
         </div>
       </div>
     </div>
-    <div>
+    <div style="float: right">
       <a>Page</a>
       <button *ngFor="let page of numToArray(getPostsModel.paging.pageCount)">
         {{ page }}

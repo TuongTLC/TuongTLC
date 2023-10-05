@@ -1,3 +1,12 @@
 <div [class.background]="true">
   <p>about-page works!</p>
+  <button (click)="showSpinner()">click ne</button>
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-spin"
+    [fullScreen]="true"
+    ><p style="color: white">Loading...</p></ngx-spinner
+  >
 </div>

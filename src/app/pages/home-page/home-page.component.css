@@ -23,6 +23,7 @@
   border-radius: 15px;
   flex-direction: column;
   flex-wrap: wrap;
+  position: relative;
 }
 
 .innerDiv::-webkit-scrollbar {
