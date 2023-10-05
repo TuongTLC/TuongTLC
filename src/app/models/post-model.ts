@@ -39,8 +39,8 @@ export class PostTags {
 }
 export class PostModel {
   postInfo = new PostInfo();
-  postCategory = new PostCategories();
-  postTags = new PostTags();
+  postCategories: PostCategories[] = [];
+  postTags: PostTags[] = [];
 }
 export class GetPostModel {
   paging: Paging = new Paging();

@@ -28,7 +28,9 @@ export class PostService {
   getPosts(
     pageNum: number,
     pageSize: number,
-    status: string
+    status?: string,
+    categoryId?: string,
+    tagId?: string
   ): Observable<GetPostModel> {
     return this.http.get<GetPostModel>(
       'https://tuongtlc.ddns.net:8081/post/get-posts?pageNumber=' +
@@ -36,7 +38,11 @@ export class PostService {
         '&pageSize=' +
         pageSize +
         '&status=' +
-        status
+        status +
+        '&categoryId=' +
+        categoryId +
+        '&tagId=' +
+        tagId
     );
   }
 }

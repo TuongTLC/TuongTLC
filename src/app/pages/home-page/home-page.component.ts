@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryModel } from 'src/app/models/category-models';
 import { CategoryService } from 'src/app/services/category-service';
 import { PostService } from 'src/app/services/post-service';
-import { UserService } from 'src/app/services/user-services';
 
 @Component({
   selector: 'app-home-page',
@@ -13,15 +12,14 @@ import { UserService } from 'src/app/services/user-services';
 export class HomePageComponent implements OnInit {
   constructor(
     private categoryService: CategoryService,
-    private postService: PostService,
-    private userService: UserService
+    private postService: PostService
   ) {}
   categories: CategoryModel[] = [];
   selectedCategory = new CategoryModel();
   getPostsModel = new GetPostModel();
   ngOnInit() {
     this.getCategories();
-    this.getPosts(1, 6, 'all');
+    this.getPosts(1, 6, 'all', '', '');
   }
   getCategories() {
     this.categoryService.getCategories('active').subscribe({
@@ -33,18 +31,37 @@ export class HomePageComponent implements OnInit {
       },
     });
   }
-  getPosts(pageNum: number, pageSize: number, status: string) {
-    this.postService.getPosts(pageNum, pageSize, status).subscribe({
-      next: (res) => {
-        this.getPostsModel = res;
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
+  numToArray(num: number) {
+    const result = [];
+    for (let i = 1; i <= num; i++) {
+      result.push(i);
+    }
+    return result;
+  }
+  getPosts(
+    pageNum: number,
+    pageSize: number,
+    status: string,
+    categoryId: string,
+    tagId: string
+  ) {
+    this.postService
+      .getPosts(pageNum, pageSize, status, categoryId, tagId)
+      .subscribe({
+        next: (res) => {
+          this.getPostsModel = res;
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
   }
 
   getPostByCategory() {
-    console.log('Hi');
+    if (JSON.stringify(this.selectedCategory).toString() === '"all"') {
+      this.getPosts(1, 6, 'all', '', '');
+    } else {
+      this.getPosts(1, 6, 'all', this.selectedCategory.id, '');
+    }
   }
 }

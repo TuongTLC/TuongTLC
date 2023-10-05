@@ -1,27 +1,31 @@
 <div [class.background]="true">
   <div [class.innerDiv]="true">
     <div class="select-category">
-      <a>Category: </a>
-      <select
-        [(ngModel)]="selectedCategory"
-        (ngModelChange)="getPostByCategory()"
-      >
-        <option hidden value="" disabled selected>Select category</option>
-        <option *ngFor="let cate of categories" [ngValue]="cate">
-          {{ cate.categoryName }}
-        </option>
-      </select>
+      <div class="select-category-box">
+        <a>Category: </a>
+        <select
+          [(ngModel)]="selectedCategory"
+          (ngModelChange)="getPostByCategory()"
+        >
+          <option hidden value="" disabled selected>Select category</option>
+          <option *ngFor="let cate of categories" [ngValue]="cate">
+            {{ cate.categoryName }}
+          </option>
+          <option value="all">All</option>
+        </select>
+      </div>
     </div>
     <div class="post-grid">
       <div *ngFor="let post of getPostsModel.listPosts" class="post-cell">
         <div class="post-img">
-          <img [src]="post.postInfo.thumbnail" alt="thumnail" />
+          <img [src]="post.postInfo.thumbnail" alt="thumbnail" />
         </div>
         <div class="post-info">
           <a>{{ post.postInfo.postName }}</a>
           <br />
           <p>{{ post.postInfo.summary }}</p>
           <br />
+          <a *ngFor="let p of post.postCategories">{{ p.categoryName }} </a>
           <div style="float: right">
             <a>{{ post.postInfo.createDate | date : "HH:mm d/M/yyyy" }}</a
             ><br />
@@ -42,6 +46,12 @@
           </div>
         </div>
       </div>
+    </div>
+    <div>
+      <a>Page</a>
+      <button *ngFor="let page of numToArray(getPostsModel.paging.pageCount)">
+        {{ page }}
+      </button>
     </div>
   </div>
 </div>
