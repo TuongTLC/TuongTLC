@@ -1,0 +1,25 @@
+.background {
+  height: 100vh;
+  width: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.innerDiv {
+  background-color: var(--mid-color);
+  color: var(--text-color);
+  height: 90vh;
+  width: 80%;
+  margin-top: 8vh;
+  border: solid white 5px;
+  border-radius: 15px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  position: relative;
+  overflow-y: scroll;
+}

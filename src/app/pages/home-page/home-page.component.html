@@ -7,8 +7,18 @@
       type="ball-spin"
       [fullScreen]="false"
     ></ngx-spinner>
-
     <div class="select-category">
+      <div class="search-post-box">
+        <input
+          type="text"
+          placeholder="Search post"
+          [(ngModel)]="searchPostName"
+        />
+        <button *ngIf="checkSearch()" (click)="searchPostByName()">
+          Search
+        </button>
+        <button *ngIf="!checkSearch()" disabled>Search</button>
+      </div>
       <div class="select-category-box">
         <a>Category: </a>
         <select
@@ -26,30 +36,46 @@
     <div class="post-grid">
       <div *ngFor="let post of getPostsModel.listPosts" class="post-cell">
         <div class="post-img">
-          <img [src]="post.postInfo.thumbnail" alt="thumbnail" />
+          <img
+            [src]="post.postInfo.thumbnail"
+            alt="thumbnail"
+            aria-hidden="true"
+            (click)="showPost()"
+          />
         </div>
         <div class="post-info">
-          <a>{{ post.postInfo.postName }}</a>
+          <a class="post-name" aria-hidden="true" (click)="showPost()">{{
+            post.postInfo.postName
+          }}</a>
+          <a class="post-category" *ngFor="let p of post.postCategories"
+            >{{ p.categoryName }} </a
+          ><br />
+          <p class="post-sum">{{ post.postInfo.summary }}</p>
           <br />
-          <p>{{ post.postInfo.summary }}</p>
-          <br />
-          <a *ngFor="let p of post.postCategories">{{ p.categoryName }} </a>
+          <a class="post-tag" *ngFor="let t of post.postTags"
+            ><img
+              src="./assets/tag.png"
+              alt="tag"
+              style="height: 1vh; margin-left: 0.5vw"
+            />
+            {{ t.tagName }}
+          </a>
           <div style="float: right">
-            <a>{{ post.postInfo.createDate | date : "HH:mm d/M/yyyy" }}</a
+            <a>{{ post.postInfo.createDate | date : "HH:mm d-MMM" }}</a
             ><br />
             <a style="float: right">{{ post.postInfo.author.fullname }}</a
             ><br />
-            <a style="float: right"
-              ><img src="./assets/like.png" alt="like" style="height: 1vh" />
-              {{ post.postInfo.like }}</a
-            >
             <a style="float: right">
               <img
                 src="./assets/dislike.png"
                 alt="dislike"
-                style="height: 1vh; margin-left: 1vw"
+                style="height: 1vh; margin-left: 0.5vw"
               />
               {{ post.postInfo.dislike }}</a
+            >
+            <a style="float: right"
+              ><img src="./assets/like.png" alt="like" style="height: 1vh" />
+              {{ post.postInfo.like }}</a
             >
           </div>
         </div>
@@ -70,7 +96,11 @@
       >
         Previous
       </button>
-      <a>{{ getPostsModel.paging.curPage }}</a>
+      <input
+        type="number"
+        [(ngModel)]="getPostsModel.paging.curPage"
+        (change)="getPostPage(getPostsModel.paging.curPage)"
+      /><span>of {{ getPostsModel.paging.pageCount }}</span>
       <button
         disabled
         *ngIf="getPostsModel.paging.curPage === getPostsModel.paging.pageCount"

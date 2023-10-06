@@ -34,7 +34,7 @@ export class PostCategories {
 }
 export class PostTags {
   id = '';
-  categoryName = '';
+  tagName = '';
   description = '';
 }
 export class PostModel {

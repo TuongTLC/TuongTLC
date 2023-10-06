@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GetPostModel, postCreateModel } from '../models/post-model';
+import { GetPostModel, PostModel, postCreateModel } from '../models/post-model';
 import { Router } from '@angular/router';
 import { Auth } from '../auth';
 import { Observable } from 'rxjs';
@@ -37,6 +37,34 @@ export class PostService {
         pageNum +
         '&pageSize=' +
         pageSize +
+        '&status=' +
+        status +
+        '&categoryId=' +
+        categoryId +
+        '&tagId=' +
+        tagId
+    );
+  }
+  getPost(postId: string): Observable<PostModel> {
+    return this.http.get<PostModel>(
+      'https://localhost:7296/post/get-post?postId=' + postId
+    );
+  }
+  searchPosts(
+    pageNum: number,
+    pageSize: number,
+    postName: string,
+    status?: string,
+    categoryId?: string,
+    tagId?: string
+  ): Observable<GetPostModel> {
+    return this.http.get<GetPostModel>(
+      'https://tuongtlc.ddns.net:8081/post/search-post?pageNumber=' +
+        pageNum +
+        '&pageSize=' +
+        pageSize +
+        '&postName=' +
+        postName +
         '&status=' +
         status +
         '&categoryId=' +

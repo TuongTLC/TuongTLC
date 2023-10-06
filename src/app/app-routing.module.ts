@@ -9,6 +9,7 @@ import { CreatePageComponent } from './pages/create-page/create-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { PasswordPageComponent } from './pages/password-page/password-page.component';
 import { UserInfoPageComponent } from './pages/user-info-page/user-info-page.component';
+import { PostPageComponent } from './pages/post-page/post-page.component';
 
 const routes: Routes = [
   { path: '', component: WelcomePageComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterPageComponent },
   { path: 'about', component: AboutPageComponent },
   { path: 'create', component: CreatePageComponent },
+  { path: 'post', component: PostPageComponent },
   { path: 'user-info', component: UserInfoPageComponent },
   { path: 'password', component: PasswordPageComponent },
   { path: '**', component: ErrorPageComponent },

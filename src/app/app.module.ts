@@ -19,6 +19,7 @@ import { CreatePageComponent } from './pages/create-page/create-page.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PostPageComponent } from './pages/post-page/post-page.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserInfoPageComponent,
     SanitizeHtmlPipes,
     CreatePageComponent,
+    PostPageComponent,
   ],
   imports: [
     BrowserModule,
