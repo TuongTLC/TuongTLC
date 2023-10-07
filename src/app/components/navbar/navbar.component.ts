@@ -10,16 +10,11 @@ import { UserModel } from 'src/app/models/user-models';
 export class NavbarComponent implements OnInit {
   constructor(private router: Router) {}
   hideNavbar() {
-    const hideUrls = [
-      '/home',
-      '/about',
-      '/create',
-      '/post',
-    ];
-    let isHidden = false;
+    const hideUrls = ['/', '/login', '/register', '/post', '/**'];
+    let isHidden = true;
     hideUrls.forEach((url) => {
       if (url === this.router.url) {
-        isHidden = true;
+        isHidden = false;
       }
     });
     return isHidden;
