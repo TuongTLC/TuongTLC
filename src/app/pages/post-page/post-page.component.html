@@ -7,27 +7,33 @@
       type="ball-spin"
       [fullScreen]="false"
     ></ngx-spinner>
-    <div>{{ getPostModel.postInfo.postName }}</div>
-    <div>{{ getPostModel.postInfo.createDate | date : "HH:mm d-MMM" }}</div>
-    <div>
-     
-      <a
-        ><img src="./assets/like.png" alt="like" style="height: 1vh" />
-        {{ getPostModel.postInfo.like }}</a
-      > <a>
-        <img
-          src="./assets/dislike.png"
-          alt="dislike"
-          style="height: 1vh; margin-left: 0.5vw"
-        />
-        {{ getPostModel.postInfo.dislike }}</a
-      >
+    <div class="post-name">{{ getPostModel.postInfo.postName }}</div>
+    <div class="post-info">
+      <div class="post-stat">{{ getPostModel.postInfo.author.fullname }}</div>
+
+      <div class="post-stat">
+        <a
+          ><img src="./assets/like.png" alt="like" style="height: 1.5vh" />
+          {{ getPostModel.postInfo.like }}</a
+        >
+        <a>
+          <img
+            src="./assets/dislike.png"
+            alt="dislike"
+            style="height: 1.5vh; margin-left: 0.5vw"
+          />
+          {{ getPostModel.postInfo.dislike }}</a
+        >
+      </div>
+
+      <div class="post-stat">
+        {{ getPostModel.postInfo.createDate | date : "HH:mm d-MMM" }}
+      </div>
     </div>
-    <div>{{ getPostModel.postInfo.author.fullname }}</div>
-    <div>
+    <div class="post-cate">
       <a *ngFor="let p of getPostModel.postCategories">{{ p.categoryName }} </a>
     </div>
-    <div>
+    <div class="post-tag">
       <a *ngFor="let t of getPostModel.postTags"
         ><img
           src="./assets/tag.png"
@@ -37,7 +43,8 @@
         {{ t.tagName }}
       </a>
     </div>
-    <div>
+    <div class="post-sum">{{ getPostModel.postInfo.summary }}</div>
+    <div class="post-content">
       <p [innerHTML]="getPostModel.postInfo.content | sanitizeHtml"></p>
     </div>
   </div>

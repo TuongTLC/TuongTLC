@@ -47,7 +47,7 @@ export class PostService {
   }
   getPost(postId: string): Observable<PostModel> {
     return this.http.get<PostModel>(
-      'https://localhost:7296/post/get-post?postId=' + postId
+      'https://tuongtlc.ddns.net:8081/post/get-post?postId=' + postId
     );
   }
   searchPosts(
