@@ -60,7 +60,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
   tags: TagModel[] = [];
   tagsAdmin: TagModel[] = [];
   uploadUrlList: FileModel[] = [];
-  editordoc = jsonDoc;
+  editorDoc = jsonDoc;
   editor!: Editor;
   toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -91,13 +91,13 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       error = true;
       this.postNameError = true;
       this.popupTitle = 'Post name invalid!';
-      this.popupMessage = 'Post name must have atleast 5 character!';
+      this.popupMessage = 'Post name must have at least 5 character!';
     }
     if (this.postModel.summary != null && this.postModel.summary.length < 6) {
       error = true;
       this.postSummaryError = true;
       this.popupTitle = 'Post summary invalid!';
-      this.popupMessage = 'Post summary must have atleast 5 character!';
+      this.popupMessage = 'Post summary must have at least 5 character!';
     }
     if (
       this.postModel.thumbnail != null &&
@@ -106,7 +106,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       error = true;
       this.postThumbnailError = true;
       this.popupTitle = 'Post thumbnail invalid!';
-      this.popupMessage = 'Post thumbnail must have atleast 5 character!';
+      this.popupMessage = 'Post thumbnail must have at least 5 character!';
     }
     if (
       this.postModel.categoriesIds == null ||
@@ -115,13 +115,13 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       error = true;
       this.postCatesError = true;
       this.popupTitle = 'Post category invalid!';
-      this.popupMessage = 'Please select atleast 1 category!';
+      this.popupMessage = 'Please select at least 1 category!';
     }
     if (this.postModel.tagsIds == null || this.postModel.tagsIds.length == 0) {
       error = true;
       this.postTagsError = true;
       this.popupTitle = 'Post tag invalid!';
-      this.popupMessage = 'Please select atleast 1 tag!';
+      this.popupMessage = 'Please select at least 1 tag!';
     }
     if (error) {
       this.showIt = true;
@@ -144,8 +144,8 @@ export class CreatePageComponent implements OnInit, OnDestroy {
   }
   saveContent = '';
   save() {
-    this.editordoc = this.form.get('editorContent').value;
-    this.saveContent = toHTML(this.editordoc);
+    this.editorDoc = this.form.get('editorContent').value;
+    this.saveContent = toHTML(this.editorDoc);
     this.postModel.categoriesIds = [];
     this.selectedCategories.forEach((category) => {
       this.postModel.categoriesIds?.push(category.id);
@@ -184,9 +184,9 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     this.postModel.categoriesIds = [];
     this.postModel.tagsIds = [];
   }
-  savedraft() {
-    this.editordoc = this.form.get('editorContent')?.value;
-    this.saveContent = toHTML(this.editordoc);
+  saveDraft() {
+    this.editorDoc = this.form.get('editorContent')?.value;
+    this.saveContent = toHTML(this.editorDoc);
     this.postModel.categoriesIds = [];
     this.selectedCategories.forEach((category) => {
       this.postModel.categoriesIds?.push(category.id);
@@ -327,9 +327,9 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       this.selectedCategories.push(this.selectedCategoryValue);
     }
   }
-  removeSelectedCategory(cateRevmove: CategoryModel) {
+  removeSelectedCategory(cateRemove: CategoryModel) {
     this.selectedCategories = this.selectedCategories.filter(
-      (obj) => obj.id !== cateRevmove.id
+      (obj) => obj.id !== cateRemove.id
     );
   }
   selectedTagValue = new TagModel();
@@ -340,9 +340,9 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       this.selectedTags.push(this.selectedTagValue);
     }
   }
-  removeSelectedTag(tagRevmove: TagModel) {
+  removeSelectedTag(tagRemove: TagModel) {
     this.selectedTags = this.selectedTags.filter(
-      (obj) => obj.id !== tagRevmove.id
+      (obj) => obj.id !== tagRemove.id
     );
   }
   selectedFiles: File[] = [];
@@ -416,7 +416,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     ) {
       this.popupTitle = 'Category invalid!';
       this.popupMessage =
-        'Category name or description must be atleast 6 characters!';
+        'Category name or description must be at least 6 characters!';
       this.showIt = true;
     } else {
       this.categoryService.createCategory(this.categoryCreateModel).subscribe({
@@ -437,21 +437,21 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     }
   }
   updateCategory(category: CategoryModel) {
-    const categoryupdateModel: CategoryUpdateModel = {
+    const categoryUpdateModel: CategoryUpdateModel = {
       id: category.id,
       categoryName: category.categoryName,
       description: category.description,
     };
     if (
-      categoryupdateModel.categoryName.length < 6 ||
-      categoryupdateModel.description.length < 6
+      categoryUpdateModel.categoryName.length < 6 ||
+      categoryUpdateModel.description.length < 6
     ) {
       this.popupTitle = 'Category invalid!';
       this.popupMessage =
-        'Category name or description must be atleast 6 characters!';
+        'Category name or description must be at least 6 characters!';
       this.showIt = true;
     } else {
-      this.categoryService.updateCategory(categoryupdateModel).subscribe({
+      this.categoryService.updateCategory(categoryUpdateModel).subscribe({
         next: () => {
           this.getCategories();
           this.getCategoriesAdmin();
@@ -503,21 +503,21 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     });
   }
   updateTag(tag: TagModel) {
-    const tagupdateModel: TagUpdateModel = {
+    const tagUpdateModel: TagUpdateModel = {
       id: tag.id,
       tagName: tag.tagName,
       description: tag.description,
     };
     if (
-      tagupdateModel.tagName.length < 6 ||
-      tagupdateModel.description.length < 6
+      tagUpdateModel.tagName.length < 6 ||
+      tagUpdateModel.description.length < 6
     ) {
       this.popupTitle = 'Tag invalid!';
       this.popupMessage =
-        'Tag name or description must be atleast 6 characters!';
+        'Tag name or description must be at least 6 characters!';
       this.showIt = true;
     } else {
-      this.tagService.updateTag(tagupdateModel).subscribe({
+      this.tagService.updateTag(tagUpdateModel).subscribe({
         next: () => {
           this.getTags();
           this.getTagsAdmin();

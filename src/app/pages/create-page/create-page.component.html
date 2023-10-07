@@ -6,7 +6,7 @@
         *ngIf="userInfo.roleName === 'Admin'"
         (click)="activateCategory()"
       >
-        Catgory
+        Category
       </button>
       <button *ngIf="userInfo.roleName === 'Admin'" (click)="activateTag()">
         Tag
@@ -41,6 +41,7 @@
 
         <a class="title">Post categories:</a
         ><select
+          *ngIf="selectedCategories.length < 3"
           [(ngModel)]="selectedCategoryValue"
           (ngModelChange)="selectCategory()"
         >
@@ -55,7 +56,11 @@
         ><br />
 
         <a class="title">Post Tags:</a>
-        <select [(ngModel)]="selectedTagValue" (ngModelChange)="selectTag()">
+        <select
+          *ngIf="selectedTags.length < 5"
+          [(ngModel)]="selectedTagValue"
+          (ngModelChange)="selectTag()"
+        >
           <option hidden value="" disabled selected>Select Tag</option>
           <option *ngFor="let tag of tags" [ngValue]="tag">
             {{ tag.tagName }}
@@ -112,7 +117,7 @@
       </div>
       <div class="savePostBtns">
         <button (click)="loadDraft()" class="savePostBtn">Load draft</button>
-        <button (click)="savedraft()" class="savePostBtn">Save draft</button>
+        <button (click)="saveDraft()" class="savePostBtn">Save draft</button>
         <button (click)="save()" class="savePostBtn">Save post</button>
       </div>
     </div>
