@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryModel } from 'src/app/models/category-models';
 import { CategoryService } from 'src/app/services/category-service';
 import { PostService } from 'src/app/services/post-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
@@ -14,7 +15,8 @@ export class HomePageComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private categoryService: CategoryService,
-    private postService: PostService
+    private postService: PostService,
+    private router: Router
   ) {}
   categories: CategoryModel[] = [];
   selectedCategory = new CategoryModel();
@@ -134,7 +136,8 @@ export class HomePageComponent implements OnInit {
         },
       });
   }
-  showPost() {
-    console.log('haiti');
+  showPost(postId: string) {
+    const queryParams = { postId: postId };
+    this.router.navigate(['/post'], { queryParams: queryParams });
   }
 }

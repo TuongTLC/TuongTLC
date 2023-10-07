@@ -12,8 +12,6 @@ export class NavbarComponent implements OnInit {
   hideNavbar() {
     const hideUrls = [
       '/home',
-      '/tutorials',
-      '/tips',
       '/about',
       '/create',
       '/post',

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PostModel } from 'src/app/models/post-model';
 import { PostService } from 'src/app/services/post-service';
@@ -11,10 +12,19 @@ import { PostService } from 'src/app/services/post-service';
 export class PostPageComponent implements OnInit {
   constructor(
     private postService: PostService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
   ngOnInit(): void {
-    this.getPost('BA782969-FFF0-4652-995D-D3F4FD0EC307');
+    let postId = '';
+    this.route.queryParams.subscribe((params) => {
+      postId = params['postId'];
+    });
+    if (postId === undefined) {
+      this.router.navigate(['/home']);
+    }
+    this.getPost(postId);
   }
   getPostModel = new PostModel();
   getPost(postId: string) {

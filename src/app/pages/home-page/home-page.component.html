@@ -40,13 +40,16 @@
             [src]="post.postInfo.thumbnail"
             alt="thumbnail"
             aria-hidden="true"
-            (click)="showPost()"
+            (click)="showPost(post.postInfo.id)"
           />
         </div>
         <div class="post-info">
-          <a class="post-name" aria-hidden="true" (click)="showPost()">{{
-            post.postInfo.postName
-          }}</a>
+          <a
+            class="post-name"
+            aria-hidden="true"
+            (click)="showPost(post.postInfo.id)"
+            >{{ post.postInfo.postName }}</a
+          >
           <a class="post-category" *ngFor="let p of post.postCategories"
             >{{ p.categoryName }} </a
           ><br />
