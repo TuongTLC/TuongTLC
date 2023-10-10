@@ -73,4 +73,9 @@ export class PostService {
         tagId
     );
   }
+  getRelatedPosts(postId: string): Observable<PostModel[]> {
+    return this.http.get<PostModel[]>(
+      'https://tuongtlc.ddns.net:8081/post/get-related-posts?postId=' + postId
+    );
+  }
 }

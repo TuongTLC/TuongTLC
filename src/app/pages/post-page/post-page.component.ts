@@ -25,6 +25,7 @@ export class PostPageComponent implements OnInit {
       this.router.navigate(['/home']);
     }
     this.getPost(postId);
+    this.getRelatedPosts(postId);
   }
   getPostModel = new PostModel();
   getPost(postId: string) {
@@ -32,13 +33,37 @@ export class PostPageComponent implements OnInit {
     this.postService.getPost(postId).subscribe({
       next: (res) => {
         this.getPostModel = res;
-        console.log(this.getPostModel);
-
         this.spinner.hide();
       },
       error: (error) => {
         console.error(error);
       },
     });
+  }
+  relatedPosts: PostModel[] = [];
+  getRelatedPosts(postId: string) {
+    this.spinner.show();
+    this.postService.getRelatedPosts(postId).subscribe({
+      next: (res) => {
+        this.relatedPosts = res;
+        this.spinner.hide();
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+  showPost(postId: string) {
+    const queryParams = { postId: postId };
+    const currentUrl = window.location.pathname;
+    const queryString = new URLSearchParams(queryParams).toString();
+    const newUrl = `${currentUrl}?${queryString}`;
+    window.history.pushState({}, '', newUrl);
+    window.location.reload();
+  }
+  onWheel(event: WheelEvent): void {
+    const container = event.currentTarget as HTMLElement;
+    container.scrollLeft += event.deltaY;
+    event.preventDefault();
   }
 }

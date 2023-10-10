@@ -47,5 +47,29 @@
     <div class="post-content">
       <p [innerHTML]="getPostModel.postInfo.content | sanitizeHtml"></p>
     </div>
+    <div class="related-posts" (wheel)="onWheel($event)">
+      <h2>Posts you may like:</h2>
+      <div *ngFor="let post of relatedPosts" class="post-cells">
+        <div class="related-post-img">
+          <img [src]="post.postInfo.thumbnail" alt="related-thumbnail" />
+        </div>
+        <div class="related-post-info">
+          <div class="related-post-name">
+            <a (click)="showPost(post.postInfo.id)" aria-hidden="true">{{
+              post.postInfo.postName
+            }}</a>
+          </div>
+          <div class="related-post-sum">
+            <p>{{ post.postInfo.summary }}</p>
+          </div>
+          <div
+            class="related-post-cate"
+            *ngFor="let cate of post.postCategories"
+          >
+            {{ cate.categoryName }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
