@@ -48,6 +48,28 @@
       <p [innerHTML]="getPostModel.postInfo.content | sanitizeHtml"></p>
     </div>
     <div class="related-posts" (wheel)="onWheel($event)">
+      <!-- asd -->
+      <ul>
+        <ng-container
+          *ngTemplateOutlet="recursiveListTmpl; context: { list: postComments }"
+        ></ng-container>
+      </ul>
+
+      <ng-template #recursiveListTmpl let-list="list">
+        <li *ngFor="let item of list">
+          {{ item.content }}
+          <ul *ngIf="item.replies.length > 0">
+            <ng-container
+              *ngTemplateOutlet="
+                recursiveListTmpl;
+                context: { list: item.replies }
+              "
+            ></ng-container>
+          </ul>
+        </li>
+      </ng-template>
+      <!-- asd -->
+
       <h2>Posts you may like:</h2>
       <div *ngFor="let post of relatedPosts" class="post-cells">
         <div class="related-post-img">

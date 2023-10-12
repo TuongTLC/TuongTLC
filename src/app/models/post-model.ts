@@ -46,3 +46,15 @@ export class GetPostModel {
   paging: Paging = new Paging();
   listPosts: PostModel[] = [];
 }
+export interface PostCommentModel {
+  id: string;
+  commenterId: string;
+  postId: string;
+  parentCommentId: string;
+  content: string;
+  commentDate: Date;
+  like: number;
+  dislike: number;
+  status: boolean;
+  replies: PostCommentModel[];
+}
