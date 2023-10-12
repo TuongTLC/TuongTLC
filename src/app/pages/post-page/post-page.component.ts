@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PostCommentModel, PostModel } from 'src/app/models/post-model';
+import { UserModel } from 'src/app/models/user-models';
 import { PostService } from 'src/app/services/post-service';
 
 @Component({
@@ -15,6 +16,8 @@ export class PostPageComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router
   ) {}
+
+  userInfo = new UserModel();
   ngOnInit(): void {
     const postId = '30C44683-05FD-4245-8FDC-872F305D8176';
     // this.route.queryParams.subscribe((params) => {
@@ -26,6 +29,11 @@ export class PostPageComponent implements OnInit {
     this.getPost(postId);
     this.getRelatedPosts(postId);
     this.getPostComments(postId);
+
+    const userJson = sessionStorage.getItem('userInfo');
+    if (userJson !== null) {
+      this.userInfo = JSON.parse(userJson);
+    }
   }
   getPostModel = new PostModel();
   getPost(postId: string) {
