@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   GetPostModel,
-  PostCommentModel,
   PostModel,
   postCreateModel,
 } from '../models/post-model';
@@ -81,12 +80,6 @@ export class PostService {
   getRelatedPosts(postId: string): Observable<PostModel[]> {
     return this.http.get<PostModel[]>(
       'https://tuongtlc.ddns.net:8081/post/get-related-posts?postId=' + postId
-    );
-  }
-  getPostComments(postId: string): Observable<PostCommentModel[]> {
-    return this.http.get<PostCommentModel[]>(
-      'https://tuongtlc.ddns.net:8081/post-comment/get-post-comments?postId=' +
-        postId
     );
   }
 }

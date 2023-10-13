@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { PostCommentModel, PostModel } from 'src/app/models/post-model';
+import {
+  PostCommentInsertModel,
+  PostCommentModel,
+  PostCommentUpdateModel,
+} from 'src/app/models/post-comment-models';
+import { PostModel } from 'src/app/models/post-model';
 import { UserModel } from 'src/app/models/user-models';
+import { PostCommentService } from 'src/app/services/post-comment-service';
 import { PostService } from 'src/app/services/post-service';
 
 @Component({
@@ -13,22 +19,24 @@ import { PostService } from 'src/app/services/post-service';
 export class PostPageComponent implements OnInit {
   constructor(
     private postService: PostService,
+    private postCommentService: PostCommentService,
     private spinner: NgxSpinnerService,
     private router: Router
   ) {}
 
   userInfo = new UserModel();
+  postId = '';
   ngOnInit(): void {
-    const postId = '30C44683-05FD-4245-8FDC-872F305D8176';
+    this.postId = '30C44683-05FD-4245-8FDC-872F305D8176';
     // this.route.queryParams.subscribe((params) => {
     //   postId = params['postId'];
     // });
-    if (postId === undefined) {
+    if (this.postId === undefined) {
       this.router.navigate(['/home']);
     }
-    this.getPost(postId);
-    this.getRelatedPosts(postId);
-    this.getPostComments(postId);
+    this.getPost(this.postId);
+    this.getRelatedPosts(this.postId);
+    this.getPostComments(this.postId);
 
     const userJson = sessionStorage.getItem('userInfo');
     if (userJson !== null) {
@@ -50,11 +58,9 @@ export class PostPageComponent implements OnInit {
   }
   postComments: PostCommentModel[] = [];
   getPostComments(postId: string) {
-    this.spinner.show();
-    this.postService.getPostComments(postId).subscribe({
+    this.postCommentService.getPostComments(postId).subscribe({
       next: (res) => {
         this.postComments = res;
-        this.spinner.hide();
         console.log(this.postComments);
       },
       error: (error) => {
@@ -87,5 +93,118 @@ export class PostPageComponent implements OnInit {
     const container = event.currentTarget as HTMLElement;
     container.scrollLeft += event.deltaY;
     event.preventDefault();
+  }
+  isReplying = false;
+  commentShowId = '';
+  showReply(status: boolean, commentId: string) {
+    this.isReplying = status;
+    this.commentShowId = commentId;
+  }
+
+  isEditing = false;
+  commentEditShowId = '';
+  showEdit(status: boolean, commentId: string) {
+    this.isEditing = status;
+    this.commentEditShowId = commentId;
+  }
+
+  postCommentInsert = new PostCommentInsertModel();
+  postComment(parentCommentId: string) {
+    this.contentReplyCounter();
+    if (this.contentLengthCheck == true) {
+      return;
+    }
+    this.postCommentInsert.PostId = this.postId;
+    this.postCommentInsert.ParentCommentId = parentCommentId;
+    console.log(this.postCommentInsert);
+    this.postCommentService
+      .insertPostComment(this.postCommentInsert)
+      .subscribe({
+        next: () => {
+          this.resetCommentData();
+          this.getPostComments(this.postId);
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+  }
+  contentLengthCheck = false;
+  contentReplyCounter() {
+    this.contentLengthCheck = false;
+    if (
+      this.postCommentInsert.CommentContent.length > 400 ||
+      this.postCommentInsert.CommentContent.length == 0
+    ) {
+      this.contentLengthCheck = true;
+    }
+    if (
+      this.postCommentInsert.CommentContent.length <= 400 &&
+      this.postCommentInsert.CommentContent.length > 0
+    ) {
+      this.contentLengthCheck = false;
+    }
+  }
+  contentLengthForEditCheck = false;
+
+  contentEditCounter(content: string) {
+    this.contentLengthForEditCheck = false;
+    if (content === this.postCommentInsert.CommentContent) {
+      this.contentLengthForEditCheck = true;
+    }
+    if (content.length > 400 || content.length == 0) {
+      this.contentLengthForEditCheck = true;
+    }
+    if (content.length <= 400 && content.length > 0) {
+      this.contentLengthForEditCheck = false;
+    }
+  }
+  resetCommentData() {
+    this.isEditing = false;
+    this.isReplying = false;
+    this.commentEditShowId = '';
+    this.commentShowId = '';
+    this.postCommentInsert = new PostCommentInsertModel();
+    this.postCommentUpdate = new PostCommentUpdateModel();
+  }
+  postCommentUpdate = new PostCommentUpdateModel();
+  updateComment(commentId: string, commentContent: string) {
+    if (this.contentLengthForEditCheck == true) {
+      console.error('Nope');
+      return;
+    }
+    this.postCommentUpdate.CommentId = commentId;
+    this.postCommentUpdate.Content = commentContent;
+    this.postCommentService
+      .updatePostComment(this.postCommentUpdate)
+      .subscribe({
+        next: () => {
+          this.resetCommentData();
+          this.getPostComments(this.postId);
+        },
+        error(err) {
+          console.error(err);
+        },
+      });
+  }
+  likeComment(commentId: string) {
+    this.postCommentService.likePostComment(commentId).subscribe({
+      next: () => {
+        this.getPostComments(this.postId);
+      },
+      error(err) {
+        console.error(err);
+      },
+    });
+  }
+  dislikeComment(commentId: string) {
+    this.postCommentService.dislikePostComment(commentId).subscribe({
+      next: () => {
+        this.getPostComments(this.postId);
+      },
+      error(err) {
+        console.error(err);
+      },
+    });
   }
 }

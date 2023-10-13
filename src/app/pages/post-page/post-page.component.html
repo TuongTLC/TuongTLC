@@ -55,22 +55,37 @@
           *ngTemplateOutlet="recursiveListTmpl; context: { list: postComments }"
         ></ng-container>
       </div>
-
       <ng-template #recursiveListTmpl let-list="list" class="comment">
         <div *ngFor="let item of list" class="comment">
           <a class="commenter-name">{{ item.commenter.commenterName }}</a
           ><a class="comment-time">{{
             item.commentDate | date : "HH:mm d/MMM/yyy"
-          }}</a
-          ><br />
-          <p>{{ item.content }}</p>
+          }}</a>
+          <br />
+          <p *ngIf="!isEditing" class="comment-content">{{ item.content }}</p>
+          <textarea
+            rows="4"
+            cols="100"
+            style="margin-left: 1vw"
+            *ngIf="isEditing && item.id === commentEditShowId"
+            (change)="contentEditCounter(item.content)"
+            [(ngModel)]="item.content"
+          ></textarea>
           <div class="comment-stat">
             <a
-              ><img src="./assets/like.png" alt="like" style="height: 1vh" />
+              ><img
+                aria-hidden="true"
+                (click)="likeComment(item.id)"
+                src="./assets/like.png"
+                alt="like"
+                style="height: 1vh"
+              />
               {{ item.like }}</a
             >
             <a>
               <img
+                aria-hidden="true"
+                (click)="dislikeComment(item.id)"
                 src="./assets/dislike.png"
                 alt="dislike"
                 style="height: 1vh"
@@ -78,9 +93,58 @@
               {{ item.dislike }}</a
             >
           </div>
-          <div>
-            <button>Reply</button
-            ><button *ngIf="userInfo.id === item.commenter.id">Edit</button>
+          <div class="comment-btns">
+            <button (click)="showReply(true, item.id)">Reply</button>
+            <button
+              *ngIf="userInfo.id === item.commenter.id && !isEditing"
+              (click)="showEdit(true, item.id)"
+            >
+              Edit
+            </button>
+            <button
+              *ngIf="
+                userInfo.id === item.commenter.id &&
+                isEditing &&
+                item.id === commentEditShowId &&
+                !contentLengthForEditCheck
+              "
+              (click)="updateComment(item.id, item.content)"
+            >
+              Save Edit
+            </button>
+            <button
+              *ngIf="item.id === commentEditShowId && contentLengthForEditCheck"
+              disabled
+            >
+              Save Edit
+            </button>
+            <button
+              *ngIf="item.id === commentEditShowId && isEditing"
+              (click)="showEdit(false, '')"
+            >
+              Cancel
+            </button>
+            <div
+              class="reply-box"
+              *ngIf="isReplying && item.id === commentShowId"
+            >
+              <textarea
+                rows="4"
+                cols="100"
+                placeholder="Comment must have less than 400 characters"
+                [(ngModel)]="postCommentInsert.CommentContent"
+                (change)="contentReplyCounter()"
+              ></textarea
+              ><br />
+              <button
+                (click)="postComment(item.id)"
+                *ngIf="!contentLengthCheck"
+              >
+                Send
+              </button>
+              <button disabled *ngIf="contentLengthCheck">Send</button
+              ><button (click)="showReply(false, '')">Cancel</button>
+            </div>
           </div>
           <br />
           <div *ngIf="item.replies.length > 0" style="margin-left: 1vw">

@@ -46,21 +46,4 @@ export class GetPostModel {
   paging: Paging = new Paging();
   listPosts: PostModel[] = [];
 }
-export class PostCommentModel {
-  id = '';
-  commenter: PostCommenter = new PostCommenter();
-  postId = '';
-  parentCommentId = '';
-  content = '';
-  commentDate: Date = new Date();
-  like = 0;
-  dislike = 0;
-  status = false;
-  replies: PostCommentModel[] = [];
-}
 
-export class PostCommenter {
-  id = '';
-  commenterName = '';
-  username = '';
-}
