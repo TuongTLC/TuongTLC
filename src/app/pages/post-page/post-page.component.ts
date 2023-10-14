@@ -139,7 +139,7 @@ export class PostPageComponent implements OnInit {
     if (this.contentLengthCheck == true) {
       this.popupTitle = 'Comment length invalid!';
       this.popupMessage =
-        'Comment length must have at least 1 and less than 400 characters!';
+        'Comment length must have at least 1 and less than 500 characters!';
       this.showIt = true;
       return;
     }
@@ -164,13 +164,13 @@ export class PostPageComponent implements OnInit {
   contentReplyCounter() {
     this.contentLengthCheck = false;
     if (
-      this.postCommentInsert.CommentContent.length > 400 ||
+      this.postCommentInsert.CommentContent.length > 500 ||
       this.postCommentInsert.CommentContent.length == 0
     ) {
       this.contentLengthCheck = true;
     }
     if (
-      this.postCommentInsert.CommentContent.length <= 400 &&
+      this.postCommentInsert.CommentContent.length <= 500 &&
       this.postCommentInsert.CommentContent.length > 0
     ) {
       this.contentLengthCheck = false;
@@ -183,10 +183,10 @@ export class PostPageComponent implements OnInit {
     if (content === this.postCommentInsert.CommentContent) {
       this.contentLengthForEditCheck = true;
     }
-    if (content.length > 400 || content.length == 0) {
+    if (content.length > 500 || content.length == 0) {
       this.contentLengthForEditCheck = true;
     }
-    if (content.length <= 400 && content.length > 0) {
+    if (content.length <= 500 && content.length > 0) {
       this.contentLengthForEditCheck = false;
     }
   }
@@ -203,7 +203,7 @@ export class PostPageComponent implements OnInit {
     if (this.contentLengthForEditCheck == true) {
       this.popupTitle = 'Comment length invalid!';
       this.popupMessage =
-        'Comment length must have at least 1 and less than 400 characters!';
+        'Comment length must have at least 1 and less than 500 characters!';
       this.showIt = true;
       return;
     }
