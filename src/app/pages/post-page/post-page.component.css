@@ -240,6 +240,8 @@ textarea {
   height: 5vh;
   margin-left: 1vw;
   border-radius: 5px;
+  font-size: 1em;
+  font-family: "Itim", cursive;
 }
 img:hover {
   cursor: pointer;
