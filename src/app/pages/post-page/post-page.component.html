@@ -13,7 +13,13 @@
 
       <div class="post-stat">
         <a
-          ><img src="./assets/like.png" alt="like" style="height: 1.5vh" />
+          ><img
+            src="./assets/like.png"
+            alt="like"
+            style="height: 1.5vh"
+            aria-hidden="true"
+            (click)="likePost()"
+          />
           {{ getPostModel.postInfo.like }}</a
         >
         <a>
@@ -21,6 +27,8 @@
             src="./assets/dislike.png"
             alt="dislike"
             style="height: 1.5vh; margin-left: 0.5vw"
+            aria-hidden="true"
+            (click)="dislikePost()"
           />
           {{ getPostModel.postInfo.dislike }}</a
         >
@@ -49,6 +57,17 @@
     </div>
     <div class="comment-section">
       <!-- Comment section -->
+      <div class="root-comment">
+        <h2 style="float: left">Post a comment:</h2>
+        <textarea
+          placeholder="Comment must have less than 400 characters"
+          class="root-comment-text"
+          [(ngModel)]="postCommentInsert.CommentContent"
+        ></textarea>
+        <button class="root-comment-btn" (click)="postComment(null)">
+          Post comment
+        </button>
+      </div>
       <h2>Comments</h2>
       <div class="comments">
         <ng-container
@@ -64,8 +83,6 @@
           <br />
           <p *ngIf="!isEditing" class="comment-content">{{ item.content }}</p>
           <textarea
-            rows="4"
-            cols="100"
             style="margin-left: 1vw"
             *ngIf="isEditing && item.id === commentEditShowId"
             (change)="contentEditCounter(item.content)"
@@ -129,8 +146,6 @@
               *ngIf="isReplying && item.id === commentShowId"
             >
               <textarea
-                rows="4"
-                cols="100"
                 placeholder="Comment must have less than 400 characters"
                 [(ngModel)]="postCommentInsert.CommentContent"
                 (change)="contentReplyCounter()"
@@ -185,3 +200,10 @@
     </div>
   </div>
 </div>
+<app-popup-modal
+  *ngIf="showIt"
+  title="{{ popupTitle }}"
+  message="{{ popupMessage }}"
+  (closeEvt)="closeModal()"
+>
+</app-popup-modal>

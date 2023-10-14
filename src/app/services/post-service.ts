@@ -1,10 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  GetPostModel,
-  PostModel,
-  postCreateModel,
-} from '../models/post-model';
+import { GetPostModel, PostModel, postCreateModel } from '../models/post-model';
 import { Router } from '@angular/router';
 import { Auth } from '../auth';
 import { Observable } from 'rxjs';
@@ -80,6 +76,22 @@ export class PostService {
   getRelatedPosts(postId: string): Observable<PostModel[]> {
     return this.http.get<PostModel[]>(
       'https://tuongtlc.ddns.net:8081/post/get-related-posts?postId=' + postId
+    );
+  }
+  likePost(postId: string) {
+    const token = sessionStorage.getItem('token');
+    return this.http.post(
+      'https://tuongtlc.ddns.net:8081/post/like-post?postId=' + postId,
+      null,
+      { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
+    );
+  }
+  dislikePost(postId: string) {
+    const token = sessionStorage.getItem('token');
+    return this.http.post(
+      'https://tuongtlc.ddns.net:8081/post/dislike-post?postId=' + postId,
+      null,
+      { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }
 }

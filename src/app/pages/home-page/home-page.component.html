@@ -49,7 +49,7 @@
             aria-hidden="true"
             (click)="showPost(post.postInfo.id)"
             >{{ post.postInfo.postName }}</a
-          >
+          ><br />
           <a class="post-category" *ngFor="let p of post.postCategories"
             >{{ p.categoryName }} </a
           ><br />

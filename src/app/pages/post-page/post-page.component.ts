@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
   PostCommentInsertModel,
@@ -21,16 +21,21 @@ export class PostPageComponent implements OnInit {
     private postService: PostService,
     private postCommentService: PostCommentService,
     private spinner: NgxSpinnerService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
-
+  showIt = false;
+  popupTitle = '';
+  popupMessage = '';
+  closeModal() {
+    this.showIt = false;
+  }
   userInfo = new UserModel();
   postId = '';
   ngOnInit(): void {
-    this.postId = '30C44683-05FD-4245-8FDC-872F305D8176';
-    // this.route.queryParams.subscribe((params) => {
-    //   postId = params['postId'];
-    // });
+    this.route.queryParams.subscribe((params) => {
+      this.postId = params['postId'];
+    });
     if (this.postId === undefined) {
       this.router.navigate(['/home']);
     }
@@ -51,8 +56,11 @@ export class PostPageComponent implements OnInit {
         this.getPostModel = res;
         this.spinner.hide();
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
+        this.popupTitle = 'Load posts failed!';
+        this.popupMessage =
+          'Something went wrong while loading posts, please try again later!';
+        this.showIt = true;
       },
     });
   }
@@ -61,10 +69,12 @@ export class PostPageComponent implements OnInit {
     this.postCommentService.getPostComments(postId).subscribe({
       next: (res) => {
         this.postComments = res;
-        console.log(this.postComments);
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
+        this.popupTitle = 'Load comments failed!';
+        this.popupMessage =
+          'Something went wrong while loading comments, please try again later!';
+        this.showIt = true;
       },
     });
   }
@@ -76,8 +86,11 @@ export class PostPageComponent implements OnInit {
         this.relatedPosts = res;
         this.spinner.hide();
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
+        this.popupTitle = 'Load related posts failed!';
+        this.popupMessage =
+          'Something went wrong while loading related posts, please try again later!';
+        this.showIt = true;
       },
     });
   }
@@ -97,6 +110,15 @@ export class PostPageComponent implements OnInit {
   isReplying = false;
   commentShowId = '';
   showReply(status: boolean, commentId: string) {
+    if (this.isEditing === true) {
+      this.isEditing = false;
+    }
+    if (this.userInfo.id === '') {
+      this.popupTitle = 'Login required!';
+      this.popupMessage = 'Please login to post a comment!';
+      this.showIt = true;
+      return;
+    }
     this.isReplying = status;
     this.commentShowId = commentId;
   }
@@ -106,17 +128,23 @@ export class PostPageComponent implements OnInit {
   showEdit(status: boolean, commentId: string) {
     this.isEditing = status;
     this.commentEditShowId = commentId;
+    if (this.isReplying === true) {
+      this.isReplying = false;
+    }
   }
 
   postCommentInsert = new PostCommentInsertModel();
-  postComment(parentCommentId: string) {
+  postComment(parentCommentId: string | null) {
     this.contentReplyCounter();
     if (this.contentLengthCheck == true) {
+      this.popupTitle = 'Comment length invalid!';
+      this.popupMessage =
+        'Comment length must have at least 1 and less than 400 characters!';
+      this.showIt = true;
       return;
     }
     this.postCommentInsert.PostId = this.postId;
     this.postCommentInsert.ParentCommentId = parentCommentId;
-    console.log(this.postCommentInsert);
     this.postCommentService
       .insertPostComment(this.postCommentInsert)
       .subscribe({
@@ -124,8 +152,11 @@ export class PostPageComponent implements OnInit {
           this.resetCommentData();
           this.getPostComments(this.postId);
         },
-        error: (error) => {
-          console.error(error);
+        error: () => {
+          this.popupTitle = 'Comment failed!';
+          this.popupMessage =
+            'Something went wrong while inserting comment, please try again later!';
+          this.showIt = true;
         },
       });
   }
@@ -170,7 +201,10 @@ export class PostPageComponent implements OnInit {
   postCommentUpdate = new PostCommentUpdateModel();
   updateComment(commentId: string, commentContent: string) {
     if (this.contentLengthForEditCheck == true) {
-      console.error('Nope');
+      this.popupTitle = 'Comment length invalid!';
+      this.popupMessage =
+        'Comment length must have at least 1 and less than 400 characters!';
+      this.showIt = true;
       return;
     }
     this.postCommentUpdate.CommentId = commentId;
@@ -182,8 +216,11 @@ export class PostPageComponent implements OnInit {
           this.resetCommentData();
           this.getPostComments(this.postId);
         },
-        error(err) {
-          console.error(err);
+        error: () => {
+          this.popupTitle = 'Update comment failed!';
+          this.popupMessage =
+            'Something went wrong while updating comment, please try again later!';
+          this.showIt = true;
         },
       });
   }
@@ -192,8 +229,17 @@ export class PostPageComponent implements OnInit {
       next: () => {
         this.getPostComments(this.postId);
       },
-      error(err) {
-        console.error(err);
+      error: (err) => {
+        if (err.status === 401) {
+          this.popupTitle = 'Login required!';
+          this.popupMessage = 'Please login to interact with the comment!';
+          this.showIt = true;
+        }
+        if (err.status === 409) {
+          this.popupTitle = 'Already interact!';
+          this.popupMessage = 'You have already interacted with this comment!';
+          this.showIt = true;
+        }
       },
     });
   }
@@ -202,8 +248,55 @@ export class PostPageComponent implements OnInit {
       next: () => {
         this.getPostComments(this.postId);
       },
-      error(err) {
-        console.error(err);
+      error: (err) => {
+        if (err.status === 401) {
+          this.popupTitle = 'Login required!';
+          this.popupMessage = 'Please login to interact with the comment!';
+          this.showIt = true;
+        }
+        if (err.status === 409) {
+          this.popupTitle = 'Already interact!';
+          this.popupMessage = 'You have already interacted with this comment!';
+          this.showIt = true;
+        }
+      },
+    });
+  }
+  likePost() {
+    this.postService.likePost(this.postId).subscribe({
+      next: () => {
+        this.showPost(this.postId);
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          this.popupTitle = 'Login required!';
+          this.popupMessage = 'Please login to interact with the post!';
+          this.showIt = true;
+        }
+        if (err.status === 409) {
+          this.popupTitle = 'Already interact!';
+          this.popupMessage = 'You have already interacted with this post!';
+          this.showIt = true;
+        }
+      },
+    });
+  }
+  dislikePost() {
+    this.postService.dislikePost(this.postId).subscribe({
+      next: () => {
+        this.showPost(this.postId);
+      },
+      error: (err) => {
+        if (err.status === 401) {
+          this.popupTitle = 'Login required!';
+          this.popupMessage = 'Please login to interact with the post!';
+          this.showIt = true;
+        }
+        if (err.status === 409) {
+          this.popupTitle = 'Already interact!';
+          this.popupMessage = 'You have already interacted with this post!';
+          this.showIt = true;
+        }
       },
     });
   }

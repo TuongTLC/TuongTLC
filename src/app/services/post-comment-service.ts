@@ -48,19 +48,23 @@ export class PostCommentService {
     );
   }
   likePostComment(commentId: string) {
+    const token = sessionStorage.getItem('token');
+
     return this.http.post(
       'https://tuongtlc.ddns.net:8081/post-comment/like-comment?commentId=' +
         commentId,
       null,
-      { responseType: 'text' }
+      { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }
   dislikePostComment(commentId: string) {
+    const token = sessionStorage.getItem('token');
+
     return this.http.post(
       'https://tuongtlc.ddns.net:8081/post-comment/dislike-comment?commentId=' +
         commentId,
       null,
-      { responseType: 'text' }
+      { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }
 }

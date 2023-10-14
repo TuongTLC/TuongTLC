@@ -39,12 +39,6 @@
   height: 50%;
   float: left;
 }
-.socialContainer {
-  width: 100%;
-  text-align: center;
-  height: fit-content;
-  float: left;
-}
 h1 {
   font-family: "Yellowtail", cursive;
   font-size: 8vw;

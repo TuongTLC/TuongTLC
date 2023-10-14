@@ -83,7 +83,7 @@
   font-family: "Itim", cursive;
   background-color: var(--light-color);
   color: var(--black-color);
-  border-radius: 5px;
+  border-top: 1px solid var(--dark-color);
   text-align: center;
 }
 .post-content {
@@ -129,6 +129,7 @@
   width: 100%;
   height: 15vh;
   margin: 5%;
+  border-radius: 5px;
 }
 .related-post-info {
   float: left;
@@ -235,9 +236,59 @@ h2 {
   margin-top: 1vh;
 }
 textarea {
+  width: 30vw;
+  height: 5vh;
   margin-left: 1vw;
   border-radius: 5px;
 }
 img:hover {
   cursor: pointer;
+}
+.root-comment {
+  width: 100%;
+  height: fit-content;
+  float: left;
+  text-align: center;
+}
+.root-comment-text {
+  width: 90%;
+}
+.root-comment-btn {
+  border: 1px solid var(--dark-color);
+  background-color: var(--light-color);
+  height: 3vh;
+  width: 5vw;
+  border-radius: 3px;
+  float: right;
+  margin-right: 5%;
+}
+@media only screen and (max-width: 768px) {
+  .innerDiv {
+    width: 98vw;
+  }
+  .post-content {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
+    background-color: bisque;
+  }
+  .related-post-img {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .post-cells {
+    width: 80vw;
+  }
+  textarea {
+    width: 80vw;
+  }
+  .related-post-sum {
+    width: 80vw;
+  }
+  .root-comment-btn {
+    height: 5vh;
+    width: 30vw;
+  }
 }
