@@ -1,7 +1,7 @@
 <div>
-  <div [class.logo]="true" onclick="window.location.href='/'"></div>
-  <div [class.innerDiv]="true">
-    <div [class.welcome]="true">
+  <div class="logo" onclick="window.location.href='/'"></div>
+  <div class="innerDiv">
+    <div class="welcome">
       <input
         name="username"
         type="text"
@@ -11,9 +11,7 @@
         [(ngModel)]="loginInfo.username"
         (keyup.enter)="login()"
       />
-      <p [class.emptyError]="true" *ngIf="usernameEmpty">
-        Username can not be empty!
-      </p>
+      <p class="emptyError" *ngIf="usernameEmpty">Username can not be empty!</p>
       <br />
       <input
         name="password"
@@ -24,16 +22,12 @@
         [(ngModel)]="loginInfo.password"
         (keyup.enter)="login()"
       />
-      <p [class.emptyError]="true" *ngIf="passwordEmpty">
-        Password can not be empty!
-      </p>
-      <p [class.loginError]="true" *ngIf="loginError">
-        Wrong username or password!
-      </p>
+      <p class="emptyError" *ngIf="passwordEmpty">Password can not be empty!</p>
+      <p class="loginError" *ngIf="loginError">Wrong username or password!</p>
       <br />
-      <button [class.loginBtn]="true" (click)="login()">Login</button>
+      <button class="loginBtn" (click)="login()">Login</button>
       <br />
-      <button [class.loginBtn]="true" routerLink="/register">Register</button>
+      <button class="loginBtn" routerLink="/register">Register</button>
     </div>
   </div>
 </div>

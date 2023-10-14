@@ -1,7 +1,7 @@
 <div>
-  <div [class.logo]="true" onclick="window.location.href='/'"></div>
-  <div [class.innerDiv]="true">
-    <div [class.welcome]="true">
+  <div class="logo" onclick="window.location.href='/'"></div>
+  <div class="innerDiv">
+    <div class="welcome">
       <input
         name="username"
         type="text"
@@ -55,10 +55,10 @@
       />
       <p class="error" *ngIf="validateBirthdateError">Birthdate invalid!</p>
       <br />
-      <button [class.loginBtn]="true" routerLink="/login">
+      <button class="loginBtn"  routerLink="/login">
         <a>Back</a>
       </button>
-      <button [class.loginBtn]="true" (click)="register()">Register</button>
+      <button class="loginBtn"  (click)="register()">Register</button>
     </div>
   </div>
   <app-popup-modal

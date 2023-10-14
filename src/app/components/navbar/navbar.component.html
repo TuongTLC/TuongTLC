@@ -1,8 +1,8 @@
 <div style="position: absolute">
-  <div [class.navbar]="true" *ngIf="hideNavbar()">
+  <div class="navbar" *ngIf="hideNavbar()">
     <ul>
       <li class="menu">
-        <img src="/favicon.ico" alt="homelogo" routerLink="/home" />
+        <img src="/favicon.ico" alt="homeLogo" routerLink="/home" />
       </li>
       <li>
         <a
@@ -31,11 +31,11 @@
         >
       </li>
       <li *ngIf="userInfo">
-        <div [class.dropdown]="true">
-          <button [class.dropbtn]="true">
+        <div class="dropdown">
+          <button class="dropbtn">
             {{ userInfo.fullname }}
           </button>
-          <div [class.dropdown-content]="true">
+          <div class="dropdown-content">
             <button
               routerLink="/password"
               routerLinkActive="active"

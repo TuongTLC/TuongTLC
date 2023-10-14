@@ -1,7 +1,7 @@
 <div>
-  <div [class.logo]="true" onclick="window.location.href='/'"></div>
-  <div [class.innerDiv]="true">
-    <div [class.welcome]="true">
+  <div class="logo" onclick="window.location.href='/'"></div>
+  <div class="innerDiv">
+    <div class="welcome">
       <h2 class="account">Account: <br />{{ username }}</h2>
       <a class="title">Fullname:</a><br />
       <input
@@ -10,7 +10,7 @@
         required
         type="text"
       /><br />
-      <p *ngIf="fullNameError" [class.emptyError]="true">Fullname invalid!</p>
+      <p *ngIf="fullNameError" class="emptyError">Fullname invalid!</p>
       <a class="title">Email:</a><br />
       <input
         [(ngModel)]="userInfo.email"
@@ -18,7 +18,7 @@
         required
         type="text"
       /><br />
-      <p *ngIf="emailError" [class.emptyError]="true">Email invalid!</p>
+      <p *ngIf="emailError" class="emptyError">Email invalid!</p>
 
       <a class="title">Phone number:</a><br />
       <input
@@ -27,7 +27,7 @@
         required
         type="text"
       /><br />
-      <p *ngIf="phoneError" [class.emptyError]="true">Phone invalid!</p>
+      <p *ngIf="phoneError" class="emptyError">Phone invalid!</p>
       <a class="title">Birthdate:</a><br />
       <input
         #a
@@ -39,14 +39,14 @@
         required
         type="text"
       /><br />
-      <p *ngIf="birthDayError" [class.emptyError]="true">Birthday invalid!</p>
+      <p *ngIf="birthDayError" class="emptyError">Birthday invalid!</p>
 
       <br />
-      <button (click)="updateUserInfo()" [class.loginBtn]="true">
+      <button (click)="updateUserInfo()" class="loginBtn" >
         Confirm
       </button>
       <br />
-      <button [class.loginBtn]="true" routerLink="/home">Home</button>
+      <button class="loginBtn"  routerLink="/home">Home</button>
     </div>
   </div>
 </div>
