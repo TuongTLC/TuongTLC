@@ -145,6 +145,7 @@
             <tr>
               <th>Category name</th>
               <th>Description</th>
+              <th></th>
             </tr>
           </thead>
           <tr *ngFor="let cateUpdate of categoriesAdmin">
@@ -152,20 +153,18 @@
               <input
                 type="text"
                 [(ngModel)]="cateUpdate.categoryName"
-                style="width: 10vw"
+                class="edit-input"
               />
             </td>
             <td>
               <textarea
                 type="text"
                 [(ngModel)]="cateUpdate.description"
-                style="width: 10vw"
+                class="edit-input"
               ></textarea>
             </td>
             <td>
-              <button (click)="updateCategory(cateUpdate)">Update</button>
-            </td>
-            <td>
+              <button (click)="updateCategory(cateUpdate)">Update</button><br />
               <button
                 *ngIf="cateUpdate.status === true"
                 (click)="changeCategoryStatus(cateUpdate.id, false)"
@@ -207,6 +206,7 @@
             <tr>
               <th>Tag name</th>
               <th>Description</th>
+              <th></th>
             </tr>
           </thead>
           <tr *ngFor="let tagUpdate of tagsAdmin">
@@ -214,20 +214,19 @@
               <input
                 type="text"
                 [(ngModel)]="tagUpdate.tagName"
-                style="width: 10vw"
+                class="edit-input"
               />
             </td>
             <td>
               <textarea
                 type="text"
                 [(ngModel)]="tagUpdate.description"
-                style="width: 10vw"
+                class="edit-input"
               ></textarea>
             </td>
             <td>
               <button (click)="updateTag(tagUpdate)">Update</button>
-            </td>
-            <td>
+              <br />
               <button
                 *ngIf="tagUpdate.status === true"
                 (click)="changeTagStatus(tagUpdate.id, false)"
