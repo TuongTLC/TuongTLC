@@ -20,6 +20,8 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PostPageComponent } from './pages/post-page/post-page.component';
+import { ListViewComponent } from './pages/list-view/list-view.component';
+import { EditPostPageComponent } from './pages/edit-post-page/edit-post-page.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { PostPageComponent } from './pages/post-page/post-page.component';
     SanitizeHtmlPipes,
     CreatePageComponent,
     PostPageComponent,
+    ListViewComponent,
+    EditPostPageComponent,
   ],
   imports: [
     BrowserModule,

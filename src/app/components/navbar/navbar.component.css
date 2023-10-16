@@ -3,14 +3,16 @@
   height: fit-content;
   width: 100vw;
   white-space: nowrap;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
   z-index: 1;
   background-color: var(--light-color);
   justify-content: space-between;
 }
+
 ul {
   height: fit-content;
-  max-height: 16vh;
+  max-height: 6vh;
   width: fit-content;
   margin: 0;
   padding: 0;
@@ -20,10 +22,12 @@ ul {
 img {
   height: 100%;
 }
+
 .rightContainer {
   height: fit-content;
   width: fit-content;
 }
+
 li {
   display: inline-block;
   width: fit-content;
@@ -31,13 +35,17 @@ li {
   vertical-align: middle;
   margin-left: 1px;
   margin-right: 1px;
+
 }
+
 ul::-webkit-scrollbar {
   display: none;
 }
+
 .navbar::-webkit-scrollbar {
   display: none;
 }
+
 li a {
   font-family: "Itim", cursive;
   display: flex;
@@ -60,9 +68,10 @@ li a:hover:not(.active) {
   color: var(--text-color);
   border-radius: 5px;
 }
+
 .active {
   height: 6vh;
-  background-color: var(--dark-color);
+  background-color: var(--dark-color) !important;
   border-radius: 5px;
   color: var(--text-color) !important;
 }
@@ -121,26 +130,17 @@ li a:hover:not(.active) {
   background-color: var(--light-color);
   border-radius: 5px;
 }
+
 .dropdown:hover {
   cursor: pointer;
 }
+
 .dropdown:hover .dropdown-content {
   display: block;
   cursor: pointer;
   min-width: fit-content;
 }
-.container {
-  display: block;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-  height: 5vh;
-  padding-top: 0.5vh;
-}
-.container:hover {
-  transform: scale(1.1);
-  transition-duration: 0.2s;
-}
+
 .menu {
   height: 5vh;
   min-height: 40px;
@@ -151,27 +151,30 @@ li a:hover:not(.active) {
   padding-right: 0.5vw;
   cursor: pointer;
 }
+
 .menu :hover {
   transform: scale(1.1);
   transition-duration: 0.2s;
 }
+
 @media only screen and (max-width: 768px) {
   li a {
     padding-left: 5vw;
     padding-right: 5vw;
   }
+
   ul {
     height: fit-content;
   }
+
   .userBox button {
     padding-left: 3vw;
     padding-right: 3vw;
   }
+
   .menu :hover {
     transform: scale(1.1);
     transition-duration: 0.2s;
   }
-  .menu-dropdown-content {
-    margin-top: 0.5vh;
-  }
+
 }

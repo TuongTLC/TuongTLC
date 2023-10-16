@@ -1,0 +1,128 @@
+<div class="background">
+  <div class="innerDiv">
+    <ngx-spinner
+      bdColor="rgba(0, 0, 0, 0.8)"
+      size="medium"
+      color="#fff"
+      type="ball-spin"
+      [fullScreen]="false"
+    ></ngx-spinner>
+    <div class="create-header">
+      <a>Edit post</a>
+    </div>
+    <div class="para" #innerDiv>
+      <div class="postInfo">
+        <h1 style="text-align: center">Post Info</h1>
+        <a class="title">Post name:</a><br />
+        <input
+          type="text"
+          placeholder="Post name"
+          [(ngModel)]="getPostModel.postInfo.postName"
+        />
+        <br />
+
+        <a class="title">Post summary:</a><br />
+        <textarea
+          cols="50"
+          rows="3"
+          placeholder="Post summary"
+          [(ngModel)]="getPostModel.postInfo.summary"
+        ></textarea
+        ><br />
+
+        <a class="title">Post thumbnail url:</a><br />
+        <input
+          type="text"
+          placeholder="Post thumbnail url"
+          [(ngModel)]="getPostModel.postInfo.thumbnail"
+        /><br />
+
+        <a class="title">Post categories:</a
+        ><select
+          *ngIf="selectedCategories.length < 3"
+          [(ngModel)]="selectedCategoryValue"
+          (ngModelChange)="selectCategory()"
+        >
+          <option hidden value="" disabled selected>Select Category</option>
+          <option *ngFor="let cate of categories" [ngValue]="cate">
+            {{ cate.categoryName }}
+          </option></select
+        ><br />
+        <a *ngFor="let category of selectedCategories">
+          {{ category.categoryName
+          }}<button (click)="removeSelectedCategory(category)">X</button> </a
+        ><br />
+
+        <a class="title">Post Tags:</a>
+        <select
+          *ngIf="selectedTags.length < 5"
+          [(ngModel)]="selectedTagValue"
+          (ngModelChange)="selectTag()"
+        >
+          <option hidden value="" disabled selected>Select Tag</option>
+          <option *ngFor="let tag of tags" [ngValue]="tag">
+            {{ tag.tagName }}
+          </option></select
+        ><br />
+        <a *ngFor="let tag of selectedTags">
+          {{ tag.tagName }}<button (click)="removeSelectedTag(tag)">X</button>
+        </a>
+      </div>
+      <div class="upload">
+        <h1>URLs</h1>
+        <p>Upload files to get urls(2MB per file)</p>
+        <input
+          type="file"
+          (change)="fileChange($event)"
+          multiple
+          style="width: 80%"
+        />
+        <button (click)="uploadFile()" [disabled]="uploadBtnDisable">
+          Upload
+        </button>
+        <p *ngIf="fileSizeError" style="color: red">
+          A file you selected exceed 2MB!
+        </p>
+        <h2>You uploaded:</h2>
+        <div class="uploadImgBox" *ngFor="let url of uploadUrlList">
+          <p>
+            {{ url.uploadDate | date : "d-MMM HH:mm:ss" }}<br /><img
+              [src]="url.path"
+              width="100px"
+              height="auto"
+              [alt]="url.id"
+            /><br />
+            <button (click)="copyBtn(url.path)" *ngIf="url.path !== copiedUrl">
+              Copy url
+            </button>
+            <button (click)="copyBtn(url.path)" *ngIf="url.path === copiedUrl">
+              Copied
+            </button>
+            <button (click)="removeFile(url.path)">Delete</button>
+          </p>
+        </div>
+      </div>
+      <div class="editor">
+        <form [formGroup]="form">
+          <div>
+            <h1 style="text-align: center; font-family: Itim">Post content</h1>
+            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+            </ngx-editor-menu>
+            <ngx-editor [editor]="editor" formControlName="editorContent">
+            </ngx-editor>
+          </div>
+        </form>
+      </div>
+      <div class="savePostBtns">
+        <button (click)="update()" class="savePostBtn">Save post</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-popup-modal
+  *ngIf="showIt"
+  title="{{ popupTitle }}"
+  message="{{ popupMessage }}"
+  (closeEvt)="closeModal()"
+>
+</app-popup-modal>

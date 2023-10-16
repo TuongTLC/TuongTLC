@@ -1,0 +1,145 @@
+<div class="background">
+  <div class="innerDiv">
+    <ngx-spinner
+      bdColor="rgba(0, 0, 0, 0.8)"
+      size="medium"
+      color="#fff"
+      type="ball-spin"
+      [fullScreen]="false"
+    ></ngx-spinner>
+    <div class="post-grid">
+      <div *ngFor="let post of postList.listPosts" class="post-cell">
+        <div class="post-img">
+          <img
+            [src]="post.postInfo.thumbnail"
+            alt="thumbnail"
+            aria-hidden="true"
+          />
+        </div>
+        <div class="post-info">
+          <a class="post-name" aria-hidden="true">{{
+            post.postInfo.postName
+          }}</a
+          ><br />
+          <a class="post-category" *ngFor="let p of post.postCategories"
+            >{{ p.categoryName }} </a
+          ><br />
+          <p class="post-sum">{{ post.postInfo.summary }}</p>
+          <br />
+          <a class="post-tag" *ngFor="let t of post.postTags"
+            ><img
+              src="./assets/tag.png"
+              alt="tag"
+              style="height: 1vh; margin-left: 0.5vw"
+            />
+            {{ t.tagName }}
+          </a>
+          <div style="float: right">
+            <a>{{ post.postInfo.createDate | date : "HH:mm d-MMM" }}</a
+            ><br />
+            <a style="float: right">
+              <img
+                src="./assets/dislike.png"
+                alt="dislike"
+                style="height: 1vh; margin-left: 0.5vw"
+              />
+              {{ post.postInfo.dislike }}</a
+            >
+            <a style="float: right"
+              ><img src="./assets/like.png" alt="like" style="height: 1vh" />
+              {{ post.postInfo.like }}</a
+            >
+          </div>
+          <div>
+            <div
+              class="post-status"
+              style="background-color: red"
+              *ngIf="post.postInfo.ban"
+            >
+              Banned
+            </div>
+            <div
+              class="post-status"
+              style="background-color: yellowgreen"
+              *ngIf="post.postInfo.status && !post.postInfo.ban"
+            >
+              Posted
+            </div>
+            <div
+              class="post-status"
+              style="background-color: orange"
+              *ngIf="!post.postInfo.status && !post.postInfo.ban"
+            >
+              Hidden
+            </div>
+          </div>
+        </div>
+        <button class="post-action" (click)="showPost(post.postInfo.id)">
+          Show</button
+        ><button
+          *ngIf="!post.postInfo.ban"
+          class="post-action"
+          (click)="toEditPost(post.postInfo.id)"
+        >
+          Edit</button
+        ><button
+          *ngIf="!post.postInfo.ban && !post.postInfo.status"
+          class="post-action"
+          (click)="changePostStatus(post.postInfo.id, post.postInfo.status)"
+        >
+          Unhide
+        </button>
+        <button
+          *ngIf="!post.postInfo.ban && post.postInfo.status"
+          class="post-action"
+          (click)="changePostStatus(post.postInfo.id, post.postInfo.status)"
+        >
+          Hide
+        </button>
+        <button disabled *ngIf="post.postInfo.ban" class="post-action-disabled">
+          Edit</button
+        ><button
+          disabled
+          *ngIf="post.postInfo.ban"
+          class="post-action-disabled"
+        >
+          Hide
+        </button>
+      </div>
+    </div>
+    <div class="page-select">
+      <a>Page: </a>
+      <button
+        disabled
+        *ngIf="postList.paging.curPage === 1"
+        (click)="getPostPage(postList.paging.curPage - 1)"
+      >
+        Previous
+      </button>
+      <button
+        *ngIf="postList.paging.curPage !== 1"
+        (click)="getPostPage(postList.paging.curPage - 1)"
+      >
+        Previous
+      </button>
+      <input
+        type="number"
+        [(ngModel)]="postList.paging.curPage"
+        (change)="getPostPage(postList.paging.curPage)"
+      /><span>of {{ postList.paging.pageCount }}</span>
+      <button
+        disabled
+        *ngIf="postList.paging.curPage === postList.paging.pageCount"
+        (click)="getPostPage(postList.paging.curPage + 1)"
+      >
+        Next
+      </button>
+      <button
+        *ngIf="postList.paging.curPage !== postList.paging.pageCount"
+        (click)="getPostPage(postList.paging.curPage + 1)"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>

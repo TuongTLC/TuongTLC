@@ -31,6 +31,14 @@
         >
       </li>
       <li *ngIf="userInfo">
+        <a
+          routerLink="/list-view"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Manage Posts</a
+        >
+      </li>
+      <li *ngIf="userInfo">
         <div class="dropdown">
           <button class="dropbtn">
             {{ userInfo.fullname }}

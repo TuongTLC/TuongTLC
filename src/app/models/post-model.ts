@@ -25,6 +25,7 @@ export class PostInfo {
   dislike = 0;
   thumbnail = '';
   status = false;
+  ban = false;
 }
 
 export class PostCategories {
@@ -46,4 +47,16 @@ export class GetPostModel {
   paging: Paging = new Paging();
   listPosts: PostModel[] = [];
 }
-
+export class PostUpdateModel {
+  id = '';
+  postName = '';
+  summary = '';
+  content = '';
+  thumbnail = '';
+  categoriesIds: string[] = [];
+  tagsIds: string[] = [];
+}
+export class ChangePostStatusModel {
+  postId = '';
+  status = '';
+}

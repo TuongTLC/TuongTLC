@@ -10,6 +10,8 @@ import { AboutPageComponent } from './pages/about-page/about-page.component';
 import { PasswordPageComponent } from './pages/password-page/password-page.component';
 import { UserInfoPageComponent } from './pages/user-info-page/user-info-page.component';
 import { PostPageComponent } from './pages/post-page/post-page.component';
+import { ListViewComponent } from './pages/list-view/list-view.component';
+import { EditPostPageComponent } from './pages/edit-post-page/edit-post-page.component';
 
 const routes: Routes = [
   { path: '', component: WelcomePageComponent },
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'post', component: PostPageComponent },
   { path: 'user-info', component: UserInfoPageComponent },
   { path: 'password', component: PasswordPageComponent },
+  { path: 'list-view', component: ListViewComponent },
+  { path: 'edit-post', component: EditPostPageComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 

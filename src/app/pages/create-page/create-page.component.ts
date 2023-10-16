@@ -208,7 +208,6 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     const postDraft = localStorage.getItem('draft-post');
     if (postDraft != null) {
       this.postModel = JSON.parse(postDraft);
-      console.log(this.postModel);
       this.categories.forEach((cate) => {
         this.postModel.categoriesIds.forEach((cateSaved) => {
           if (cate.id == cateSaved) {

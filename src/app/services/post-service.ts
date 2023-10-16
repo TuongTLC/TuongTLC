@@ -1,6 +1,12 @@
+import { ChangePostStatusModel } from './../models/post-model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GetPostModel, PostModel, postCreateModel } from '../models/post-model';
+import {
+  GetPostModel,
+  PostModel,
+  PostUpdateModel,
+  postCreateModel,
+} from '../models/post-model';
 import { Router } from '@angular/router';
 import { Auth } from '../auth';
 import { Observable } from 'rxjs';
@@ -23,6 +29,17 @@ export class PostService {
       'https://tuongtlc.ddns.net:8081/post/create-post',
       postModel,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
+    );
+  }
+  updatePost(postUpdateModel: PostUpdateModel): Observable<PostModel> {
+    if (!this.auth.checkToken()) {
+      this.router.navigate(['/login']);
+    }
+    const token = sessionStorage.getItem('token');
+    return this.http.post<PostModel>(
+      'https://tuongtlc.ddns.net:8081/post/update-post',
+      postUpdateModel,
+      { headers: { Authorization: 'Bearer ' + token } }
     );
   }
   getPosts(
@@ -91,6 +108,24 @@ export class PostService {
     return this.http.post(
       'https://tuongtlc.ddns.net:8081/post/dislike-post?postId=' + postId,
       null,
+      { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
+    );
+  }
+  getUserPosts(pageNumber: number, pageSize: number): Observable<GetPostModel> {
+    const token = sessionStorage.getItem('token');
+    return this.http.get<GetPostModel>(
+      'https://tuongtlc.ddns.net:8081/post/get-user-posts?pageNumber=' +
+        pageNumber +
+        '&pageSize=' +
+        pageSize,
+      { headers: { Authorization: 'Bearer ' + token } }
+    );
+  }
+  changePostStatus(changePostStatusModel: ChangePostStatusModel) {
+    const token = sessionStorage.getItem('token');
+    return this.http.post(
+      'https://tuongtlc.ddns.net:8081/post/change-post-status',
+      changePostStatusModel,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }

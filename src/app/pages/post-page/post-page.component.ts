@@ -57,9 +57,9 @@ export class PostPageComponent implements OnInit {
         this.spinner.hide();
       },
       error: () => {
-        this.popupTitle = 'Load posts failed!';
+        this.popupTitle = 'Load post failed!';
         this.popupMessage =
-          'Something went wrong while loading posts, please try again later!';
+          'Something went wrong while loading post, please try again later!';
         this.showIt = true;
       },
     });
