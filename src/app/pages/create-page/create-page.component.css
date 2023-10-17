@@ -12,6 +12,7 @@
   padding: 0;
   font-family: "Itim", cursive;
 }
+
 .postInfo {
   padding: -50px;
   height: 60vh;
@@ -23,9 +24,11 @@
   outline-offset: -2px;
   border-radius: 5px;
 }
+
 .postInfo::-webkit-scrollbar {
   display: none;
 }
+
 .upload {
   text-align: center;
   height: 60vh;
@@ -37,9 +40,11 @@
   outline-offset: -2px;
   border-radius: 5px;
 }
+
 .upload::-webkit-scrollbar {
   display: none;
 }
+
 .uploadImgBox {
   height: 20vh;
   min-height: fit-content;
@@ -48,6 +53,7 @@
   float: left;
   margin: 1vh;
 }
+
 .innerDiv {
   background-color: var(--mid-color);
   color: var(--text-color);
@@ -58,6 +64,7 @@
   border-radius: 15px;
   overflow: scroll;
 }
+
 .editor {
   font-family: none;
   float: left;
@@ -68,9 +75,11 @@
   outline-offset: -2px;
   border-radius: 5px;
 }
+
 .innerDiv::-webkit-scrollbar {
   display: none;
 }
+
 .para {
   margin: 0 auto;
   width: 95%;
@@ -78,13 +87,16 @@
   background-color: white;
   border-radius: 5px;
 }
+
 .title {
   margin: 10px;
   font-size: 2em;
 }
+
 a {
   margin-left: 10px;
 }
+
 input {
   font-family: "Itim", cursive;
   margin: 10px;
@@ -94,6 +106,7 @@ input {
   border-radius: 5px;
   width: 96%;
 }
+
 button {
   font-size: 1em;
   font-family: "Itim", cursive;
@@ -104,6 +117,10 @@ button {
   margin: 3px;
 }
 
+button:hover {
+  color: var(--dark-color);
+}
+
 textarea {
   margin: 10px;
   border: solid var(--dark-color) 1px;
@@ -112,6 +129,7 @@ textarea {
   width: 96%;
   font-family: "Itim", cursive;
 }
+
 .create-header {
   background-color: var(--light-color);
   font-size: 1.5em;
@@ -122,6 +140,7 @@ textarea {
   margin-bottom: 1vh;
   border-radius: 5px;
 }
+
 .create-header a {
   color: var(--dark-color);
   font-size: 2em;
@@ -129,6 +148,7 @@ textarea {
   padding-left: 2vw;
   padding-right: 2vw;
 }
+
 .create-header a:hover {
   background-color: var(--dark-color);
   color: var(--text-color);
@@ -138,6 +158,7 @@ textarea {
 select::-ms-expand {
   display: none;
 }
+
 select {
   display: inline-block;
   box-sizing: border-box;
@@ -156,6 +177,7 @@ select {
   background-position: right 15px top 1em, right 10px top 1em;
   background-size: 5px 5px, 5px 5px;
 }
+
 .savePostBtns {
   float: right;
   height: fit-content;
@@ -164,20 +186,24 @@ select {
   border-radius: 5px;
   background-color: var(--light-color);
 }
+
 .savePostBtns button {
   padding: 15px;
   font-size: 1em;
   color: var(--dark-color);
   border-radius: 5px;
 }
+
 .savePostBtns button:hover {
   background-color: var(--dark-color);
   color: var(--light-color);
 }
+
 img:hover {
   transform: scale(3);
   transition-duration: 0.2s;
 }
+
 .cate-tag-create {
   color: var(--dark-color);
   width: 40vw;
@@ -189,15 +215,18 @@ img:hover {
   border-radius: 5px;
   text-align: center;
 }
+
 .cate-tag-create input {
   height: 3vh;
   text-align: center;
   width: 25vw;
 }
+
 .cate-tag-create button {
   height: 4vh;
   margin: 1vh;
 }
+
 .cate-tag-update {
   color: var(--dark-color);
   width: 40vw;
@@ -210,66 +239,84 @@ img:hover {
   text-align: center;
   overflow: scroll;
 }
+
 .cate-tag-update button {
   width: fit-content;
   padding: 5px;
 }
+
 .cate-tag-update::-webkit-scrollbar {
   display: none;
 }
+
 table {
   margin: 0 auto;
   padding: 0;
   border-collapse: collapse;
 }
+
 tr {
   border: 1px solid var(--dark-color);
 }
+
 .edit-input {
   width: 15vw;
 }
+
 @media only screen and (max-width: 768px) {
   .innerDiv {
     width: 95vw;
     margin-top: 6vh;
   }
+
   .para {
     width: 100%;
     margin-top: 2%;
   }
+
   .postInfo {
     width: 100%;
     height: fit-content;
   }
+
   .upload {
     width: 100%;
     height: fit-content;
   }
+
   input {
     width: 92%;
   }
+
   textarea {
     width: 92%;
   }
+
   .editor {
     width: 100%;
   }
+
   .uploadImgBox {
     width: 96%;
     margin: 0;
   }
+
   .cate-tag-create {
     width: 95%;
   }
+
   .cate-tag-create input {
     width: 90%;
   }
+
   .cate-tag-update {
     width: 95%;
   }
+
   .edit-input {
     width: 25vw;
   }
+
   .cate-tag-update button {
     width: fit-content;
   }

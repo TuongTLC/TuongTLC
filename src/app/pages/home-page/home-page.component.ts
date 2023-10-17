@@ -24,7 +24,7 @@ export class HomePageComponent implements OnInit {
   getByCategory = false;
   ngOnInit() {
     this.getCategories();
-    this.getPosts(1, 8, 'all', '', '');
+    this.getPosts(1, 8, 'active', '', '');
   }
   getCategories() {
     this.categoryService.getCategories('active').subscribe({
@@ -65,10 +65,10 @@ export class HomePageComponent implements OnInit {
   }
   getPostByCategory() {
     if (JSON.stringify(this.selectedCategory).toString() === '"all"') {
-      this.getPosts(1, 8, 'all', '', '');
+      this.getPosts(1, 8, 'active', '', '');
       this.getByCategory = false;
     } else {
-      this.getPosts(1, 8, 'all', this.selectedCategory.id, '');
+      this.getPosts(1, 8, 'active', this.selectedCategory.id, '');
       this.getByCategory = true;
     }
   }
@@ -80,18 +80,18 @@ export class HomePageComponent implements OnInit {
       page = this.getPostsModel.paging.pageCount;
     }
     if (this.getByCategory == true) {
-      this.getPosts(page, 8, 'all', this.selectedCategory.id, '');
+      this.getPosts(page, 8, 'active', this.selectedCategory.id, '');
     } else if (this.searchPostStatus == true) {
       this.searchPost(
         page,
         8,
         this.searchPostName,
-        'all',
+        'active',
         this.selectedCategory === undefined ? '' : this.selectedCategory.id,
         ''
       );
     } else {
-      this.getPosts(page, 8, 'all', '', '');
+      this.getPosts(page, 8, 'active', '', '');
     }
   }
   searchPostStatus = false;
@@ -101,7 +101,7 @@ export class HomePageComponent implements OnInit {
       1,
       8,
       this.searchPostName,
-      'all',
+      'active',
       JSON.stringify(this.selectedCategory).toString() === '"all"'
         ? ''
         : this.selectedCategory.id,

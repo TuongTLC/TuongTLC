@@ -1,0 +1,16 @@
+<div class="background">
+  <div class="innerDiv" #innerDiv>
+    <div class="create-header">
+      <button (click)="activateUser()">Users</button>
+      <button (click)="activatePost()">Posts</button>
+      <button (click)="activateCategory()">Categories</button>
+      <button (click)="activateTag()">Tags</button>
+    </div>
+    <div class="para">
+      <div *ngIf="activeUsers">Users</div>
+      <div *ngIf="activePosts">Posts</div>
+      <div *ngIf="activeCategories">Categories</div>
+      <div *ngIf="activeTags">Tags</div>
+    </div>
+  </div>
+</div>

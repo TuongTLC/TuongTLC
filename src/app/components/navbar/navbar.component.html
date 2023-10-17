@@ -38,6 +38,14 @@
           >Manage Posts</a
         >
       </li>
+      <li *ngIf="userInfo && userInfo.roleName === 'Admin'">
+        <a
+          routerLink="/admin-console"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Admin Console</a
+        >
+      </li>
       <li *ngIf="userInfo">
         <div class="dropdown">
           <button class="dropbtn">
