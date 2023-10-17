@@ -1,5 +1,12 @@
 <div class="background">
   <div class="innerDiv" #innerDiv>
+    <ngx-spinner
+      bdColor="rgba(0, 0, 0, 0.8)"
+      size="medium"
+      color="#fff"
+      type="ball-spin"
+      [fullScreen]="false"
+    ></ngx-spinner>
     <div class="create-header">
       <button (click)="activateUser()">Users</button>
       <button (click)="activatePost()">Posts</button>
@@ -7,10 +14,51 @@
       <button (click)="activateTag()">Tags</button>
     </div>
     <div class="para">
-      <div *ngIf="activeUsers">Users</div>
+      <div *ngIf="activeUsers">
+        <h1>User list:</h1>
+        <div class="console-info">
+          <table>
+            <tr>
+              <th>Username</th>
+              <th>Fullname</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Status</th>
+            </tr>
+            <tr *ngFor="let user of userList">
+              <td>{{ user.username }}</td>
+              <td>{{ user.fullname }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phone }}</td>
+              <td *ngIf="user.status" style="color: green">Active</td>
+              <td *ngIf="!user.status" style="color: red">Inactive</td>
+              <td *ngIf="user.id === this.userInfo.id">
+                <a>This is you</a>
+              </td>
+              <td *ngIf="user.status && user.id !== this.userInfo.id">
+                <button (click)="changeUserStatus(user.id, false)">
+                  Disable
+                </button>
+              </td>
+              <td *ngIf="!user.status && user.id !== this.userInfo.id">
+                <button (click)="changeUserStatus(user.id, true)">
+                  Enable
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
       <div *ngIf="activePosts">Posts</div>
       <div *ngIf="activeCategories">Categories</div>
       <div *ngIf="activeTags">Tags</div>
     </div>
   </div>
 </div>
+<app-popup-modal
+  *ngIf="showIt"
+  title="{{ popupTitle }}"
+  message="{{ popupMessage }}"
+  (closeEvt)="closeModal()"
+>
+</app-popup-modal>

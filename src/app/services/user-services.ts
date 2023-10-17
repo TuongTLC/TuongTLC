@@ -6,6 +6,7 @@ import {
   UserUpdateModel,
   UserModel,
   UserLoginResModel,
+  ChangeUserStatusModel,
 } from './../models/user-models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -53,6 +54,27 @@ export class UserService {
       'https://tuongtlc.ddns.net:8081/user/update',
       newUserInfo,
       { headers: { Authorization: 'Bearer ' + token } }
+    );
+  }
+  getUsers(status: string): Observable<UserModel[]> {
+    if (!this.auth.checkToken()) {
+      this.router.navigate(['/login']);
+    }
+    const token = sessionStorage.getItem('token');
+    return this.http.get<UserModel[]>(
+      'https://tuongtlc.ddns.net:8081/user/get-users?status=' + status,
+      { headers: { Authorization: 'Bearer ' + token } }
+    );
+  }
+  changeUserStatus(changeUserStatusModel: ChangeUserStatusModel) {
+    if (!this.auth.checkToken()) {
+      this.router.navigate(['/login']);
+    }
+    const token = sessionStorage.getItem('token');
+    return this.http.post(
+      'https://tuongtlc.ddns.net:8081/user/change-account-status',
+      changeUserStatusModel,
+      { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }
 }

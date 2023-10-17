@@ -5,20 +5,22 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     margin: 0;
     padding: 0;
     font-family: "Itim", cursive;
 }
 
 .innerDiv {
-    background-color: var(--mid-color);
+    margin: 0 auto;
+    background-color: var(--light-color);
     color: var(--text-color);
-    height: 90vh;
+    height: fit-content;
+    max-height: 80vh;
     width: 80%;
-    margin-top: 6vh;
+    margin-top: 10vh;
     border: solid white 5px;
     border-radius: 15px;
     overflow: scroll;
@@ -30,11 +32,11 @@
 
 .para {
     margin: 0 auto;
-    width: 95%;
+    width: fit-content;
     color: var(--dark-color);
     background-color: white;
     border-radius: 5px;
-    float: left;
+    text-align: center;
 }
 
 .create-header {
@@ -62,10 +64,51 @@ button:hover {
     color: var(--dark-color);
 }
 
+.console-info {
+    width: 100%;
+    overflow: scroll;
+    padding: 5px;
+}
+
+.console-info::-webkit-scrollbar {
+    display: none;
+}
+
+table {
+    margin: 0 auto;
+    border-collapse: collapse;
+    text-align: center;
+    white-space: nowrap;
+}
+
+td {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 1px solid var(--dark-color);
+    width: fit-content;
+    height: fit-content;
+}
+
+button {
+    font-size: 1em;
+    font-family: "Itim", cursive;
+    border: solid var(--dark-color) 1px;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: var(--light-color);
+    margin: 3px;
+}
+
+button:hover {
+    color: var(--dark-color);
+}
+
 @media only screen and (max-width: 768px) {
     .innerDiv {
         width: 95vw;
-        margin-top: 6vh;
+        margin-top: 10vh;
     }
 
     .para {

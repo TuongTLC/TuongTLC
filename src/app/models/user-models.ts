@@ -40,3 +40,7 @@ export class AuthorModel {
   roleName = '';
   fullname = '';
 }
+export class ChangeUserStatusModel {
+  userId = '';
+  status = false;
+}

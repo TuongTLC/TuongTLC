@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import {
-  ChangePostStatusModel,
-  GetPostModel,
-  PostModel,
-} from 'src/app/models/post-model';
+import { ChangePostStatusModel, GetPostModel } from 'src/app/models/post-model';
+import { UserModel } from 'src/app/models/user-models';
 import { PostService } from 'src/app/services/post-service';
 
 @Component({
@@ -19,8 +16,20 @@ export class ListViewComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router
   ) {}
+  userInfo = new UserModel();
   ngOnInit(): void {
     this.getUserPosts(1, 8);
+    const userJson = sessionStorage.getItem('userInfo');
+    if (userJson !== null) {
+      this.userInfo = JSON.parse(userJson);
+    } else {
+      this.logout();
+    }
+  }
+  logout() {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('userInfo');
+    this.router.navigate(['/login']);
   }
 
   postList = new GetPostModel();
