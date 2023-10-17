@@ -34,6 +34,7 @@
     color: var(--dark-color);
     background-color: white;
     border-radius: 5px;
+    float: left;
 }
 
 .create-header {
@@ -47,7 +48,7 @@
     border-radius: 5px;
 }
 
-button {
+.create-header button {
     font-size: 1em;
     font-family: "Itim", cursive;
     border: solid var(--dark-color) 1px;
@@ -70,6 +71,11 @@ button:hover {
     .para {
         width: 100%;
         margin-top: 2%;
+    }
+
+    .create-header button {
+        width: 48%;
+        float: left;
     }
 
 }
