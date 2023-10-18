@@ -23,7 +23,7 @@
 }
 
 .logo {
-  background-image: url("https://tuongtlc.ddns.net:8080/resource/logo.png");
+  background-image: url("./assets/logo.png");
   height: 30vh;
   width: 20vw;
   background-position: center;
@@ -106,6 +106,7 @@ input::placeholder {
   margin: 0 auto;
   font: 2em;
 }
+
 @media only screen and (max-width: 768px) {
   .logo {
     margin-left: 25%;
@@ -114,36 +115,45 @@ input::placeholder {
     float: left;
     margin-top: 0;
   }
+
   .innerDiv {
     width: 95vw;
     margin-top: 10vh;
   }
+
   input {
     width: 70vw;
     height: 5vh;
     border-radius: 10px;
     font-size: 3em;
   }
+
   .loginBtn {
     width: 20vw fit-content;
     height: 5vh fit-content;
     font-size: 3em;
   }
+
   input::placeholder {
     font-size: 1em;
   }
+
   .account {
     font-size: 3em;
   }
+
   label {
     font-size: 2em;
   }
+
   .loginError {
     font-size: 2em;
   }
+
   .emptyError {
     font-size: 2em;
   }
+
   .title {
     font-size: 3em;
   }

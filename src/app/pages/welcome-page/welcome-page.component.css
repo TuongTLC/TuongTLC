@@ -1,6 +1,7 @@
 .background::-webkit-scrollbar {
   display: none;
 }
+
 .innerDiv {
   float: left;
   margin-top: 5%;
@@ -12,8 +13,9 @@
   border-radius: 20px;
   opacity: 0.9;
 }
+
 .logo {
-  background-image: url("https://tuongtlc.ddns.net:8080/resource/logo.png");
+  background-image: url("./assets/logo.png");
   height: 30vh;
   width: 20vw;
   background-position: center;
@@ -24,6 +26,7 @@
   float: left;
   cursor: pointer;
 }
+
 .welcome {
   text-align: center;
   width: 100%;
@@ -31,6 +34,7 @@
   float: left;
   color: var(--dark-color);
 }
+
 .para {
   font-family: "Itim", cursive;
   word-wrap: break-word;
@@ -39,12 +43,14 @@
   height: 50%;
   float: left;
 }
+
 h1 {
   font-family: "Yellowtail", cursive;
   font-size: 8vw;
   text-align: center;
   margin: 0;
 }
+
 p {
   font-family: "Itim", cursive;
   text-align: center;
@@ -70,10 +76,12 @@ img {
   font-size: 2vw;
   cursor: pointer;
 }
+
 .homeBtn a {
   color: var(--text-color);
   text-decoration: none;
 }
+
 .loginBtn {
   margin: 0.5%;
   background-color: var(--dark-color);
@@ -86,14 +94,17 @@ img {
   font-size: 1.5vw;
   cursor: pointer;
 }
+
 .loginBtn a {
   color: var(--text-color);
   text-decoration: none;
 }
+
 @media only screen and (max-width: 768px) {
   .innerDiv {
     width: 99%;
   }
+
   .logo {
     margin-left: 25%;
     height: 30vh;
@@ -101,20 +112,25 @@ img {
     float: left;
     margin-top: 0;
   }
+
   .homeBtn {
     padding: 3%;
     font-size: 4ex;
   }
+
   .loginBtn {
     padding: 3%;
     font-size: 4ex;
   }
+
   .welcome {
     font-size: 3ex;
   }
+
   h1 {
     font-size: 5.5ex;
   }
+
   p {
     font-size: 3ex;
   }

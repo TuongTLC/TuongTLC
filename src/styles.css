@@ -4,14 +4,16 @@ html {
   min-height: fit-content;
   margin: 0;
   padding: 0;
-  background-image: url("https://tuongtlc.ddns.net:8080/resource/background/wal.jpg");
+  background-image: url("./assets/wal.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
 body::-webkit-scrollbar {
   display: none;
 }
+
 :root {
   --dark-color: rgb(252, 103, 178);
   --mid-color: rgb(255, 197, 242);
@@ -19,4 +21,14 @@ body::-webkit-scrollbar {
   --black-color: black;
   --text-color: white;
   --navbar-height: 8vh;
+}
+
+@font-face {
+  font-family: Itim;
+  src: url(./assets/Itim-Regular.ttf) format("opentype");
+}
+
+@font-face {
+  font-family: YellowTail;
+  src: url(./assets/Yellowtail-Regular.ttf) format("opentype");
 }

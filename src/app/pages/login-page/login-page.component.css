@@ -12,6 +12,7 @@
   border-radius: 20px;
   opacity: 0.95;
 }
+
 .welcome {
   text-align: center;
   width: 100%;
@@ -20,8 +21,9 @@
   color: var(--dark-color);
   font-size: 2vw;
 }
+
 .logo {
-  background-image: url("https://tuongtlc.ddns.net:8080/resource/logo.png");
+  background-image: url("./assets/logo.png");
   height: 30vh;
   width: 20vw;
   background-position: center;
@@ -32,6 +34,7 @@
   float: left;
   cursor: pointer;
 }
+
 .loginBtn {
   font-family: "Itim", cursive;
   margin: 1%;
@@ -48,10 +51,12 @@
   padding: 1vh;
   border: none;
 }
+
 .loginBtn a {
   color: var(--text-color);
   text-decoration: none;
 }
+
 input {
   border-radius: 1ex;
   font-family: "Itim", cursive;
@@ -63,6 +68,7 @@ input {
   height: 5vh fit-content;
   font-size: 1em;
 }
+
 input::placeholder {
   font-family: "Itim", cursive;
   font-size: 1em;
@@ -77,6 +83,7 @@ input::placeholder {
   text-align: center;
   display: inline-block;
 }
+
 .emptyError {
   font-family: "Itim", cursive;
   padding: 0;
@@ -85,6 +92,7 @@ input::placeholder {
   font-size: 1.25vw;
   display: inline-block;
 }
+
 @media only screen and (max-width: 768px) {
   .logo {
     margin-left: 25%;
@@ -93,27 +101,33 @@ input::placeholder {
     float: left;
     margin-top: 0;
   }
+
   .innerDiv {
     width: 95vw;
     margin-top: 10vh;
   }
+
   input {
     width: 70vw;
     height: 5vh;
     border-radius: 10px;
     font-size: 3em;
   }
+
   .loginBtn {
     width: 20vw fit-content;
     height: 5vh fit-content;
     font-size: 3em;
   }
+
   input::placeholder {
     font-size: 1em;
   }
+
   .loginError {
     font-size: 2em;
   }
+
   .emptyError {
     font-size: 2em;
   }

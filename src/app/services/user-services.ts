@@ -12,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Auth } from '../auth';
+import { environment } from 'src/ext';
 @Injectable({
   providedIn: 'root',
 })
@@ -24,13 +25,13 @@ export class UserService {
 
   login(userLoginModel: UserLoginModel): Observable<UserLoginResModel> {
     return this.http.post<UserLoginResModel>(
-      'https://tuongtlc.ddns.net:8081/user/login',
+      environment.BASE_URL + '/user/login',
       userLoginModel
     );
   }
   register(userRegisterModel: UserRegisterModel): Observable<UserModel> {
     return this.http.post<UserModel>(
-      'https://tuongtlc.ddns.net:8081/user/register',
+      environment.BASE_URL + '/user/register',
       userRegisterModel
     );
   }
@@ -40,7 +41,7 @@ export class UserService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/user/change-password',
+      environment.BASE_URL + '/user/change-password',
       userChangePasswordModel,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
@@ -51,7 +52,7 @@ export class UserService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post<UserModel>(
-      'https://tuongtlc.ddns.net:8081/user/update',
+      environment.BASE_URL + '/user/update',
       newUserInfo,
       { headers: { Authorization: 'Bearer ' + token } }
     );
@@ -62,7 +63,7 @@ export class UserService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.get<UserModel[]>(
-      'https://tuongtlc.ddns.net:8081/user/get-users?status=' + status,
+      environment.BASE_URL + '/user/get-users?status=' + status,
       { headers: { Authorization: 'Bearer ' + token } }
     );
   }
@@ -72,7 +73,7 @@ export class UserService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/user/change-account-status',
+      environment.BASE_URL + '/user/change-account-status',
       changeUserStatusModel,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );

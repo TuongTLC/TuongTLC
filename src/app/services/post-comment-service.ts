@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Auth } from '../auth';
 import { Router } from '@angular/router';
+import { environment } from 'src/ext';
 
 @Injectable({ providedIn: 'root' })
 export class PostCommentService {
@@ -19,8 +20,7 @@ export class PostCommentService {
 
   getPostComments(postId: string): Observable<PostCommentModel[]> {
     return this.http.get<PostCommentModel[]>(
-      'https://tuongtlc.ddns.net:8081/post-comment/get-post-comments?postId=' +
-        postId
+      environment.BASE_URL + '/post-comment/get-post-comments?postId=' + postId
     );
   }
   insertPostComment(
@@ -31,7 +31,7 @@ export class PostCommentService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post<PostCommentModel>(
-      'https://tuongtlc.ddns.net:8081/post-comment/insert-comment',
+      environment.BASE_URL + '/post-comment/insert-comment',
       postCommentInsertModel,
       { headers: { Authorization: 'Bearer ' + token } }
     );
@@ -42,7 +42,7 @@ export class PostCommentService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/post-comment/update-comment',
+      environment.BASE_URL + '/post-comment/update-comment',
       postCommentUpdateModel,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
@@ -51,7 +51,8 @@ export class PostCommentService {
     const token = sessionStorage.getItem('token');
 
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/post-comment/like-comment?commentId=' +
+      environment.BASE_URL +
+        '/post-comment/like-comment?commentId=' +
         commentId,
       null,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
@@ -61,7 +62,8 @@ export class PostCommentService {
     const token = sessionStorage.getItem('token');
 
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/post-comment/dislike-comment?commentId=' +
+      environment.BASE_URL +
+        '/post-comment/dislike-comment?commentId=' +
         commentId,
       null,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }

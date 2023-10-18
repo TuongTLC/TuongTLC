@@ -10,6 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { Auth } from '../auth';
 import { Observable } from 'rxjs';
+import { environment } from 'src/ext';
 @Injectable({
   providedIn: 'root',
 })
@@ -26,7 +27,7 @@ export class PostService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/post/create-post',
+      environment.BASE_URL + '/post/create-post',
       postModel,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
@@ -37,7 +38,7 @@ export class PostService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post<PostModel>(
-      'https://tuongtlc.ddns.net:8081/post/update-post',
+      environment.BASE_URL + '/post/update-post',
       postUpdateModel,
       { headers: { Authorization: 'Bearer ' + token } }
     );
@@ -51,7 +52,8 @@ export class PostService {
     tagId?: string
   ): Observable<GetPostModel> {
     return this.http.get<GetPostModel>(
-      'https://tuongtlc.ddns.net:8081/post/get-posts?pageNumber=' +
+      environment.BASE_URL +
+        '/post/get-posts?pageNumber=' +
         pageNum +
         '&pageSize=' +
         pageSize +
@@ -67,7 +69,7 @@ export class PostService {
   }
   getPost(postId: string): Observable<PostModel> {
     return this.http.get<PostModel>(
-      'https://tuongtlc.ddns.net:8081/post/get-post?postId=' + postId
+      environment.BASE_URL + '/post/get-post?postId=' + postId
     );
   }
   searchPosts(
@@ -79,7 +81,8 @@ export class PostService {
     tagId?: string
   ): Observable<GetPostModel> {
     return this.http.get<GetPostModel>(
-      'https://tuongtlc.ddns.net:8081/post/search-post?pageNumber=' +
+      environment.BASE_URL +
+        '/post/search-post?pageNumber=' +
         pageNum +
         '&pageSize=' +
         pageSize +
@@ -95,13 +98,13 @@ export class PostService {
   }
   getRelatedPosts(postId: string): Observable<PostModel[]> {
     return this.http.get<PostModel[]>(
-      'https://tuongtlc.ddns.net:8081/post/get-related-posts?postId=' + postId
+      environment.BASE_URL + '/post/get-related-posts?postId=' + postId
     );
   }
   likePost(postId: string) {
     const token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/post/like-post?postId=' + postId,
+      environment.BASE_URL + '/post/like-post?postId=' + postId,
       null,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
@@ -109,7 +112,7 @@ export class PostService {
   dislikePost(postId: string) {
     const token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/post/dislike-post?postId=' + postId,
+      environment.BASE_URL + '/post/dislike-post?postId=' + postId,
       null,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
@@ -117,7 +120,8 @@ export class PostService {
   getUserPosts(pageNumber: number, pageSize: number): Observable<GetPostModel> {
     const token = sessionStorage.getItem('token');
     return this.http.get<GetPostModel>(
-      'https://tuongtlc.ddns.net:8081/post/get-user-posts?pageNumber=' +
+      environment.BASE_URL +
+        '/post/get-user-posts?pageNumber=' +
         pageNumber +
         '&pageSize=' +
         pageSize,
@@ -127,7 +131,7 @@ export class PostService {
   changePostStatus(changePostStatusModel: ChangePostStatusModel) {
     const token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/post/change-post-status',
+      environment.BASE_URL + '/post/change-post-status',
       changePostStatusModel,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
@@ -135,7 +139,7 @@ export class PostService {
   banPost(postId: string) {
     const token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/post/ban-post?postId=' + postId,
+      environment.BASE_URL + '/post/ban-post?postId=' + postId,
       null,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
@@ -143,7 +147,7 @@ export class PostService {
   unbanPost(postId: string) {
     const token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/post/unban-post?postId=' + postId,
+      environment.BASE_URL + '/post/unban-post?postId=' + postId,
       null,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );

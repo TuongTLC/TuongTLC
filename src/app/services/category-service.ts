@@ -8,6 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { Auth } from '../auth';
 import { Router } from '@angular/router';
+import { environment } from 'src/ext';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,7 @@ export class CategoryService {
 
   getCategories(status: string): Observable<CategoryModel[]> {
     return this.http.get<CategoryModel[]>(
-      'https://tuongtlc.ddns.net:8081/category/get-categories?status=' + status
+      environment.BASE_URL + '/category/get-categories?status=' + status
     );
   }
   createCategory(category: CategoryCreateModel): Observable<CategoryModel> {
@@ -30,7 +31,7 @@ export class CategoryService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post<CategoryModel>(
-      'https://tuongtlc.ddns.net:8081/category/create-category',
+      environment.BASE_URL + '/category/create-category',
       category,
       { headers: { Authorization: 'Bearer ' + token } }
     );
@@ -41,7 +42,7 @@ export class CategoryService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post<CategoryModel>(
-      'https://tuongtlc.ddns.net:8081/category/update-category',
+      environment.BASE_URL + '/category/update-category',
       category,
       { headers: { Authorization: 'Bearer ' + token } }
     );
@@ -55,7 +56,8 @@ export class CategoryService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/category/change-category-status?categoryId=' +
+      environment.BASE_URL +
+        '/category/change-category-status?categoryId=' +
         categoryId +
         '&status=' +
         categoryStatus,

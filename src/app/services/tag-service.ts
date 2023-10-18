@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { TagUpdateModel, TagModel, TagCreateModel } from '../models/tag-models';
 import { Auth } from '../auth';
 import { Router } from '@angular/router';
+import { environment } from 'src/ext';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,7 +17,7 @@ export class TagService {
 
   getTags(status: string): Observable<TagModel[]> {
     return this.http.get<TagModel[]>(
-      'https://tuongtlc.ddns.net:8081/tag/get-tags?status=' + status
+      environment.BASE_URL + '/tag/get-tags?status=' + status
     );
   }
   createTag(tag: TagCreateModel): Observable<TagModel> {
@@ -25,7 +26,7 @@ export class TagService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post<TagModel>(
-      'https://tuongtlc.ddns.net:8081/tag/create-tag',
+      environment.BASE_URL + '/tag/create-tag',
       tag,
       { headers: { Authorization: 'Bearer ' + token } }
     );
@@ -36,7 +37,7 @@ export class TagService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post<TagModel>(
-      'https://tuongtlc.ddns.net:8081/tag/update-tag',
+      environment.BASE_URL + '/tag/update-tag',
       tag,
       { headers: { Authorization: 'Bearer ' + token } }
     );
@@ -47,7 +48,8 @@ export class TagService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.post(
-      'https://tuongtlc.ddns.net:8081/tag/change-tag-status?tagId=' +
+      environment.BASE_URL +
+        '/tag/change-tag-status?tagId=' +
         tagId +
         '&status=' +
         tagStatus,

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Auth } from '../auth';
 import { Observable } from 'rxjs';
 import { FileModel } from '../models/file-model';
+import { environment } from 'src/ext';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,11 +20,9 @@ export class FileService {
       this.router.navigate(['/login']);
     }
     const token = sessionStorage.getItem('token');
-    return this.http.post(
-      'https://tuongtlc.ddns.net:8081/file/upload-files',
-      data,
-      { headers: { Authorization: 'Bearer ' + token } }
-    );
+    return this.http.post(environment.BASE_URL + '/file/upload-files', data, {
+      headers: { Authorization: 'Bearer ' + token },
+    });
   }
   getFiles(): Observable<FileModel[]> {
     if (!this.auth.checkToken()) {
@@ -31,7 +30,7 @@ export class FileService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.get<FileModel[]>(
-      'https://tuongtlc.ddns.net:8081/file/get-files',
+      environment.BASE_URL + '/file/get-files',
       {
         headers: { Authorization: 'Bearer ' + token },
       }
@@ -43,7 +42,7 @@ export class FileService {
     }
     const token = sessionStorage.getItem('token');
     return this.http.delete(
-      'https://tuongtlc.ddns.net:8081/file/delete-file?fileUrl=' + fileUrl,
+      environment.BASE_URL + '/file/delete-file?fileUrl=' + fileUrl,
       {
         headers: { Authorization: 'Bearer ' + token },
       }
