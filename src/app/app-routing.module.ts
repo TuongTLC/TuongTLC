@@ -13,6 +13,7 @@ import { PostPageComponent } from './pages/post-page/post-page.component';
 import { ListViewComponent } from './pages/list-view/list-view.component';
 import { EditPostPageComponent } from './pages/edit-post-page/edit-post-page.component';
 import { AdminConsoleComponent } from './pages/admin-console/admin-console.component';
+import { PreviewPostComponent } from './pages/preview-post/preview-post.component';
 
 const routes: Routes = [
   { path: '', component: WelcomePageComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'list-view', component: ListViewComponent },
   { path: 'edit-post', component: EditPostPageComponent },
   { path: 'admin-console', component: AdminConsoleComponent },
+  { path: 'preview-post', component: PreviewPostComponent },
   { path: '**', component: ErrorPageComponent },
 ];
 

@@ -46,6 +46,7 @@ export class PostService {
     pageNum: number,
     pageSize: number,
     status?: string,
+    adminStatus?: string,
     categoryId?: string,
     tagId?: string
   ): Observable<GetPostModel> {
@@ -56,6 +57,8 @@ export class PostService {
         pageSize +
         '&status=' +
         status +
+        '&adminStatus=' +
+        adminStatus +
         '&categoryId=' +
         categoryId +
         '&tagId=' +
@@ -126,6 +129,22 @@ export class PostService {
     return this.http.post(
       'https://tuongtlc.ddns.net:8081/post/change-post-status',
       changePostStatusModel,
+      { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
+    );
+  }
+  banPost(postId: string) {
+    const token = sessionStorage.getItem('token');
+    return this.http.post(
+      'https://tuongtlc.ddns.net:8081/post/ban-post?postId=' + postId,
+      null,
+      { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
+    );
+  }
+  unbanPost(postId: string) {
+    const token = sessionStorage.getItem('token');
+    return this.http.post(
+      'https://tuongtlc.ddns.net:8081/post/unban-post?postId=' + postId,
+      null,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }

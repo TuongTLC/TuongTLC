@@ -24,6 +24,7 @@ export class PostPageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {}
+  postHidden = false;
   showIt = false;
   popupTitle = '';
   popupMessage = '';
@@ -55,6 +56,9 @@ export class PostPageComponent implements OnInit {
       next: (res) => {
         this.getPostModel = res;
         this.spinner.hide();
+        if (this.getPostModel.postInfo.adminStatus === 'banned') {
+          this.postHidden = true;
+        }
       },
       error: () => {
         this.popupTitle = 'Load post failed!';

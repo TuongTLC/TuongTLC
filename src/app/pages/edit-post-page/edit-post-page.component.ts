@@ -43,6 +43,7 @@ export class EditPostPageComponent implements OnInit {
       this.router.navigate(['/list-view']);
     }
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: any;
   editor!: Editor;
   toolbar: Toolbar = [
@@ -101,6 +102,7 @@ export class EditPostPageComponent implements OnInit {
         this.spinner.hide();
       },
       error: () => {
+        this.spinner.hide();
         this.popupTitle = 'Load post failed!';
         this.popupMessage =
           'Something went wrong while loading posts, please try again later!';

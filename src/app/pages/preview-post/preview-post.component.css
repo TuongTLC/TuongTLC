@@ -1,0 +1,145 @@
+.background {
+    height: 100vh;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+a {
+    font-size: 1.1em;
+}
+
+.innerDiv {
+    background-color: var(--mid-color);
+    color: var(--black-color);
+    height: 90vh;
+    width: 80%;
+    margin-top: 8vh;
+    border: solid white 5px;
+    border-radius: 15px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: relative;
+    overflow-y: scroll;
+    background-color: var(--light-color);
+}
+
+.innerDiv::-webkit-scrollbar {
+    display: none;
+}
+
+.post-name {
+    text-align: center;
+    font-family: "Itim", cursive;
+    font-size: 2.5em;
+    width: 100%;
+    float: left;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    border-radius: 10px;
+}
+
+.post-info {
+    width: 100%;
+    height: fit-content;
+}
+
+.post-stat {
+    width: fit-content;
+    float: right;
+    margin-left: 1vw;
+    color: var(--dark-color);
+    font-family: "Itim", cursive;
+}
+
+.post-cate {
+    width: 100%;
+    float: left;
+}
+
+.post-cate a {
+    float: right;
+    color: var(--text-color);
+    font-family: "Itim", cursive;
+    background-color: var(--dark-color);
+    margin: 5px;
+    padding: 3px;
+    border-radius: 5px;
+}
+
+.post-tag {
+    width: 100%;
+    float: left;
+}
+
+.post-tag a {
+    float: right;
+    font-family: "Itim", cursive;
+    margin: 5px;
+    padding: 3px;
+    color: var(--text-color);
+    background-color: var(--dark-color);
+    border-radius: 5px;
+}
+
+.post-sum {
+    float: left;
+    width: 90%;
+    margin-left: 4%;
+    font-size: 1.5em;
+    padding: 1%;
+    font-family: "Itim", cursive;
+    background-color: var(--light-color);
+    color: var(--black-color);
+    border-top: 1px solid var(--dark-color);
+    text-align: center;
+}
+
+.post-content {
+    color: var(--black-color);
+    background-color: var(--light-color);
+    float: left;
+    margin-top: 1vh;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.post-content p {
+    margin: 1%;
+}
+
+
+.related-post-img img {
+    width: 100%;
+    height: 15vh;
+    margin: 5%;
+    border-radius: 5px;
+}
+
+img:hover {
+    cursor: pointer;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    .innerDiv {
+        width: 98vw;
+    }
+
+    .post-content {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        word-wrap: break-word;
+    }
+
+}

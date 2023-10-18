@@ -54,53 +54,81 @@
             <div
               class="post-status"
               style="background-color: red"
-              *ngIf="post.postInfo.ban"
+              *ngIf="post.postInfo.adminStatus === 'banned'"
             >
               Banned
             </div>
             <div
               class="post-status"
               style="background-color: yellowgreen"
-              *ngIf="post.postInfo.status && !post.postInfo.ban"
+              *ngIf="
+                post.postInfo.status && post.postInfo.adminStatus === 'approved'
+              "
             >
               Posted
             </div>
             <div
               class="post-status"
               style="background-color: orange"
-              *ngIf="!post.postInfo.status && !post.postInfo.ban"
+              *ngIf="
+                !post.postInfo.status &&
+                post.postInfo.adminStatus === 'approved'
+              "
             >
               Hidden
+            </div>
+            <div
+              class="post-status"
+              style="background-color: orange"
+              *ngIf="
+                !post.postInfo.status && post.postInfo.adminStatus === 'review'
+              "
+            >
+              In review
             </div>
           </div>
         </div>
         <button class="post-action" (click)="showPost(post.postInfo.id)">
           Show</button
         ><button
-          *ngIf="!post.postInfo.ban"
+          *ngIf="post.postInfo.adminStatus === 'approved'"
           class="post-action"
           (click)="toEditPost(post.postInfo.id)"
         >
           Edit</button
         ><button
-          *ngIf="!post.postInfo.ban && !post.postInfo.status"
+          *ngIf="
+            post.postInfo.adminStatus === 'approved' && !post.postInfo.status
+          "
           class="post-action"
           (click)="changePostStatus(post.postInfo.id, post.postInfo.status)"
         >
           Unhide
         </button>
         <button
-          *ngIf="!post.postInfo.ban && post.postInfo.status"
+          *ngIf="
+            post.postInfo.adminStatus === 'approved' && post.postInfo.status
+          "
           class="post-action"
           (click)="changePostStatus(post.postInfo.id, post.postInfo.status)"
         >
           Hide
         </button>
-        <button disabled *ngIf="post.postInfo.ban" class="post-action-disabled">
+        <button
+          disabled
+          *ngIf="
+            post.postInfo.adminStatus === 'banned' ||
+            post.postInfo.adminStatus === 'review'
+          "
+          class="post-action-disabled"
+        >
           Edit</button
         ><button
           disabled
-          *ngIf="post.postInfo.ban"
+          *ngIf="
+            post.postInfo.adminStatus === 'banned' ||
+            post.postInfo.adminStatus === 'review'
+          "
           class="post-action-disabled"
         >
           Hide
@@ -143,3 +171,10 @@
     </div>
   </div>
 </div>
+<app-popup-modal
+  *ngIf="showIt"
+  title="{{ popupTitle }}"
+  message="{{ popupMessage }}"
+  (closeEvt)="closeModal()"
+>
+</app-popup-modal>

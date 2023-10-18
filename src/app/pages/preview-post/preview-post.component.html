@@ -1,0 +1,64 @@
+<div class="background">
+  <div class="innerDiv">
+    <ngx-spinner
+      bdColor="rgba(0, 0, 0, 0.8)"
+      size="medium"
+      color="#fff"
+      type="ball-spin"
+      [fullScreen]="false"
+    ></ngx-spinner>
+    <div class="post-name">{{ getPostModel.postInfo.postName }}</div>
+    <div class="post-info">
+      <div class="post-stat">{{ getPostModel.postInfo.author.fullname }}</div>
+
+      <div class="post-stat">
+        <a
+          ><img
+            src="./assets/like.png"
+            alt="like"
+            style="height: 1.75vh"
+            aria-hidden="true"
+          />
+          {{ getPostModel.postInfo.like }}</a
+        >
+        <a>
+          <img
+            src="./assets/dislike.png"
+            alt="dislike"
+            style="height: 1.75vh; margin-left: 0.5vw"
+            aria-hidden="true"
+          />
+          {{ getPostModel.postInfo.dislike }}</a
+        >
+      </div>
+
+      <div class="post-stat">
+        {{ getPostModel.postInfo.createDate | date : "HH:mm d-MMM" }}
+      </div>
+    </div>
+    <div class="post-cate">
+      <a *ngFor="let p of getPostModel.postCategories">{{ p.categoryName }} </a>
+    </div>
+    <div class="post-tag">
+      <a *ngFor="let t of getPostModel.postTags"
+        ><img
+          src="./assets/tag.png"
+          alt="tag"
+          style="height: 1vh; margin-left: 0.5vw"
+        />
+        {{ t.tagName }}
+      </a>
+    </div>
+    <div class="post-sum">{{ getPostModel.postInfo.summary }}</div>
+    <div class="post-content">
+      <p [innerHTML]="getPostModel.postInfo.content | sanitizeHtml"></p>
+    </div>
+  </div>
+</div>
+<app-popup-modal
+  *ngIf="showIt"
+  title="{{ popupTitle }}"
+  message="{{ popupMessage }}"
+  (closeEvt)="closeModal()"
+>
+</app-popup-modal>

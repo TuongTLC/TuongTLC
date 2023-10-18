@@ -58,7 +58,7 @@ export class LoginPageComponent {
         }
       },
       error: (error) => {
-        this.loginError = error;
+        this.loginError = error.error;
       },
     });
   }

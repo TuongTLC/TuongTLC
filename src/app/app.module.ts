@@ -23,6 +23,7 @@ import { PostPageComponent } from './pages/post-page/post-page.component';
 import { ListViewComponent } from './pages/list-view/list-view.component';
 import { EditPostPageComponent } from './pages/edit-post-page/edit-post-page.component';
 import { AdminConsoleComponent } from './pages/admin-console/admin-console.component';
+import { PreviewPostComponent } from './pages/preview-post/preview-post.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AdminConsoleComponent } from './pages/admin-console/admin-console.compo
     ListViewComponent,
     EditPostPageComponent,
     AdminConsoleComponent,
+    PreviewPostComponent,
   ],
   imports: [
     BrowserModule,

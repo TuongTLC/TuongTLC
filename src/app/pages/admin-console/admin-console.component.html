@@ -49,9 +49,180 @@
           </table>
         </div>
       </div>
-      <div *ngIf="activePosts">Posts</div>
-      <div *ngIf="activeCategories">Categories</div>
-      <div *ngIf="activeTags">Tags</div>
+      <div *ngIf="activePosts">
+        <h1>Posts list:</h1>
+        <div class="console-info">
+          <table>
+            <tr>
+              <th>Post Name</th>
+              <th>Create Date</th>
+              <th>Author</th>
+              <th>Status</th>
+              <th>Admin status</th>
+            </tr>
+            <tr *ngFor="let post of getPostsModel.listPosts">
+              <td>
+                {{ post.postInfo.postName }}
+              </td>
+              <td>{{ post.postInfo.createDate | date : "HH:mm d-MMM-yyy" }}</td>
+              <td>{{ post.postInfo.author.fullname }}</td>
+              <td *ngIf="post.postInfo.status">Posted</td>
+              <td *ngIf="!post.postInfo.status">Hidden</td>
+              <td
+                *ngIf="post.postInfo.adminStatus === 'approved'"
+                style="color: green"
+              >
+                Approved
+              </td>
+              <td
+                *ngIf="post.postInfo.adminStatus === 'review'"
+                style="color: orange"
+              >
+                Review
+              </td>
+              <td
+                *ngIf="post.postInfo.adminStatus === 'banned'"
+                style="color: red"
+              >
+                Banned
+              </td>
+              <td>
+                <Button (click)="showPost(post.postInfo.id)">View</Button>
+              </td>
+              <td *ngIf="post.postInfo.adminStatus === 'approved'">
+                <button (click)="banPost(post.postInfo.id)">Ban</button>
+              </td>
+              <td *ngIf="post.postInfo.adminStatus === 'review'">
+                <button (click)="banPost(post.postInfo.id)">Approve</button>
+              </td>
+              <td *ngIf="post.postInfo.adminStatus === 'banned'">
+                <button (click)="unbanPost(post.postInfo.id)">Unban</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="activeCategories">
+        <h1>Create category</h1>
+        <div class="cate-tag-create">
+          <a class="title">Category name:</a><br />
+          <input
+            type="text"
+            placeholder="Category name"
+            [(ngModel)]="categoryCreateModel.categoryName"
+          /><br />
+          <a class="title">Category description:</a><br />
+          <input
+            type="text"
+            placeholder="Category description"
+            [(ngModel)]="categoryCreateModel.description"
+          /><br />
+          <button (click)="createCategory()">Create Category</button>
+        </div>
+        <h1>Update categories</h1>
+        <div class="cate-tag-update">
+          <table>
+            <tr>
+              <th>Category name</th>
+              <th>Description</th>
+            </tr>
+            <tr *ngFor="let cateUpdate of categoriesAdmin">
+              <td>
+                <input
+                  type="text"
+                  [(ngModel)]="cateUpdate.categoryName"
+                  class="edit-input"
+                />
+              </td>
+              <td>
+                <textarea
+                  type="text"
+                  [(ngModel)]="cateUpdate.description"
+                  class="edit-input"
+                ></textarea>
+              </td>
+              <td>
+                <button (click)="updateCategory(cateUpdate)">Update</button
+                ><br />
+                <button
+                  *ngIf="cateUpdate.status === true"
+                  (click)="changeCategoryStatus(cateUpdate.id, false)"
+                >
+                  Disable
+                </button>
+                <button
+                  *ngIf="cateUpdate.status === false"
+                  (click)="changeCategoryStatus(cateUpdate.id, true)"
+                >
+                  Enable
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div *ngIf="activeTags">
+        <h1>Create tag</h1>
+        <div class="cate-tag-create">
+          <a class="title">Tag name:</a><br />
+          <input
+            type="text"
+            placeholder="Tag name"
+            [(ngModel)]="tagCreateModel.tagName"
+          /><br />
+          <a class="title">Tag description:</a><br />
+          <input
+            type="text"
+            placeholder="Tag description"
+            [(ngModel)]="tagCreateModel.description"
+          /><br />
+          <button (click)="createTag()">Create Tag</button>
+        </div>
+        <h1>Update categories</h1>
+        <div class="cate-tag-update">
+          <table>
+            <thead>
+              <tr>
+                <th>Tag name</th>
+                <th>Description</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tr *ngFor="let tagUpdate of tagsAdmin">
+              <td>
+                <input
+                  type="text"
+                  [(ngModel)]="tagUpdate.tagName"
+                  class="edit-input"
+                />
+              </td>
+              <td>
+                <textarea
+                  type="text"
+                  [(ngModel)]="tagUpdate.description"
+                  class="edit-input"
+                ></textarea>
+              </td>
+              <td>
+                <button (click)="updateTag(tagUpdate)">Update</button>
+                <br />
+                <button
+                  *ngIf="tagUpdate.status === true"
+                  (click)="changeTagStatus(tagUpdate.id, false)"
+                >
+                  Disable
+                </button>
+                <button
+                  *ngIf="tagUpdate.status === false"
+                  (click)="changeTagStatus(tagUpdate.id, true)"
+                >
+                  Enable
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>

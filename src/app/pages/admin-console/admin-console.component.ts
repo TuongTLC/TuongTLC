@@ -3,6 +3,20 @@ import { ChangeUserStatusModel, UserModel } from 'src/app/models/user-models';
 import { UserService } from 'src/app/services/user-services';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
+import { PostService } from 'src/app/services/post-service';
+import { GetPostModel } from 'src/app/models/post-model';
+import { CategoryService } from 'src/app/services/category-service';
+import { TagService } from 'src/app/services/tag-service';
+import {
+  CategoryCreateModel,
+  CategoryModel,
+  CategoryUpdateModel,
+} from 'src/app/models/category-models';
+import {
+  TagCreateModel,
+  TagModel,
+  TagUpdateModel,
+} from 'src/app/models/tag-models';
 
 @Component({
   selector: 'app-admin-console',
@@ -13,7 +27,10 @@ export class AdminConsoleComponent implements OnInit {
   constructor(
     private userService: UserService,
     private spinner: NgxSpinnerService,
-    private router: Router
+    private router: Router,
+    private postService: PostService,
+    private categoryService: CategoryService,
+    private tagService: TagService
   ) {}
   userInfo = new UserModel();
 
@@ -54,14 +71,17 @@ export class AdminConsoleComponent implements OnInit {
   activatePost() {
     this.resetActive();
     this.activePosts = true;
+    this.getPosts(1, 8, 'all', '', '', '');
   }
   activateCategory() {
     this.resetActive();
     this.activeCategories = true;
+    this.getCategoriesAdmin();
   }
   activateTag() {
     this.resetActive();
     this.activeTags = true;
+    this.getTagsAdmin();
   }
   userList: UserModel[] = [];
   getUsers(status: string) {
@@ -72,6 +92,7 @@ export class AdminConsoleComponent implements OnInit {
         this.spinner.hide();
       },
       error: () => {
+        this.spinner.hide();
         this.popupTitle = 'Load users failed!';
         this.popupMessage =
           'Something went wrong while loading users, please try again later!';
@@ -92,6 +113,224 @@ export class AdminConsoleComponent implements OnInit {
         this.popupTitle = 'Change user status failed!';
         this.popupMessage =
           'Something went wrong while changing user status, please try again later!';
+        this.showIt = true;
+      },
+    });
+  }
+  getPostsModel = new GetPostModel();
+  getPosts(
+    pageNum: number,
+    pageSize: number,
+    status: string,
+    adminStatus: string,
+    categoryId: string,
+    tagId: string
+  ) {
+    this.spinner.show();
+    this.postService
+      .getPosts(pageNum, pageSize, status, adminStatus, categoryId, tagId)
+      .subscribe({
+        next: (res) => {
+          this.getPostsModel = res;
+          this.spinner.hide();
+        },
+        error: () => {
+          this.spinner.hide();
+          this.popupTitle = 'Failed to load posts!';
+          this.popupMessage =
+            'Something went wrong while loading post, please try again later!';
+          this.showIt = true;
+        },
+      });
+  }
+  banPost(postId: string) {
+    this.postService.banPost(postId).subscribe({
+      next: () => {
+        this.getPosts(1, 8, 'all', '', '', '');
+      },
+      error: () => {
+        this.popupTitle = 'Failed to ban posts!';
+        this.popupMessage =
+          'Something went wrong while banning post, please try again later!';
+        this.showIt = true;
+      },
+    });
+  }
+  unbanPost(postId: string) {
+    this.postService.unbanPost(postId).subscribe({
+      next: () => {
+        this.getPosts(1, 8, 'all', '', '', '');
+      },
+      error: () => {
+        this.popupTitle = 'Failed to unban posts!';
+        this.popupMessage =
+          'Something went wrong while unbanning post, please try again later!';
+        this.showIt = true;
+      },
+    });
+  }
+  showPost(postId: string) {
+    const queryParams = { postId: postId };
+    this.router.navigate(['/preview-post'], { queryParams: queryParams });
+  }
+  categoriesAdmin: CategoryModel[] = [];
+  getCategoriesAdmin() {
+    this.categoryService.getCategories('all').subscribe({
+      next: (res) => {
+        this.categoriesAdmin = res;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+  tagsAdmin: TagModel[] = [];
+  getTagsAdmin() {
+    this.tagService.getTags('all').subscribe({
+      next: (res) => {
+        this.tagsAdmin = res;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+  categoryCreateModel: CategoryCreateModel = new CategoryCreateModel();
+
+  createCategory() {
+    if (
+      this.categoryCreateModel.categoryName.length < 6 ||
+      this.categoryCreateModel.description.length < 6
+    ) {
+      this.popupTitle = 'Category invalid!';
+      this.popupMessage =
+        'Category name or description must be at least 6 characters!';
+      this.showIt = true;
+    } else {
+      this.categoryService.createCategory(this.categoryCreateModel).subscribe({
+        next: () => {
+          this.getCategoriesAdmin();
+          this.popupTitle = 'Category created!';
+          this.popupMessage = 'Category created!';
+          this.showIt = true;
+          this.categoryCreateModel = new CategoryCreateModel();
+        },
+        error: (error) => {
+          this.popupTitle = 'Create error!';
+          this.popupMessage = error.error;
+          this.showIt = true;
+        },
+      });
+    }
+  }
+  updateCategory(category: CategoryModel) {
+    const categoryUpdateModel: CategoryUpdateModel = {
+      id: category.id,
+      categoryName: category.categoryName,
+      description: category.description,
+    };
+    if (
+      categoryUpdateModel.categoryName.length < 6 ||
+      categoryUpdateModel.description.length < 6
+    ) {
+      this.popupTitle = 'Category invalid!';
+      this.popupMessage =
+        'Category name or description must be at least 6 characters!';
+      this.showIt = true;
+    } else {
+      this.categoryService.updateCategory(categoryUpdateModel).subscribe({
+        next: () => {
+          this.getCategoriesAdmin();
+          this.popupTitle = 'Category Updated!';
+          this.popupMessage = 'Category updated!';
+          this.showIt = true;
+        },
+        error: (error) => {
+          this.popupTitle = 'Update error!';
+          this.popupMessage = error.error;
+          this.showIt = true;
+        },
+      });
+    }
+  }
+  changeCategoryStatus(id: string, status: boolean) {
+    this.categoryService.updateCategoryStatus(id, status).subscribe({
+      next: () => {
+        this.getCategoriesAdmin();
+        this.popupTitle = 'Category Updated!';
+        this.popupMessage = 'Category updated!';
+        this.showIt = true;
+      },
+      error: (error) => {
+        this.popupTitle = 'Update error!';
+        this.popupMessage = error.error;
+        console.log(error);
+
+        this.showIt = true;
+      },
+    });
+  }
+  tagCreateModel: TagCreateModel = new TagCreateModel();
+  createTag() {
+    this.tagService.createTag(this.tagCreateModel).subscribe({
+      next: () => {
+        this.popupTitle = 'Tag created!';
+        this.popupMessage = 'Tag created !';
+        this.showIt = true;
+        this.getTagsAdmin();
+        this.tagCreateModel = new TagCreateModel();
+      },
+      error: (error) => {
+        this.popupTitle = 'Create error!';
+        this.popupMessage = error.error;
+        this.showIt = true;
+      },
+    });
+  }
+  updateTag(tag: TagModel) {
+    const tagUpdateModel: TagUpdateModel = {
+      id: tag.id,
+      tagName: tag.tagName,
+      description: tag.description,
+    };
+    if (
+      tagUpdateModel.tagName.length < 6 ||
+      tagUpdateModel.description.length < 6
+    ) {
+      this.popupTitle = 'Tag invalid!';
+      this.popupMessage =
+        'Tag name or description must be at least 6 characters!';
+      this.showIt = true;
+    } else {
+      this.tagService.updateTag(tagUpdateModel).subscribe({
+        next: () => {
+          this.getTagsAdmin();
+          this.popupTitle = 'Tag Updated!';
+          this.popupMessage = 'Tag updated!';
+          this.showIt = true;
+        },
+        error: (error) => {
+          this.popupTitle = 'Update error!';
+          this.popupMessage = error.error;
+          this.showIt = true;
+        },
+      });
+    }
+  }
+  changeTagStatus(id: string, status: boolean) {
+    this.tagService.updateTagStatus(id, status).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getTagsAdmin();
+        this.popupTitle = 'Tag Updated!';
+        this.popupMessage = 'Tag updated!';
+        this.showIt = true;
+      },
+      error: (error) => {
+        this.popupTitle = 'Update error!';
+        this.popupMessage = error.error;
+        console.log(error);
+
         this.showIt = true;
       },
     });

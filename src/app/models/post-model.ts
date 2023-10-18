@@ -25,7 +25,7 @@ export class PostInfo {
   dislike = 0;
   thumbnail = '';
   status = false;
-  ban = false;
+  adminStatus = '';
 }
 
 export class PostCategories {

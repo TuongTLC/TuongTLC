@@ -19,7 +19,7 @@
     color: var(--text-color);
     height: fit-content;
     max-height: 80vh;
-    width: 80%;
+    width: 60%;
     margin-top: 10vh;
     border: solid white 5px;
     border-radius: 15px;
@@ -81,14 +81,20 @@ table {
     white-space: nowrap;
 }
 
+tr {
+    width: fit-content;
+    height: fit-content;
+}
+
 td {
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
     border: 1px solid var(--dark-color);
     width: fit-content;
     height: fit-content;
+    font-size: 1.25em;
 }
 
 button {
@@ -103,6 +109,81 @@ button {
 
 button:hover {
     color: var(--dark-color);
+}
+
+.cate-tag-create {
+    color: var(--dark-color);
+    width: 40vw;
+    margin: 0 auto;
+    margin-top: 3vh;
+    background-color: var(--light-color);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.cate-tag-create input {
+    height: 3vh;
+    text-align: center;
+    width: 25vw;
+}
+
+.cate-tag-create button {
+    height: 4vh;
+    margin: 1vh;
+}
+
+.cate-tag-update {
+    color: var(--dark-color);
+    width: 50vw;
+    margin: 0 auto;
+    margin-top: 3vh;
+    background-color: var(--light-color);
+    border-radius: 5px;
+    text-align: center;
+    overflow: scroll;
+}
+
+.cate-tag-update button {
+    width: fit-content;
+    padding: 5px;
+}
+
+.cate-tag-update td {
+    border: none;
+    font-size: 1em;
+}
+
+.cate-tag-update input {
+    height: 5vh;
+    width: 10vw;
+}
+
+.cate-tag-update textarea {
+    height: 5vh;
+    width: 20vw;
+}
+
+.cate-tag-update::-webkit-scrollbar {
+    display: none;
+}
+
+input {
+    font-family: "Itim", cursive;
+    margin: 10px;
+    height: 3vh;
+    font-size: 1.25em;
+    border: solid var(--dark-color) 1px;
+    border-radius: 5px;
+    width: 96%;
+}
+
+textarea {
+    margin: 10px;
+    border: solid var(--dark-color) 1px;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 96%;
+    font-family: "Itim", cursive;
 }
 
 @media only screen and (max-width: 768px) {
@@ -121,4 +202,33 @@ button:hover {
         float: left;
     }
 
+    .cate-tag-create {
+        width: 95%;
+    }
+
+    .cate-tag-create input {
+        width: 90%;
+    }
+
+    .cate-tag-update {
+        width: 95%;
+    }
+
+    .edit-input {
+        width: 25vw;
+    }
+
+    .cate-tag-update button {
+        width: fit-content;
+    }
+
+    .cate-tag-update input {
+        height: 4vh;
+        width: 30vw;
+        font-size: 1em;
+    }
+
+    .cate-tag-update textarea {
+        width: 50vw;
+    }
 }

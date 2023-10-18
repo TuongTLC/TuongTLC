@@ -24,7 +24,7 @@ export class HomePageComponent implements OnInit {
   getByCategory = false;
   ngOnInit() {
     this.getCategories();
-    this.getPosts(1, 8, 'active', '', '');
+    this.getPosts(1, 8, 'active', 'approved', '', '');
   }
   getCategories() {
     this.categoryService.getCategories('active').subscribe({
@@ -47,28 +47,30 @@ export class HomePageComponent implements OnInit {
     pageNum: number,
     pageSize: number,
     status: string,
+    adminStatus: string,
     categoryId: string,
     tagId: string
   ) {
     this.spinner.show();
     this.postService
-      .getPosts(pageNum, pageSize, status, categoryId, tagId)
+      .getPosts(pageNum, pageSize, status, adminStatus, categoryId, tagId)
       .subscribe({
         next: (res) => {
           this.getPostsModel = res;
           this.spinner.hide();
         },
         error: (error) => {
+          this.spinner.hide();
           console.error(error);
         },
       });
   }
   getPostByCategory() {
     if (JSON.stringify(this.selectedCategory).toString() === '"all"') {
-      this.getPosts(1, 8, 'active', '', '');
+      this.getPosts(1, 8, 'active', 'approved', '', '');
       this.getByCategory = false;
     } else {
-      this.getPosts(1, 8, 'active', this.selectedCategory.id, '');
+      this.getPosts(1, 8, 'active', 'approved', this.selectedCategory.id, '');
       this.getByCategory = true;
     }
   }
@@ -80,7 +82,14 @@ export class HomePageComponent implements OnInit {
       page = this.getPostsModel.paging.pageCount;
     }
     if (this.getByCategory == true) {
-      this.getPosts(page, 8, 'active', this.selectedCategory.id, '');
+      this.getPosts(
+        page,
+        8,
+        'active',
+        'approved',
+        this.selectedCategory.id,
+        ''
+      );
     } else if (this.searchPostStatus == true) {
       this.searchPost(
         page,
@@ -91,7 +100,7 @@ export class HomePageComponent implements OnInit {
         ''
       );
     } else {
-      this.getPosts(page, 8, 'active', '', '');
+      this.getPosts(page, 8, 'active', 'approved', '', '');
     }
   }
   searchPostStatus = false;
@@ -114,6 +123,12 @@ export class HomePageComponent implements OnInit {
     }
     return true;
   }
+  showIt = false;
+  popupTitle = '';
+  popupMessage = '';
+  closeModal() {
+    this.showIt = false;
+  }
   searchPost(
     pageNum: number,
     pageSize: number,
@@ -131,8 +146,12 @@ export class HomePageComponent implements OnInit {
           this.searchPostStatus = true;
           this.spinner.hide();
         },
-        error: (error) => {
-          console.error(error);
+        error: () => {
+          this.spinner.hide();
+          this.popupTitle = 'Failed to load posts!';
+          this.popupMessage =
+            'Something went wrong while loading posts, please try again later!';
+          this.showIt = true;
         },
       });
   }

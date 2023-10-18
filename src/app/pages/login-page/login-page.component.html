@@ -23,7 +23,7 @@
         (keyup.enter)="login()"
       />
       <p class="emptyError" *ngIf="passwordEmpty">Password can not be empty!</p>
-      <p class="loginError" *ngIf="loginError">Wrong username or password!</p>
+      <p class="loginError" *ngIf="loginError">{{ loginError }}</p>
       <br />
       <button class="loginBtn" (click)="login()">Login</button>
       <br />

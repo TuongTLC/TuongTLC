@@ -16,6 +16,12 @@ export class ListViewComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router
   ) {}
+  showIt = false;
+  popupTitle = '';
+  popupMessage = '';
+  closeModal() {
+    this.showIt = false;
+  }
   userInfo = new UserModel();
   ngOnInit(): void {
     this.getUserPosts(1, 8);
@@ -39,6 +45,12 @@ export class ListViewComponent implements OnInit {
       next: (res) => {
         this.postList = res;
         this.spinner.hide();
+      },error:()=> {
+          this.spinner.hide();
+          this.popupTitle = 'Failed to load posts!';
+          this.popupMessage =
+            'Something went wrong while loading posts, please try again later!';
+          this.showIt = true;
       },
     });
   }
@@ -53,7 +65,7 @@ export class ListViewComponent implements OnInit {
   }
   showPost(postId: string) {
     const queryParams = { postId: postId };
-    this.router.navigate(['/post'], { queryParams: queryParams });
+    this.router.navigate(['/preview-post'], { queryParams: queryParams });
   }
   changePostStatusModel = new ChangePostStatusModel();
   changePostStatus(postId: string, oldStatus: boolean) {
@@ -66,6 +78,11 @@ export class ListViewComponent implements OnInit {
       next: (res) => {
         this.getUserPosts(1, 8);
         console.log(res);
+      },error:() => {
+          this.popupTitle = 'Failed to update post!';
+          this.popupMessage =
+            'Something went wrong while updating posts, please try again later!';
+          this.showIt = true;
       },
     });
   }

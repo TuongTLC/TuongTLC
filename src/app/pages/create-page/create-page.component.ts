@@ -1,8 +1,4 @@
-import {
-  TagCreateModel,
-  TagModel,
-  TagUpdateModel,
-} from './../../models/tag-models';
+import { TagModel } from './../../models/tag-models';
 import {
   Component,
   ElementRef,
@@ -23,7 +19,6 @@ import { PostService } from 'src/app/services/post-service';
 import {
   CategoryCreateModel,
   CategoryModel,
-  CategoryUpdateModel,
 } from 'src/app/models/category-models';
 import { FileModel } from 'src/app/models/file-model';
 import { UserModel } from 'src/app/models/user-models';
@@ -56,7 +51,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
   categoryCreateModel: CategoryCreateModel = new CategoryCreateModel();
   categories: CategoryModel[] = [];
   categoriesAdmin: CategoryModel[] = [];
-  tagCreateModel: TagCreateModel = new TagCreateModel();
+
   tags: TagModel[] = [];
   tagsAdmin: TagModel[] = [];
   uploadUrlList: FileModel[] = [];
@@ -229,6 +224,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       this.showIt = true;
     }
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: any;
   getCategories() {
     this.categoryService.getCategories('active').subscribe({
@@ -240,31 +236,11 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       },
     });
   }
-  getCategoriesAdmin() {
-    this.categoryService.getCategories('all').subscribe({
-      next: (res) => {
-        this.categoriesAdmin = res;
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
-  }
+
   getTags() {
     this.tagService.getTags('active').subscribe({
       next: (res) => {
         this.tags = res;
-        this.scrollTopDiv();
-      },
-      error: (error) => {
-        console.error(error);
-      },
-    });
-  }
-  getTagsAdmin() {
-    this.tagService.getTags('all').subscribe({
-      next: (res) => {
-        this.tagsAdmin = res;
         this.scrollTopDiv();
       },
       error: (error) => {
@@ -300,23 +276,6 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     timer(2000).subscribe(() => {
       this.copiedUrl = '';
     });
-  }
-  activatePost() {
-    this.activePost = true;
-    this.activeCategory = false;
-    this.activeTag = false;
-  }
-  activateCategory() {
-    this.activePost = false;
-    this.activeCategory = true;
-    this.activeTag = false;
-    this.getCategoriesAdmin();
-  }
-  activateTag() {
-    this.activePost = false;
-    this.activeCategory = false;
-    this.activeTag = true;
-    this.getTagsAdmin();
   }
   selectedCategoryValue = new CategoryModel();
   selectedCategories: CategoryModel[] = [];
@@ -405,149 +364,6 @@ export class CreatePageComponent implements OnInit, OnDestroy {
       },
       error: (error) => {
         console.error(error);
-      },
-    });
-  }
-  createCategory() {
-    if (
-      this.categoryCreateModel.categoryName.length < 6 ||
-      this.categoryCreateModel.description.length < 6
-    ) {
-      this.popupTitle = 'Category invalid!';
-      this.popupMessage =
-        'Category name or description must be at least 6 characters!';
-      this.showIt = true;
-    } else {
-      this.categoryService.createCategory(this.categoryCreateModel).subscribe({
-        next: () => {
-          this.getCategories();
-          this.getCategoriesAdmin();
-          this.popupTitle = 'Category created!';
-          this.popupMessage = 'Category created and ready to use!';
-          this.showIt = true;
-          this.categoryCreateModel = new CategoryCreateModel();
-        },
-        error: (error) => {
-          this.popupTitle = 'Create error!';
-          this.popupMessage = error.error;
-          this.showIt = true;
-        },
-      });
-    }
-  }
-  updateCategory(category: CategoryModel) {
-    const categoryUpdateModel: CategoryUpdateModel = {
-      id: category.id,
-      categoryName: category.categoryName,
-      description: category.description,
-    };
-    if (
-      categoryUpdateModel.categoryName.length < 6 ||
-      categoryUpdateModel.description.length < 6
-    ) {
-      this.popupTitle = 'Category invalid!';
-      this.popupMessage =
-        'Category name or description must be at least 6 characters!';
-      this.showIt = true;
-    } else {
-      this.categoryService.updateCategory(categoryUpdateModel).subscribe({
-        next: () => {
-          this.getCategories();
-          this.getCategoriesAdmin();
-          this.popupTitle = 'Category Updated!';
-          this.popupMessage = 'Category updated and ready to use!';
-          this.showIt = true;
-        },
-        error: (error) => {
-          this.popupTitle = 'Update error!';
-          this.popupMessage = error.error;
-          this.showIt = true;
-        },
-      });
-    }
-  }
-  changeCategoryStatus(id: string, status: boolean) {
-    this.categoryService.updateCategoryStatus(id, status).subscribe({
-      next: () => {
-        this.getCategories();
-        this.getCategoriesAdmin();
-        this.popupTitle = 'Category Updated!';
-        this.popupMessage = 'Category updated and ready to use!';
-        this.showIt = true;
-      },
-      error: (error) => {
-        this.popupTitle = 'Update error!';
-        this.popupMessage = error.error;
-        console.log(error);
-
-        this.showIt = true;
-      },
-    });
-  }
-  createTag() {
-    this.tagService.createTag(this.tagCreateModel).subscribe({
-      next: () => {
-        this.popupTitle = 'Tag created!';
-        this.popupMessage = 'Tag created and ready to use!';
-        this.showIt = true;
-        this.getTags();
-        this.getTagsAdmin();
-        this.tagCreateModel = new TagCreateModel();
-      },
-      error: (error) => {
-        this.popupTitle = 'Create error!';
-        this.popupMessage = error.error;
-        this.showIt = true;
-      },
-    });
-  }
-  updateTag(tag: TagModel) {
-    const tagUpdateModel: TagUpdateModel = {
-      id: tag.id,
-      tagName: tag.tagName,
-      description: tag.description,
-    };
-    if (
-      tagUpdateModel.tagName.length < 6 ||
-      tagUpdateModel.description.length < 6
-    ) {
-      this.popupTitle = 'Tag invalid!';
-      this.popupMessage =
-        'Tag name or description must be at least 6 characters!';
-      this.showIt = true;
-    } else {
-      this.tagService.updateTag(tagUpdateModel).subscribe({
-        next: () => {
-          this.getTags();
-          this.getTagsAdmin();
-          this.popupTitle = 'Tag Updated!';
-          this.popupMessage = 'Tag updated!';
-          this.showIt = true;
-        },
-        error: (error) => {
-          this.popupTitle = 'Update error!';
-          this.popupMessage = error.error;
-          this.showIt = true;
-        },
-      });
-    }
-  }
-  changeTagStatus(id: string, status: boolean) {
-    this.tagService.updateTagStatus(id, status).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.getTags();
-        this.getTagsAdmin();
-        this.popupTitle = 'Tag Updated!';
-        this.popupMessage = 'Tag updated!';
-        this.showIt = true;
-      },
-      error: (error) => {
-        this.popupTitle = 'Update error!';
-        this.popupMessage = error.error;
-        console.log(error);
-
-        this.showIt = true;
       },
     });
   }
