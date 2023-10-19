@@ -44,3 +44,7 @@ export class ChangeUserStatusModel {
   userId = '';
   status = false;
 }
+export class VerifyCodeModel {
+  code = '';
+  email = '';
+}

@@ -59,7 +59,14 @@ export class LoginPageComponent {
       },
       error: (error) => {
         this.loginError = error.error;
+        if (error.error === 'User inactive!') {
+          this.verify = true;
+        }
       },
     });
+  }
+  verify = false;
+  closePopup() {
+    this.verify = false;
   }
 }

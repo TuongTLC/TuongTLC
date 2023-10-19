@@ -1,12 +1,23 @@
 <div class="background">
-  <p>about-page works!</p>
-  <button (click)="showSpinner()">click ne</button>
-  <ngx-spinner
-    bdColor="rgba(0, 0, 0, 0.8)"
-    size="medium"
-    color="#fff"
-    type="ball-spin"
-    [fullScreen]="true"
-    ><p style="color: white">Loading...</p></ngx-spinner
-  >
+  <div class="innerDiv">
+    <h2>Website techs:</h2>
+    <div class="techs">
+      <p><a>Front-end:</a> Angular 16</p>
+      <p><a>Back-end:</a> .Net 6, Entity Framework, JWT</p>
+      <p><a>Secrets Management:</a> Environment variables + Hashicorp Vault</p>
+      <p><a>CI/CD:</a> Github Webhooks + Jenkins</p>
+      <p><a>Host:</a> IIS 10 on Windows Server 2022 VM</p>
+    </div>
+    <h2>My contacts:</h2>
+    <div>
+      <p><a>Email:</a>trinhtuong98@gmail.com</p>
+      <p><a>Phone:</a>0383938384</p>
+      <a href="https://www.linkedin.com/in/tuong-trinh-47a316268/"
+        ><img src="/assets//linkedIn.png" alt="li"
+      /></a>
+      <a href="https://www.facebook.com/trinhtuong242/"
+        ><img src="/assets//fbicon.png" alt="fb"
+      /></a>
+    </div>
+  </div>
 </div>

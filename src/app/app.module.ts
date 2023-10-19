@@ -24,6 +24,7 @@ import { ListViewComponent } from './pages/list-view/list-view.component';
 import { EditPostPageComponent } from './pages/edit-post-page/edit-post-page.component';
 import { AdminConsoleComponent } from './pages/admin-console/admin-console.component';
 import { PreviewPostComponent } from './pages/preview-post/preview-post.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { PreviewPostComponent } from './pages/preview-post/preview-post.componen
     EditPostPageComponent,
     AdminConsoleComponent,
     PreviewPostComponent,
+    VerifyEmailComponent,
   ],
   imports: [
     BrowserModule,

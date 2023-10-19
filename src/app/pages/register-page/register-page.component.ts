@@ -102,10 +102,7 @@ export class RegisterPageComponent {
           this.userInfo = res;
           if (this.userInfo) {
             console.log(JSON.stringify(this.userInfo));
-            this.popupTitle = 'Congratulations!';
-            this.popupMessage =
-              'Your account has been created. You can now login and enjoy.';
-            this.showModal();
+            this.verify = true;
           }
         },
         error: (error) => {
@@ -127,5 +124,9 @@ export class RegisterPageComponent {
     if (this.registerError === null) {
       this.router.navigate(['/login']);
     }
+  }
+  verify = false;
+  closePopup() {
+    this.verify = false;
   }
 }

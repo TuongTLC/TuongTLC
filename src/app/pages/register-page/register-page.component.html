@@ -55,10 +55,10 @@
       />
       <p class="error" *ngIf="validateBirthdateError">Birthdate invalid!</p>
       <br />
-      <button class="loginBtn"  routerLink="/login">
+      <button class="loginBtn" routerLink="/login">
         <a>Back</a>
       </button>
-      <button class="loginBtn"  (click)="register()">Register</button>
+      <button class="loginBtn" (click)="register()">Register</button>
     </div>
   </div>
   <app-popup-modal
@@ -69,3 +69,4 @@
   >
   </app-popup-modal>
 </div>
+<app-verify-email *ngIf="verify" (closeEvt)="closePopup()"> </app-verify-email>

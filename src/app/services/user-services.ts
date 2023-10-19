@@ -7,6 +7,7 @@ import {
   UserModel,
   UserLoginResModel,
   ChangeUserStatusModel,
+  VerifyCodeModel,
 } from './../models/user-models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -76,6 +77,13 @@ export class UserService {
       environment.BASE_URL + '/user/change-account-status',
       changeUserStatusModel,
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
+    );
+  }
+  verifyCode(verifyModel: VerifyCodeModel) {
+    return this.http.post(
+      environment.BASE_URL + '/user/verify-email',
+      verifyModel,
+      { responseType: 'text' }
     );
   }
 }
