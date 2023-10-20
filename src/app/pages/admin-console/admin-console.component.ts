@@ -143,6 +143,15 @@ export class AdminConsoleComponent implements OnInit {
         },
       });
   }
+  getPostPage(page: number) {
+    if (page < 1) {
+      page = 1;
+    }
+    if (page > this.getPostsModel.paging.pageCount) {
+      page = this.getPostsModel.paging.pageCount;
+    }
+    this.getPosts(page, 8, 'all', '', '', '');
+  }
   banPost(postId: string) {
     this.postService.banPost(postId).subscribe({
       next: () => {
@@ -152,6 +161,19 @@ export class AdminConsoleComponent implements OnInit {
         this.popupTitle = 'Failed to ban posts!';
         this.popupMessage =
           'Something went wrong while banning post, please try again later!';
+        this.showIt = true;
+      },
+    });
+  }
+  approvePost(postId: string) {
+    this.postService.approvePost(postId).subscribe({
+      next: () => {
+        this.getPosts(1, 8, 'all', '', '', '');
+      },
+      error: () => {
+        this.popupTitle = 'Failed to approve posts!';
+        this.popupMessage =
+          'Something went wrong while approving post, please try again later!';
         this.showIt = true;
       },
     });

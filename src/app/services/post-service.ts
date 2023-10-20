@@ -152,4 +152,12 @@ export class PostService {
       { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
     );
   }
+  approvePost(postId: string) {
+    const token = sessionStorage.getItem('token');
+    return this.http.post(
+      environment.BASE_URL + '/post/approve-post?postId=' + postId,
+      null,
+      { headers: { Authorization: 'Bearer ' + token }, responseType: 'text' }
+    );
+  }
 }

@@ -186,6 +186,52 @@ textarea {
     font-family: "Itim", cursive;
 }
 
+.page-select {
+    float: right;
+    margin-top: 1vh;
+    font-size: 1.5em;
+}
+
+.page-select button {
+    font-family: "Itim", cursive;
+    height: fit-content;
+    color: var(--dark-color);
+    font-size: 0.7em;
+    border: 2px solid var(--dark-color);
+    border-radius: 5px;
+    background-color: var(--light-color);
+    text-align: center;
+    margin: 3px;
+    margin-top: -3px;
+}
+
+.page-select button:hover {
+    cursor: pointer;
+}
+
+.page-select button:disabled {
+    color: var(--mid-color);
+}
+
+.page-select input {
+    font-size: 0.75em;
+    width: 1vw;
+    padding: 0;
+    margin: 3px;
+    text-align: center;
+    color: var(--dark-color);
+    border: 2px solid var(--dark-color);
+    border-radius: 5px;
+    background: none;
+    font-family: "Itim", cursive;
+}
+
+.page-select input::-webkit-outer-spin-button,
+.page-select input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 @media only screen and (max-width: 768px) {
     .innerDiv {
         width: 95vw;

@@ -340,6 +340,7 @@ export class CreatePageComponent implements OnInit, OnDestroy {
     this.fileService.uploadFiles(formData).subscribe({
       next: () => {
         this.getUserUrls();
+        this.selectedFiles = [];
       },
       error: (error) => {
         console.error(error);

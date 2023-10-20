@@ -93,13 +93,47 @@
                 <button (click)="banPost(post.postInfo.id)">Ban</button>
               </td>
               <td *ngIf="post.postInfo.adminStatus === 'review'">
-                <button (click)="banPost(post.postInfo.id)">Approve</button>
+                <button (click)="approvePost(post.postInfo.id)">Approve</button>
               </td>
               <td *ngIf="post.postInfo.adminStatus === 'banned'">
                 <button (click)="unbanPost(post.postInfo.id)">Unban</button>
               </td>
             </tr>
           </table>
+          <div class="page-select">
+      <a>Page: </a>
+      <button
+        disabled
+        *ngIf="getPostsModel.paging.curPage === 1"
+        (click)="getPostPage(getPostsModel.paging.curPage - 1)"
+      >
+        Previous
+      </button>
+      <button
+        *ngIf="getPostsModel.paging.curPage !== 1"
+        (click)="getPostPage(getPostsModel.paging.curPage - 1)"
+      >
+        Previous
+      </button>
+      <input
+        type="number"
+        [(ngModel)]="getPostsModel.paging.curPage"
+        (change)="getPostPage(getPostsModel.paging.curPage)"
+      /><span>of {{ getPostsModel.paging.pageCount }}</span>
+      <button
+        disabled
+        *ngIf="getPostsModel.paging.curPage === getPostsModel.paging.pageCount"
+        (click)="getPostPage(getPostsModel.paging.curPage + 1)"
+      >
+        Next
+      </button>
+      <button
+        *ngIf="getPostsModel.paging.curPage !== getPostsModel.paging.pageCount"
+        (click)="getPostPage(getPostsModel.paging.curPage + 1)"
+      >
+        Next
+      </button>
+    </div>
         </div>
       </div>
       <div *ngIf="activeCategories">
