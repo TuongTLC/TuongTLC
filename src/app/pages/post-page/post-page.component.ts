@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
@@ -15,6 +15,7 @@ import { PostService } from 'src/app/services/post-service';
   selector: 'app-post-page',
   templateUrl: './post-page.component.html',
   styleUrls: ['./post-page.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PostPageComponent implements OnInit {
   constructor(

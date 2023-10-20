@@ -65,6 +65,10 @@
   overflow: scroll;
 }
 
+.innerDiv::-webkit-scrollbar {
+  display: none;
+}
+
 .editor {
   font-family: none;
   float: left;
@@ -76,9 +80,8 @@
   border-radius: 5px;
 }
 
-.innerDiv::-webkit-scrollbar {
-  display: none;
-}
+
+
 
 .para {
   margin: 0 auto;
@@ -141,19 +144,6 @@ textarea {
   border-radius: 5px;
 }
 
-.create-header a {
-  color: var(--dark-color);
-  font-size: 2em;
-  cursor: pointer;
-  padding-left: 2vw;
-  padding-right: 2vw;
-}
-
-.create-header a:hover {
-  background-color: var(--dark-color);
-  color: var(--text-color);
-  border-radius: 12px;
-}
 
 select::-ms-expand {
   display: none;

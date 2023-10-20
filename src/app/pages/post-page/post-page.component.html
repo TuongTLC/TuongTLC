@@ -53,7 +53,7 @@
     </div>
     <div class="post-sum">{{ getPostModel.postInfo.summary }}</div>
     <div class="post-content">
-      <p [innerHTML]="getPostModel.postInfo.content | sanitizeHtml"></p>
+      <div class="post-content-container" [innerHTML]="getPostModel.postInfo.content | sanitizeHtml"></div>
     </div>
     <div class="comment-section">
       <!-- Comment section -->

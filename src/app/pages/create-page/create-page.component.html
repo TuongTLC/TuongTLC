@@ -99,8 +99,13 @@
         <form [formGroup]="form">
           <div>
             <h1 style="text-align: center; font-family: Itim">Post content</h1>
-            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
-            </ngx-editor-menu>
+            <div>
+              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+              </ngx-editor-menu>
+            </div>
+            <ngx-editor-floating-menu
+              [editor]="editor"
+            ></ngx-editor-floating-menu>
             <ngx-editor [editor]="editor" formControlName="editorContent">
             </ngx-editor>
           </div>
