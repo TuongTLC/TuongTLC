@@ -53,7 +53,10 @@
     </div>
     <div class="post-sum">{{ getPostModel.postInfo.summary }}</div>
     <div class="post-content">
-      <div class="post-content-container" [innerHTML]="getPostModel.postInfo.content | sanitizeHtml"></div>
+      <div
+        class="post-content-container"
+        [innerHTML]="getPostModel.postInfo.content | sanitizeHtml"
+      ></div>
     </div>
     <div class="comment-section">
       <!-- Comment section -->
@@ -182,9 +185,9 @@
         </div>
         <div class="related-post-info">
           <div class="related-post-name">
-            <a (click)="showPost(post.postInfo.id)" aria-hidden="true">{{
-              post.postInfo.postName
-            }}</a>
+            <a (click)="showPost(post.postInfo.id)" aria-hidden="true">
+              {{ post.postInfo.postName }}
+            </a>
           </div>
           <div class="related-post-sum">
             <p>{{ post.postInfo.summary }}</p>
