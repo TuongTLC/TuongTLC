@@ -174,7 +174,6 @@ a {
   background-color: none;
   color: var(--dark-color);
   white-space: break-spaces;
-  background-color: bisque;
 }
 
 .related-post-name:hover {
@@ -187,7 +186,6 @@ a {
   height: fit-content;
   font-size: 1em;
   white-space: break-spaces;
-  background-color: antiquewhite;
 }
 
 .related-post-cate {
