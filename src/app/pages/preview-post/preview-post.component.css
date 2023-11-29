@@ -134,9 +134,10 @@ img:hover {
 }
 
 .admin-action button {
-    border: 1px solid var(--dark-color);
+  float: right;
+    border: 2px solid var(--dark-color);
     border-radius: 5px;
-    margin-left: 1vw;
+    margin-right: 1vw;
     background-color: var(--light-color);
     cursor: pointer;
     min-width: fit-content;
