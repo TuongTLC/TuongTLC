@@ -5,9 +5,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
+
     margin: 0;
     padding: 0;
     font-family: "Itim", cursive;
@@ -19,8 +17,10 @@
     color: var(--text-color);
     height: fit-content;
     max-height: 80vh;
-    width: 60%;
+    width: fit-content;
     margin-top: 10vh;
+    padding-left: 1vw;
+    padding-right: 1vw;
     border: solid white 5px;
     border-radius: 15px;
     overflow: scroll;
@@ -214,6 +214,8 @@ textarea {
 }
 
 .page-select input {
+    width: fit-content;
+    height: fit-content;
     font-size: 0.75em;
     width: 1vw;
     padding: 0;
@@ -276,5 +278,9 @@ textarea {
 
     .cate-tag-update textarea {
         width: 50vw;
+    }
+
+    .page-select input {
+        width: 6vw;
     }
 }

@@ -7,6 +7,7 @@
       type="ball-spin"
       [fullScreen]="false"
     ></ngx-spinner>
+    <div><h1>Preview</h1></div>
     <div class="post-name">{{ getPostModel.postInfo.postName }}</div>
     <div class="post-info">
       <div class="post-stat">{{ getPostModel.postInfo.author.fullname }}</div>
@@ -52,6 +53,31 @@
     <div class="post-sum">{{ getPostModel.postInfo.summary }}</div>
     <div class="post-content">
       <p [innerHTML]="getPostModel.postInfo.content | sanitizeHtml"></p>
+    </div>
+    <div class="admin-action">
+      <button
+        style="color: green"
+        *ngIf="getPostModel.postInfo.adminStatus === 'review'"
+        (click)="approvePost(getPostModel.postInfo.id)"
+      >
+        Approve
+      </button>
+      <button
+        style="color: red"
+        *ngIf="
+          getPostModel.postInfo.adminStatus === 'review' ||
+          getPostModel.postInfo.adminStatus === 'approved'
+        "
+        (click)="banPost(getPostModel.postInfo.id)"
+      >
+        Ban
+      </button>
+      <button
+        *ngIf="getPostModel.postInfo.adminStatus === 'banned'"
+        (click)="unbanPost(getPostModel.postInfo.id)"
+      >
+        Unban
+      </button>
     </div>
   </div>
 </div>

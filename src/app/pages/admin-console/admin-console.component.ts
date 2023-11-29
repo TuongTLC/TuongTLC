@@ -158,7 +158,7 @@ export class AdminConsoleComponent implements OnInit {
         this.getPosts(1, 8, 'all', '', '', '');
       },
       error: () => {
-        this.popupTitle = 'Failed to ban posts!';
+        this.popupTitle = 'Failed to ban post!';
         this.popupMessage =
           'Something went wrong while banning post, please try again later!';
         this.showIt = true;
@@ -171,7 +171,7 @@ export class AdminConsoleComponent implements OnInit {
         this.getPosts(1, 8, 'all', '', '', '');
       },
       error: () => {
-        this.popupTitle = 'Failed to approve posts!';
+        this.popupTitle = 'Failed to approve post!';
         this.popupMessage =
           'Something went wrong while approving post, please try again later!';
         this.showIt = true;
@@ -184,7 +184,7 @@ export class AdminConsoleComponent implements OnInit {
         this.getPosts(1, 8, 'all', '', '', '');
       },
       error: () => {
-        this.popupTitle = 'Failed to unban posts!';
+        this.popupTitle = 'Failed to unban post!';
         this.popupMessage =
           'Something went wrong while unbanning post, please try again later!';
         this.showIt = true;

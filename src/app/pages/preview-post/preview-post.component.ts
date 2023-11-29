@@ -45,4 +45,43 @@ export class PreviewPostComponent implements OnInit {
       },
     });
   }
+  banPost(postId: string) {
+    this.postService.banPost(postId).subscribe({
+      next: () => {
+        this.getPost(this.postId);
+      },
+      error: () => {
+        this.popupTitle = 'Failed to ban post!';
+        this.popupMessage =
+          'Something went wrong while banning post, please try again later!';
+        this.showIt = true;
+      },
+    });
+  }
+  approvePost(postId: string) {
+    this.postService.approvePost(postId).subscribe({
+      next: () => {
+        this.getPost(this.postId);
+      },
+      error: () => {
+        this.popupTitle = 'Failed to approve post!';
+        this.popupMessage =
+          'Something went wrong while approving post, please try again later!';
+        this.showIt = true;
+      },
+    });
+  }
+  unbanPost(postId: string) {
+    this.postService.unbanPost(postId).subscribe({
+      next: () => {
+        this.getPost(this.postId);
+      },
+      error: () => {
+        this.popupTitle = 'Failed to unban post!';
+        this.popupMessage =
+          'Something went wrong while unbanning post, please try again later!';
+        this.showIt = true;
+      },
+    });
+  }
 }
