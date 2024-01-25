@@ -138,7 +138,6 @@ a {
 
 .post-cells {
   width: 30vw;
-  height: 10vh;
   min-height: fit-content;
   background-color: var(--light-color);
   margin: 0.5%;
