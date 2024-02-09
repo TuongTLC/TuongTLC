@@ -16,7 +16,7 @@
           ><img
             src="/assets//like.png"
             alt="like"
-            style="height: 1.75vh"
+            style="height: 1.75vh; min-height: 10px"
             aria-hidden="true"
             (click)="likePost()"
           />
@@ -26,7 +26,7 @@
           <img
             src="/assets//dislike.png"
             alt="dislike"
-            style="height: 1.75vh; margin-left: 0.5vw"
+            style="height: 1.75vh; margin-left: 0.5vw; min-height: 10px"
             aria-hidden="true"
             (click)="dislikePost()"
           />
@@ -46,7 +46,7 @@
         ><img
           src="/assets//tag.png"
           alt="tag"
-          style="height: 1vh; margin-left: 0.5vw"
+          style="height: 1vh; margin-left: 0.5vw; min-height: 10px"
         />
         {{ t.tagName }}
       </a>

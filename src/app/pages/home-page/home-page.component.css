@@ -18,7 +18,7 @@
   color: var(--text-color);
   height: 90vh;
   width: 80%;
-  margin-top: 8vh;
+  margin-top: min(8vh);
   border: solid white 5px;
   border-radius: 15px;
   flex-direction: column;
@@ -30,16 +30,19 @@
 .innerDiv::-webkit-scrollbar {
   display: none;
 }
+
 .select-category {
   color: var(--dark-color);
   height: 6vh;
   margin-left: auto;
-  margin-top: 1vh;
+  margin-top: 0.5vh;
   width: 100%;
 }
+
 .select-category a {
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
+
 .select-category-box {
   float: right;
   width: fit-content;
@@ -49,10 +52,11 @@
   border-radius: 5px;
   background-color: var(--light-color);
 }
+
 .select-category-box select {
   display: inline-block;
   box-sizing: border-box;
-  padding: 0.5em 2em 0.5em 0.5em;
+  padding: 0.5em 0.5em 0.5em 0.5em;
   border: 1px solid var(--dark-color);
   border-radius: 5px;
   font: inherit;
@@ -67,6 +71,7 @@
   background-position: right 15px top 1em, right 10px top 1em;
   background-size: 5px 5px, 5px 5px;
 }
+
 .search-post-box {
   float: left;
   width: fit-content;
@@ -77,37 +82,45 @@
   background-color: var(--light-color);
   margin-left: 1vw;
 }
+
 .search-post-box input {
   border: 1px solid var(--dark-color);
   border-radius: 5px;
-  height: 3vh;
+  height: 4vh;
+  min-height: 30px;
   font-family: "Itim", cursive;
   font-size: 1em;
   width: 10vw;
 }
+
 .search-post-box button {
   border: 1px solid var(--dark-color);
   border-radius: 5px;
   height: 3vh;
+  min-height: 30px;
   color: var(--dark-color);
   background-color: var(--light-color);
   font-family: "Itim", cursive;
   font-size: 1em;
   margin-left: 0.5vw;
 }
+
 .search-post-box button:disabled {
   color: var(--mid-color);
   border: 1px solid var(--mid-color);
 }
+
 .search-post-box button:hover {
   cursor: pointer;
 }
+
 .post-grid {
   width: 100%;
   height: fit-content;
   float: left;
   background-color: var(--light-color);
 }
+
 .post-cell {
   height: fit-content;
   width: 48%;
@@ -117,30 +130,37 @@
   margin-bottom: 0.75%;
   border-radius: 5px;
 }
+
 .post-img {
   height: fit-content;
   float: left;
   width: auto;
   margin: 1%;
 }
+
 .post-img img {
   height: 17vh;
   width: 10vw;
+  min-height: 150px;
   border-radius: 5px;
 }
+
 .post-img:hover {
   cursor: pointer;
 }
+
 .post-info {
   height: fit-content;
   width: 27vw;
   float: left;
 }
+
 .page-select {
   float: right;
   margin-top: 1vh;
   font-size: 1.5em;
 }
+
 .page-select button {
   font-family: "Itim", cursive;
   height: fit-content;
@@ -153,12 +173,15 @@
   margin: 3px;
   margin-top: -3px;
 }
+
 .page-select button:hover {
   cursor: pointer;
 }
+
 .page-select button:disabled {
   color: var(--mid-color);
 }
+
 .page-select input {
   font-size: 0.75em;
   width: 1vw;
@@ -171,46 +194,63 @@
   background: none;
   font-family: "Itim", cursive;
 }
+
 .page-select input::-webkit-outer-spin-button,
 .page-select input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 .post-name {
   font-size: 1.75em;
   color: var(--dark-color);
   margin-right: 0.5vw;
 }
+
 .post-name:hover {
   color: var(--light-color);
   cursor: pointer;
 }
+
 .post-category {
   color: var(--dark-color);
   margin: 0;
   padding: 0;
 }
+
 .post-category:hover {
   color: var(--light-color);
   cursor: pointer;
 }
+
 .post-tag {
   margin: 0;
   padding: 0;
 }
+
 .post-tag:hover {
   color: var(--dark-color);
   cursor: pointer;
 }
+
 .post-sum {
   margin: 0;
   padding: 0;
 }
+
+@media only screen and (max-height: 700px) {
+  .innerDiv {
+    margin-top: 26vh;
+    height: 74vh;
+  }
+}
+
 @media only screen and (max-width: 768px) {
   .innerDiv {
     width: 98vw;
     margin-top: 5vh;
   }
+
   .search-post-box {
     width: 98%;
     margin: 0;
@@ -218,14 +258,17 @@
     border-radius: 0;
     text-align: center;
   }
+
   .search-post-box input {
     width: 50vw;
     height: 5vh;
   }
+
   .search-post-box button {
     width: 30vw;
     height: 5.5vh;
   }
+
   .select-category-box {
     border-radius: 0;
     width: 98%;
@@ -236,6 +279,7 @@
     padding: 1%;
     text-align: center;
   }
+
   .post-cell {
     width: 98%;
   }
@@ -245,6 +289,7 @@
     width: 100%;
     text-align: center;
   }
+
   .post-img img {
     height: auto;
     width: auto;
@@ -260,12 +305,15 @@
     float: left;
     margin: 2%;
   }
+
   .post-name {
     font-size: 2.5em;
   }
+
   .post-category {
     font-size: 1.25em;
   }
+
   .page-select input {
     width: 5vw;
   }
