@@ -6,7 +6,6 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
@@ -14,16 +13,17 @@
 }
 
 .innerDiv {
+  margin: auto;
   background-color: var(--mid-color);
   color: var(--text-color);
   height: calc(100vh - 70px);
+  min-height: 70vh;
   width: 80%;
-  margin-top: 50px;
+  margin-top: 60px;
   border: solid white 5px;
-  border-radius: 15px;
   flex-direction: column;
+  border-radius: 15px;
   flex-wrap: wrap;
-  position: relative;
   overflow-y: scroll;
 }
 
@@ -70,6 +70,40 @@
     linear-gradient(135deg, currentColor 50%, transparent 50%);
   background-position: right 15px top 1em, right 10px top 1em;
   background-size: 5px 5px, 5px 5px;
+}
+
+.filter {
+  float: right;
+  width: fit-content;
+  height: fit-content;
+  padding: 5px;
+  margin-right: 1vw;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.filter button {
+  border: 1px solid var(--dark-color);
+  border-radius: 5px;
+  color: var(--dark-color);
+  font-family: "Itim", cursive;
+  margin-top: 1px;
+  background-color: var(--light-color);
+  font-size: 1em;
+  text-align: center;
+}
+
+.open-filter {
+  height: 4vh;
+  min-height: fit-content;
+  width: 6vw;
+  min-width: fit-content;
+  border: 1px solid var(--dark-color);
+  border-radius: 5px;
+  color: var(--dark-color);
+  font-family: "Itim", cursive;
+  background-color: var(--light-color);
+  text-align: center;
 }
 
 .search-post-box {
@@ -226,6 +260,16 @@
 .post-tag {
   margin: 0;
   padding: 0;
+  border: none;
+  background-color: transparent;
+  font-family: "Itim", cursive;
+  color: var(--light-color);
+  font-size: 1em;
+}
+
+.post-tag img {
+  height: 1.5vh;
+  margin-left: 0.5vw
 }
 
 .post-tag:hover {
@@ -248,6 +292,13 @@
   .innerDiv {
     width: 98vw;
     margin-top: 55px;
+    height: fit-content;
+    max-height: calc(100vh - 70px);
+  }
+
+  .filter {
+    width: 98%;
+    margin: 0;
   }
 
   .search-post-box {
@@ -271,7 +322,6 @@
   .select-category-box {
     border-radius: 0;
     width: 98%;
-    float: left;
     margin: 0;
     margin-top: 1vh;
     margin-bottom: 1vh;
@@ -311,6 +361,10 @@
 
   .post-category {
     font-size: 1.25em;
+  }
+
+  .post-tag img {
+    height: 2vh;
   }
 
   .page-select input {

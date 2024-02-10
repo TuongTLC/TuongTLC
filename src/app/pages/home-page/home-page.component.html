@@ -19,18 +19,35 @@
         </button>
         <button *ngIf="!checkSearch()" disabled>Search</button>
       </div>
-      <div class="select-category-box">
-        <a>Category: </a>
-        <select
-          [(ngModel)]="selectedCategory"
-          (ngModelChange)="getPostByCategory()"
-        >
-          <option hidden value="" disabled>Select category</option>
-          <option *ngFor="let cate of categories" [ngValue]="cate">
-            {{ cate.categoryName }}
-          </option>
-          <option value="all">All</option>
-        </select>
+      <div class="filter" *ngIf="!filterOpen">
+        <button (click)="filterAction(true)" class="open-filter">Filter</button>
+      </div>
+      <div *ngIf="filterOpen">
+        <div class="filter">
+          <button (click)="filterAction(false)">Close</button><br />
+          <button (click)="clearFilter()">Clear filter</button>
+        </div>
+        <div class="select-category-box">
+          <a>Tag: </a>
+          <select [(ngModel)]="selectedTag" (ngModelChange)="filterPost()">
+            <option hidden value="" disabled>Select tag</option>
+            <option *ngFor="let tag of tags" [ngValue]="tag">
+              {{ tag.tagName }}
+            </option>
+            <option value="all">All</option>
+          </select>
+          <br />
+        </div>
+        <div class="select-category-box">
+          <a>Category: </a>
+          <select [(ngModel)]="selectedCategory" (ngModelChange)="filterPost()">
+            <option hidden value="" disabled>Select category</option>
+            <option *ngFor="let cate of categories" [ngValue]="cate">
+              {{ cate.categoryName }}
+            </option>
+            <option value="all">All</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="post-grid">
@@ -55,14 +72,10 @@
           ><br />
           <p class="post-sum">{{ post.postInfo.summary }}</p>
           <br />
-          <a class="post-tag" *ngFor="let t of post.postTags"
-            ><img
-              src="/assets//tag.png"
-              alt="tag"
-              style="height: 1vh; margin-left: 0.5vw"
-            />
+          <button class="post-tag" *ngFor="let t of post.postTags">
+            <img src="/assets//tag.png" alt="tag" />
             {{ t.tagName }}
-          </a>
+          </button>
           <div style="float: right">
             <a>{{ post.postInfo.createDate | date : "HH:mm d-MMM" }}</a
             ><br />
