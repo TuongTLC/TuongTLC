@@ -16,9 +16,9 @@
 .innerDiv {
   background-color: var(--mid-color);
   color: var(--text-color);
-  height: 90vh;
+  height: calc(100vh - 70px);
   width: 80%;
-  margin-top: min(8vh);
+  margin-top: 50px;
   border: solid white 5px;
   border-radius: 15px;
   flex-direction: column;
@@ -238,17 +238,16 @@
   padding: 0;
 }
 
-@media only screen and (max-height: 700px) {
+@media only screen and (max-height: 650px) {
   .innerDiv {
-    margin-top: 26vh;
-    height: 74vh;
+    margin-top: 60px;
   }
 }
 
 @media only screen and (max-width: 768px) {
   .innerDiv {
     width: 98vw;
-    margin-top: 5vh;
+    margin-top: 55px;
   }
 
   .search-post-box {

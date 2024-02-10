@@ -22,9 +22,9 @@ a {
 .innerDiv {
   background-color: var(--mid-color);
   color: var(--black-color);
-  height: 90vh;
+  height: calc(100vh - 70px);
   width: 80%;
-  margin-top: 8vh;
+  margin-top: 50px;
   border: solid white 5px;
   border-radius: 15px;
   flex-direction: column;
@@ -332,6 +332,7 @@ img:hover {
 @media only screen and (max-width: 768px) {
   .innerDiv {
     width: 98vw;
+    margin-top: 55px;
   }
 
   .post-content {
