@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopupModalComponent } from './components/popup-modal/popup-modal.component';
 import { PasswordPageComponent } from './pages/password-page/password-page.component';
 import { UserInfoPageComponent } from './pages/user-info-page/user-info-page.component';
-import { NgxEditorModule } from 'ngx-editor';
 import { SanitizeHtmlPipes } from './sanitizer';
 import { CreatePageComponent } from './pages/create-page/create-page.component';
 import { ClipboardModule } from 'ngx-clipboard';
@@ -25,6 +24,7 @@ import { EditPostPageComponent } from './pages/edit-post-page/edit-post-page.com
 import { AdminConsoleComponent } from './pages/admin-console/admin-console.component';
 import { PreviewPostComponent } from './pages/preview-post/preview-post.component';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -49,11 +49,11 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
     VerifyEmailComponent,
   ],
   imports: [
+    QuillModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxEditorModule,
     ReactiveFormsModule,
     ClipboardModule,
     NgxSpinnerModule,

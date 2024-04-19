@@ -115,6 +115,7 @@ a {
 .post-content-container {
   margin: 0 auto;
   width: fit-content;
+  font-family: initial;
 }
 
 .related-posts {

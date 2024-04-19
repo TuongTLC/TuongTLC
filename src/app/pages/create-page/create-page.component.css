@@ -86,8 +86,10 @@
   border-radius: 5px;
 }
 
-
-
+.quillEditor {
+  width: 98%;
+  padding: 1%;
+}
 
 .para {
   margin: 0 auto;

@@ -103,15 +103,16 @@
         </div>
       </div>
       <div class="editor">
-        <form [formGroup]="form">
-          <div>
-            <h1 style="text-align: center; font-family: Itim">Post content</h1>
-            <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
-            </ngx-editor-menu>
-            <ngx-editor [editor]="editor" formControlName="editorContent">
-            </ngx-editor>
-          </div>
-        </form>
+        <div>
+          <h1 style="text-align: center; font-family: Itim">Post content</h1>
+          <quill-editor
+            class="quillEditor"
+            (onEditorChanged)="editorChange($event)"
+            [ngModel]="getPostModel.postInfo.content"
+            [placeholder]="'Enter your text here...'"
+          >
+          </quill-editor>
+        </div>
       </div>
       <div class="savePostBtns">
         <button (click)="update()" class="savePostBtn">Save post</button>

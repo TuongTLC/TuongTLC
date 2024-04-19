@@ -96,20 +96,16 @@
         </div>
       </div>
       <div class="editor">
-        <form [formGroup]="form">
-          <div>
-            <h1 style="text-align: center; font-family: Itim">Post content</h1>
-            <div>
-              <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
-              </ngx-editor-menu>
-            </div>
-            <ngx-editor-floating-menu
-              [editor]="editor"
-            ></ngx-editor-floating-menu>
-            <ngx-editor [editor]="editor" formControlName="editorContent">
-            </ngx-editor>
-          </div>
-        </form>
+        <div>
+          <h1 style="text-align: center; font-family: Itim">Post content</h1>
+          <quill-editor
+            class="quillEditor"
+            (onEditorChanged)="editorChange($event)"
+            [ngModel]="editorData"
+            [placeholder]="'Enter your text here...'"
+          >
+          </quill-editor>
+        </div>
       </div>
       <div class="savePostBtns">
         <button (click)="loadDraft()" class="savePostBtn">Load draft</button>

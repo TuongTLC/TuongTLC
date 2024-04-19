@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {
@@ -23,7 +23,8 @@ export class PostPageComponent implements OnInit {
     private postCommentService: PostCommentService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private renderer: Renderer2
   ) {}
   postHidden = false;
   showIt = false;
@@ -35,6 +36,7 @@ export class PostPageComponent implements OnInit {
   userInfo = new UserModel();
   postId = '';
   ngOnInit(): void {
+    this.renderer.setProperty;
     this.route.queryParams.subscribe((params) => {
       this.postId = params['postId'];
     });

@@ -1,8 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ClipboardService } from 'ngx-clipboard';
-import { Editor, Toolbar, Validators, toDoc, toHTML } from 'ngx-editor';
+import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { timer } from 'rxjs';
 import { CategoryModel } from 'src/app/models/category-models';
@@ -45,19 +44,8 @@ export class EditPostPageComponent implements OnInit {
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: any;
-  editor!: Editor;
-  toolbar: Toolbar = [
-    ['bold', 'italic'],
-    ['underline', 'strike'],
-    ['code', 'blockquote'],
-    ['ordered_list', 'bullet_list'],
-    [{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
-    ['link', 'image'],
-    ['text_color', 'background_color'],
-    ['align_left', 'align_center', 'align_right', 'align_justify'],
-  ];
+
   ngOnInit(): void {
-    this.editor = new Editor();
     this.route.queryParams.subscribe((params) => {
       this.postId = params['postId'];
     });
@@ -68,13 +56,6 @@ export class EditPostPageComponent implements OnInit {
     this.getCategories();
     this.getTags();
     this.getPost(this.postId);
-
-    this.form = new FormGroup({
-      editorContent: new FormControl(
-        toDoc(this.getPostModel.postInfo.content),
-        Validators.required()
-      ),
-    });
   }
   getPostModel = new PostModel();
   getPost(postId: string) {
@@ -82,9 +63,6 @@ export class EditPostPageComponent implements OnInit {
     this.postService.getPost(postId).subscribe({
       next: (res) => {
         this.getPostModel = res;
-        this.form
-          .get('editorContent')
-          .setValue(toDoc(this.getPostModel.postInfo.content));
         this.categories.forEach((cate) => {
           this.getPostModel.postCategories.forEach((cateLoaded) => {
             if (cate.id == cateLoaded.id) {
@@ -244,7 +222,6 @@ export class EditPostPageComponent implements OnInit {
       this.updateModel.id = this.postId;
       this.updateModel.postName = this.getPostModel.postInfo.postName;
       this.updateModel.summary = this.getPostModel.postInfo.summary;
-      this.updateModel.content = toHTML(this.form.get('editorContent').value);
       this.updateModel.thumbnail = this.getPostModel.postInfo.thumbnail;
       this.updateModel.categoriesIds = [];
       this.updateModel.tagsIds = [];
@@ -270,7 +247,9 @@ export class EditPostPageComponent implements OnInit {
       });
     }
   }
-
+  editorChange(event: EditorChangeContent | EditorChangeSelection) {
+    this.updateModel.content = event['editor']['root']['innerHTML'];
+  }
   postNameError = false;
   postSummaryError = false;
   postThumbnailError = false;

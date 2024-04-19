@@ -23,8 +23,9 @@
     "jwt-decode": "^3.1.2",
     "ng": "^0.0.0",
     "ngx-clipboard": "^16.0.0",
-    "ngx-editor": "^16.0.1",
+    "ngx-quill": "^25.3.1",
     "ngx-spinner": "^16.0.2",
+    "quill": "^2.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
