@@ -40,6 +40,7 @@ export class HomePageComponent implements OnInit {
     this.searchPostStatus = false;
     this.searchPostName = '';
     this.getPosts(1, 8, 'active', 'approved', '', '');
+    this.filterAction(false);
   }
   filterAction(action: boolean) {
     this.filterOpen = action;

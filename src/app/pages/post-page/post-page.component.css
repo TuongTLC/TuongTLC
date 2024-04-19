@@ -1,12 +1,10 @@
 .background {
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0;
   padding: 0;
 }
@@ -20,16 +18,14 @@ a {
 }
 
 .innerDiv {
+  margin: auto;
   background-color: var(--mid-color);
   color: var(--black-color);
-  height: calc(100vh - 70px);
+  height: 92vh;
   width: 80%;
-  margin-top: 50px;
+  margin-top: 8vh;
   border: solid white 5px;
   border-radius: 15px;
-  flex-direction: column;
-  flex-wrap: wrap;
-  position: relative;
   overflow-y: scroll;
   background-color: var(--light-color);
 }

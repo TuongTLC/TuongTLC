@@ -5,20 +5,16 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0;
   padding: 0;
   font-family: "Itim", cursive;
 }
 
 .postInfo {
-  padding: -50px;
   height: 60vh;
   width: 50%;
+  overflow-y: scroll;
   float: left;
-  overflow: scroll;
   background-color: var(--light-color);
   outline: 2px solid var(--dark-color);
   outline-offset: -2px;
@@ -41,6 +37,15 @@
   border-radius: 5px;
 }
 
+.upload input[type="file"]::-webkit-file-upload-button {
+  height: 100%;
+  font-family: "Itim", cursive;
+  border: solid var(--dark-color) 1px;
+  border-radius: 5px;
+  background-color: var(--light-color);
+}
+
+
 .upload::-webkit-scrollbar {
   display: none;
 }
@@ -55,11 +60,12 @@
 }
 
 .innerDiv {
+  margin: auto;
   background-color: var(--mid-color);
   color: var(--text-color);
   height: 90vh;
   width: 80%;
-  margin-top: 6vh;
+  margin-top: 8vh;
   border: solid white 5px;
   border-radius: 15px;
   overflow: scroll;
