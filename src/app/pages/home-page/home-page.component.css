@@ -38,6 +38,11 @@
 }
 
 .select-category a {
+  margin: 0;
+  padding: 0;
+}
+
+.select-category a {
   font-size: 1.2em;
 }
 
@@ -52,21 +57,12 @@
 }
 
 .select-category-box select {
+  border: solid var(--dark-color) 1px;
+  border-radius: 5px;
+  height: 3vh;
   font-family: "Itim", cursive;
-  background-color: var(--light-color);
   color: var(--dark-color);
-  padding: 12px;
-  height: 2vh;
-  width: fit-content;
-  border: none;
-  font-size: 20px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
-  -webkit-appearance: button;
-  appearance: button;
-  outline: none;
 }
-
-
 
 .filter {
   float: right;
@@ -114,6 +110,7 @@
   border-radius: 5px;
   background-color: var(--light-color);
   margin-left: 1vw;
+  margin-bottom: .5vh;
 }
 
 .search-post-box input {

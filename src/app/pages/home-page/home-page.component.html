@@ -29,22 +29,20 @@
         <div class="select-category-box">
           <a>Tag: </a>
           <select [(ngModel)]="selectedTag" (ngModelChange)="filterPost()">
-            <option hidden value="" disabled>Select tag</option>
+            <option value="all" selected>All</option>
             <option *ngFor="let tag of tags" [ngValue]="tag">
               {{ tag.tagName }}
             </option>
-            <option value="all">All</option>
           </select>
           <br />
         </div>
         <div class="select-category-box">
           <a>Category: </a>
           <select [(ngModel)]="selectedCategory" (ngModelChange)="filterPost()">
-            <option hidden value="" disabled>Select category</option>
+            <option value="all" selected>All</option>
             <option *ngFor="let cate of categories" [ngValue]="cate">
               {{ cate.categoryName }}
             </option>
-            <option value="all">All</option>
           </select>
         </div>
       </div>
