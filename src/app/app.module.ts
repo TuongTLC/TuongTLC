@@ -13,7 +13,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopupModalComponent } from './components/popup-modal/popup-modal.component';
 import { PasswordPageComponent } from './pages/password-page/password-page.component';
 import { UserInfoPageComponent } from './pages/user-info-page/user-info-page.component';
-import { SanitizeHtmlPipes } from './sanitizer';
 import { CreatePageComponent } from './pages/create-page/create-page.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -39,7 +38,6 @@ import { QuillModule } from 'ngx-quill';
     PopupModalComponent,
     PasswordPageComponent,
     UserInfoPageComponent,
-    SanitizeHtmlPipes,
     CreatePageComponent,
     PostPageComponent,
     ListViewComponent,

@@ -52,7 +52,9 @@
     </div>
     <div class="post-sum">{{ getPostModel.postInfo.summary }}</div>
     <div class="post-content">
-      <p [innerHTML]="getPostModel.postInfo.content | sanitizeHtml"></p>
+      <quill-view-html
+        [content]="getPostModel.postInfo.content"
+      ></quill-view-html>
     </div>
     <div class="admin-action">
       <button
