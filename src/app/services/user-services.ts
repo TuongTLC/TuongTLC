@@ -81,9 +81,16 @@ export class UserService {
   }
   verifyCode(verifyModel: VerifyCodeModel) {
     return this.http.post(
-      environment.BASE_URL + '/user/verify-email',
+      environment.BASE_URL + '/user/verify-user',
       verifyModel,
       { responseType: 'text' }
+    );
+  }
+  sentNewOtpCode(username: string) {
+    return this.http.post(
+      environment.BASE_URL + '/user/sent-new-otp-code',
+      JSON.stringify(username),
+      { headers: { 'Content-Type': 'application/json' }, responseType: 'text' }
     );
   }
 }

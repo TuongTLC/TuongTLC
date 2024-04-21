@@ -11,6 +11,7 @@ import { UserService } from 'src/app/services/user-services';
 export class VerifyEmailComponent {
   constructor(private userService: UserService, private router: Router) {}
   @Input() closeShow = '0';
+  @Input() username: string = '';
 
   @Output() closeEvt = new EventEmitter<boolean>();
   action = true;
@@ -24,10 +25,14 @@ export class VerifyEmailComponent {
     this.action = false;
     this.closeEvt.emit(this.action);
   }
+  sentCodeOk() {
+    this.sentCode = false;
+  }
   verifyModel = new VerifyCodeModel();
   verified = false;
   verifyMessage = '';
   verifyCode() {
+    this.verifyModel.username = this.username;
     this.userService.verifyCode(this.verifyModel).subscribe({
       next: (res) => {
         this.verifyMessage = res;
@@ -35,6 +40,20 @@ export class VerifyEmailComponent {
       },
       error: (err) => {
         this.verifyMessage = err.error;
+      },
+    });
+  }
+  sendNewCodeMessage = '';
+  sentCode = false;
+  sendNewCode() {
+    this.userService.sentNewOtpCode(this.username).subscribe({
+      next: (res) => {
+        this.sendNewCodeMessage = res;
+        this.sentCode = true;
+      },
+      error: (err) => {
+        this.sendNewCodeMessage = err.error;
+        this.sentCode = true;
       },
     });
   }

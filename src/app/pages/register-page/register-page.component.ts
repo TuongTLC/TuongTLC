@@ -46,6 +46,7 @@ export class RegisterPageComponent {
 
     if (this.registerInfo.username.length <= 6) {
       this.validateUsernameError = true;
+      validateFailed = true;
     }
     const passwordRegex = new RegExp(
       '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$'
@@ -83,16 +84,9 @@ export class RegisterPageComponent {
       this.validateBirthdateError = true;
       validateFailed = true;
     }
-    console.log(this.registerInfo);
-    console.log('username: ' + this.validateUsernameError);
-    console.log('password: ' + this.validatePasswordError);
-    console.log('email: ' + this.validateEmailError);
-    console.log('fullname: ' + this.validateFullnameError);
-    console.log('phone: ' + this.validatePhoneError);
-    console.log('birthdate: ' + this.validateBirthdateError);
     return validateFailed;
   }
-
+  verify = false;
   register() {
     if (!this.validateRegister()) {
       this.userInfo = new UserModel();
@@ -125,7 +119,6 @@ export class RegisterPageComponent {
       this.router.navigate(['/login']);
     }
   }
-  verify = false;
   closePopup() {
     this.verify = false;
   }

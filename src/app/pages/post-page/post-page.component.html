@@ -53,9 +53,11 @@
     </div>
     <div class="post-sum">{{ getPostModel.postInfo.summary }}</div>
     <div class="post-content">
-      <quill-view-html
-        [content]="getPostModel.postInfo.content"
-      ></quill-view-html>
+      <div class="view-container">
+        <quill-view-html
+          [content]="getPostModel.postInfo.content"
+        ></quill-view-html>
+      </div>
     </div>
     <div class="comment-section">
       <!-- Comment section -->

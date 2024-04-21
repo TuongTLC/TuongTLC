@@ -1,13 +1,13 @@
 <div class="modal">
   <h1>Account verification</h1>
   <div *ngIf="!verified">
-    <p>Please use the code sent to your email to verify your account</p>
-
+    <p>Please enter the code sent to your email to verify your account.</p>
+    <!-- 
     <input
       [(ngModel)]="verifyModel.email"
       type="text"
       placeholder="Your email"
-    /><br />
+    /><br /> -->
     <input
       [(ngModel)]="verifyModel.code"
       type="text"
@@ -16,13 +16,20 @@
     <h2>{{ verifyMessage }}</h2>
     <div class="btn">
       <button type="button" (click)="verifyCode()">Verify</button>
+      <button type="button" (click)="sendNewCode()">Sent new code</button>
       <button type="button" (click)="cancel()">Close</button>
     </div>
   </div>
   <div *ngIf="verified">
-    <h2>Email verified.</h2>
+    <h2>User verified.</h2>
     <div class="btn">
       <button type="button" (click)="ok()">Ok</button>
+    </div>
+  </div>
+  <div *ngIf="sentCode">
+    <h2>{{ this.sendNewCodeMessage }}</h2>
+    <div class="btn">
+      <button type="button" (click)="sentCodeOk()">Ok</button>
     </div>
   </div>
 </div>

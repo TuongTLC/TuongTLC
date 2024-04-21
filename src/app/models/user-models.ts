@@ -46,5 +46,5 @@ export class ChangeUserStatusModel {
 }
 export class VerifyCodeModel {
   code = '';
-  email = '';
+  username = '';
 }

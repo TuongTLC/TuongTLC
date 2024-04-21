@@ -37,6 +37,7 @@ h2 {
 p {
     text-align: center;
     font-family: "Itim", cursive;
+    font-size: 1.5em;
 }
 
 button {
@@ -56,10 +57,12 @@ button {
 }
 
 input {
-    height: 3vh;
+    height: 8vh;
     width: 10vw;
     border: 1px solid var(--dark-color);
     border-radius: 5px;
     margin: 1% auto;
     text-align: center;
+    font-size: 1.5em;
+    font-family: "Itim", cursive;
 }

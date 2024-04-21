@@ -31,4 +31,9 @@
     </div>
   </div>
 </div>
-<app-verify-email *ngIf="verify" (closeEvt)="closePopup()"> </app-verify-email>
+<app-verify-email
+  [username]="loginInfo.username"
+  *ngIf="verify"
+  (closeEvt)="closePopup()"
+>
+</app-verify-email>

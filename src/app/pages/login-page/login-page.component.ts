@@ -39,7 +39,6 @@ export class LoginPageComponent {
     this.passwordEmpty = false;
     this.loginError = null;
     this.userInfo = new UserLoginResModel();
-
     if (this.validateLoginInfo() == false) {
       return;
     }

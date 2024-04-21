@@ -8,14 +8,18 @@
         placeholder="Username"
         [(ngModel)]="registerInfo.username"
       />
-      <p class="error" *ngIf="validateUsernameError">Username invalid!</p>
+      <p class="error" *ngIf="validateUsernameError">
+        Username must have atleast 7 character!
+      </p>
       <input
         name="password"
         type="password"
         placeholder="Password"
         [(ngModel)]="registerInfo.password"
       />
-      <p class="error" *ngIf="validatePasswordError">Password invalid!</p>
+      <p class="error" *ngIf="validatePasswordError">
+        Password mus have 1 upper case, 1 digit, 1 special character!
+      </p>
       <input
         name="repassword"
         type="password"
@@ -31,21 +35,23 @@
         placeholder="Email"
         [(ngModel)]="registerInfo.email"
       />
-      <p class="error" *ngIf="validateEmailError">Email invalid!</p>
+      <p class="error" *ngIf="validateEmailError">Email format invalid!</p>
       <input
         name="fullname"
         type="text"
         placeholder="Full name"
         [(ngModel)]="registerInfo.fullname"
       />
-      <p class="error" *ngIf="validateFullnameError">Full name invalid!</p>
+      <p class="error" *ngIf="validateFullnameError">
+        Full name must have atleast 6 character!
+      </p>
       <input
         name="phone"
         type="text"
         placeholder="Phone number"
         [(ngModel)]="registerInfo.phone"
       />
-      <p class="error" *ngIf="validatePhoneError">Phone invalid!</p>
+      <p class="error" *ngIf="validatePhoneError">Phone is 10 digit!</p>
       <input
         name="birthdate"
         type="text"
@@ -53,7 +59,9 @@
         [(ngModel)]="registerInfo.birthdate"
         onfocus="(this.type ='date')"
       />
-      <p class="error" *ngIf="validateBirthdateError">Birthdate invalid!</p>
+      <p class="error" *ngIf="validateBirthdateError">
+        You must be 7 or older!
+      </p>
       <br />
       <button class="loginBtn" routerLink="/login">
         <a>Back</a>
@@ -69,4 +77,9 @@
   >
   </app-popup-modal>
 </div>
-<app-verify-email *ngIf="verify" (closeEvt)="closePopup()"> </app-verify-email>
+<app-verify-email
+  *ngIf="verify"
+  (closeEvt)="closePopup()"
+  [username]="registerInfo.username"
+>
+</app-verify-email>

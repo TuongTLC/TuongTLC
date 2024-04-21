@@ -31,9 +31,8 @@
 
 .select-category {
   color: var(--dark-color);
-  height: 4vh;
+  height: 3vh;
   margin-left: auto;
-  margin-top: 0.5vh;
   width: 100%;
 }
 
@@ -50,15 +49,18 @@
   float: right;
   width: fit-content;
   height: fit-content;
-  padding: 5px;
+  padding: 3px;
   margin-right: 1vw;
   border-radius: 5px;
   background-color: var(--light-color);
+  margin-top: .5vh;
+
 }
 
 .select-category-box select {
   border: solid var(--dark-color) 1px;
   border-radius: 5px;
+  min-height: 30px;
   height: 3vh;
   font-family: "Itim", cursive;
   color: var(--dark-color);
@@ -68,10 +70,10 @@
   float: right;
   width: fit-content;
   height: fit-content;
-  padding: 3px;
   margin-right: 1vw;
   border-radius: 5px;
   text-align: center;
+  margin-top: .5vh;
 }
 
 .filter button {
@@ -82,24 +84,12 @@
   background-color: var(--light-color);
   font-size: 1em;
   text-align: center;
-  height: fit-content;
+  min-height: 30px;
+  height: 3vh;
   width: fit-content;
-  padding: 5px;
   padding-left: 15px;
   padding-right: 15px;
-}
-
-.open-filter {
-  height: 4vh;
-  min-height: fit-content;
-  width: 6vw;
-  min-width: fit-content;
-  border: 1px solid var(--dark-color);
-  border-radius: 5px;
-  color: var(--dark-color);
-  font-family: "Itim", cursive;
-  background-color: var(--light-color);
-  text-align: center;
+  margin: 0;
 }
 
 .search-post-box {
@@ -111,6 +101,7 @@
   background-color: var(--light-color);
   margin-left: 1vw;
   margin-bottom: .5vh;
+  margin-top: .5vh;
 }
 
 .search-post-box input {
