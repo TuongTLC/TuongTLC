@@ -50,8 +50,7 @@ export class HomePageComponent implements OnInit {
       next: (res) => {
         this.categories = res;
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -60,8 +59,7 @@ export class HomePageComponent implements OnInit {
       next: (res) => {
         this.tags = res;
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -88,9 +86,8 @@ export class HomePageComponent implements OnInit {
           this.getPostsModel = res;
           this.spinner.hide();
         },
-        error: (error) => {
+        error: () => {
           this.spinner.hide();
-          console.error(error);
         },
       });
   }

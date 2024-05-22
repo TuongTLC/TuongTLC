@@ -201,8 +201,7 @@ export class AdminConsoleComponent implements OnInit {
       next: (res) => {
         this.categoriesAdmin = res;
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -212,8 +211,7 @@ export class AdminConsoleComponent implements OnInit {
       next: (res) => {
         this.tagsAdmin = res;
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -286,7 +284,6 @@ export class AdminConsoleComponent implements OnInit {
       error: (error) => {
         this.popupTitle = 'Update error!';
         this.popupMessage = error.error;
-        console.log(error);
 
         this.showIt = true;
       },
@@ -341,8 +338,7 @@ export class AdminConsoleComponent implements OnInit {
   }
   changeTagStatus(id: string, status: boolean) {
     this.tagService.updateTagStatus(id, status).subscribe({
-      next: (res) => {
-        console.log(res);
+      next: () => {
         this.getTagsAdmin();
         this.popupTitle = 'Tag Updated!';
         this.popupMessage = 'Tag updated!';
@@ -351,7 +347,6 @@ export class AdminConsoleComponent implements OnInit {
       error: (error) => {
         this.popupTitle = 'Update error!';
         this.popupMessage = error.error;
-        console.log(error);
 
         this.showIt = true;
       },

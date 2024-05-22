@@ -126,23 +126,19 @@ export class CreatePageComponent implements OnInit {
     });
     if (!this.validatePost()) {
       this.postService.createPost(this.postModel).subscribe({
-        next: (res) => {
-          console.log(res);
+        next: () => {
           this.popupTitle = 'Post save successful!';
           this.popupMessage =
             'Your post have been save and will be reviewed by admin!';
           this.showIt = true;
           this.resetPostModel();
         },
-        error: (error) => {
+        error: () => {
           this.popupTitle = 'Post save failed!';
           this.popupMessage = 'Something happen while trying to save post!';
           this.showIt = true;
-          console.error(error);
         },
       });
-    } else {
-      console.error('Post invalid!');
     }
   }
   resetPostModel() {
@@ -204,8 +200,7 @@ export class CreatePageComponent implements OnInit {
       next: (res) => {
         this.categories = res;
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -216,8 +211,7 @@ export class CreatePageComponent implements OnInit {
         this.tags = res;
         this.scrollTopDiv();
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -307,8 +301,7 @@ export class CreatePageComponent implements OnInit {
         this.getUserUrls();
         this.selectedFiles = [];
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -318,8 +311,7 @@ export class CreatePageComponent implements OnInit {
       next: (res) => {
         this.uploadUrlList = res;
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -328,8 +320,7 @@ export class CreatePageComponent implements OnInit {
       next: () => {
         this.getUserUrls();
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }

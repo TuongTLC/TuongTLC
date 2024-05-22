@@ -124,8 +124,7 @@ export class EditPostPageComponent implements OnInit {
       next: (res) => {
         this.categories = res;
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -135,8 +134,7 @@ export class EditPostPageComponent implements OnInit {
       next: (res) => {
         this.tags = res;
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -182,8 +180,7 @@ export class EditPostPageComponent implements OnInit {
       next: () => {
         this.getUserUrls();
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -193,8 +190,7 @@ export class EditPostPageComponent implements OnInit {
       next: (res) => {
         this.uploadUrlList = res;
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }
@@ -203,8 +199,7 @@ export class EditPostPageComponent implements OnInit {
       next: () => {
         this.getUserUrls();
       },
-      error: (error) => {
-        console.error(error);
+      error: () => {
       },
     });
   }

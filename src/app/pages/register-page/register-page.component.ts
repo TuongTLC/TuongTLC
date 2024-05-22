@@ -95,7 +95,6 @@ export class RegisterPageComponent {
         next: (res) => {
           this.userInfo = res;
           if (this.userInfo) {
-            console.log(JSON.stringify(this.userInfo));
             this.verify = true;
           }
         },

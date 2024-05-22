@@ -75,9 +75,8 @@ export class ListViewComponent implements OnInit {
       this.changePostStatusModel.status = 'active';
     }
     this.postService.changePostStatus(this.changePostStatusModel).subscribe({
-      next: (res) => {
+      next: () => {
         this.getUserPosts(1, 8);
-        console.log(res);
       },error:() => {
           this.popupTitle = 'Failed to update post!';
           this.popupMessage =
