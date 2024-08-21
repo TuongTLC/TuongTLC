@@ -107,7 +107,6 @@ export class RegisterPageComponent {
       });
     }
   }
-
   showModal() {
     this.showIt = true;
   }
