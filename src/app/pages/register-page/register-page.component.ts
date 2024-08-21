@@ -110,7 +110,6 @@ export class RegisterPageComponent {
   showModal() {
     this.showIt = true;
   }
-
   closeModal() {
     this.showIt = false;
     if (this.registerError === null) {
