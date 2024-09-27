@@ -37,6 +37,7 @@ export class FileService {
       }
     );
   }
+  
   removeFiles(fileUrl: string) {
     if (!this.auth.checkToken()) {
       this.router.navigate(['/login']);
