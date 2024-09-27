@@ -1,3 +1,3 @@
 export const environment = {
-  BASE_URL: 'https://tuongtlc.ddns.net:8081',
+  BASE_URL: 'http://api.tuongtlc.site:8081',
 };
