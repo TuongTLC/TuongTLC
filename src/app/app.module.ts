@@ -8,7 +8,7 @@ import { WelcomePageComponent } from './pages/welcome-page/welcome-page.componen
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PopupModalComponent } from './components/popup-modal/popup-modal.component';
 import { PasswordPageComponent } from './pages/password-page/password-page.component';
@@ -25,39 +25,32 @@ import { PreviewPostComponent } from './pages/preview-post/preview-post.componen
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { QuillModule } from 'ngx-quill';
 
-@NgModule({
-  declarations: [
-    WelcomePageComponent,
-    HomePageComponent,
-    ErrorPageComponent,
-    NavbarComponent,
-    WelcomePageComponent,
-    LoginPageComponent,
-    RegisterPageComponent,
-    AboutPageComponent,
-    PopupModalComponent,
-    PasswordPageComponent,
-    UserInfoPageComponent,
-    CreatePageComponent,
-    PostPageComponent,
-    ListViewComponent,
-    EditPostPageComponent,
-    AdminConsoleComponent,
-    PreviewPostComponent,
-    VerifyEmailComponent,
-  ],
-  imports: [
-    QuillModule.forRoot(),
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    ClipboardModule,
-    NgxSpinnerModule,
-    BrowserAnimationsModule,
-  ],
-  providers: [],
-  bootstrap: [NavbarComponent],
-})
+@NgModule({ declarations: [
+        WelcomePageComponent,
+        HomePageComponent,
+        ErrorPageComponent,
+        NavbarComponent,
+        WelcomePageComponent,
+        LoginPageComponent,
+        RegisterPageComponent,
+        AboutPageComponent,
+        PopupModalComponent,
+        PasswordPageComponent,
+        UserInfoPageComponent,
+        CreatePageComponent,
+        PostPageComponent,
+        ListViewComponent,
+        EditPostPageComponent,
+        AdminConsoleComponent,
+        PreviewPostComponent,
+        VerifyEmailComponent,
+    ],
+    bootstrap: [NavbarComponent], imports: [QuillModule.forRoot(),
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ClipboardModule,
+        NgxSpinnerModule,
+        BrowserAnimationsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {}
