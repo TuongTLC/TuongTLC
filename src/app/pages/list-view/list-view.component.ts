@@ -6,9 +6,10 @@ import { UserModel } from 'src/app/models/user-models';
 import { PostService } from 'src/app/services/post-service';
 
 @Component({
-  selector: 'app-list-view',
-  templateUrl: './list-view.component.html',
-  styleUrls: ['./list-view.component.css'],
+    selector: 'app-list-view',
+    templateUrl: './list-view.component.html',
+    styleUrls: ['./list-view.component.css'],
+    standalone: false
 })
 export class ListViewComponent implements OnInit {
   constructor(

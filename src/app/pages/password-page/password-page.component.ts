@@ -4,9 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { UserChangePasswordModel, UserModel } from '../../models/user-models';
 
 @Component({
-  selector: 'app-password-page',
-  templateUrl: './password-page.component.html',
-  styleUrls: ['./password-page.component.css'],
+    selector: 'app-password-page',
+    templateUrl: './password-page.component.html',
+    styleUrls: ['./password-page.component.css'],
+    standalone: false
 })
 export class PasswordPageComponent implements OnInit {
   changePassModel: UserChangePasswordModel = {

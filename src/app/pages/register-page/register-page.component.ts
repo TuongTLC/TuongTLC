@@ -4,9 +4,10 @@ import { UserModel, UserRegisterModel } from '../../models/user-models';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register-page',
-  templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.css'],
+    selector: 'app-register-page',
+    templateUrl: './register-page.component.html',
+    styleUrls: ['./register-page.component.css'],
+    standalone: false
 })
 export class RegisterPageComponent {
   registerInfo: UserRegisterModel = {

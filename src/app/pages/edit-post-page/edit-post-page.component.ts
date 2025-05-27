@@ -14,9 +14,10 @@ import { PostService } from 'src/app/services/post-service';
 import { TagService } from 'src/app/services/tag-service';
 
 @Component({
-  selector: 'app-edit-post-page',
-  templateUrl: './edit-post-page.component.html',
-  styleUrls: ['./edit-post-page.component.css'],
+    selector: 'app-edit-post-page',
+    templateUrl: './edit-post-page.component.html',
+    styleUrls: ['./edit-post-page.component.css'],
+    standalone: false
 })
 export class EditPostPageComponent implements OnInit {
   constructor(

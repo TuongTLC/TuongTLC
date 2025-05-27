@@ -5,9 +5,10 @@ import { PostModel } from 'src/app/models/post-model';
 import { PostService } from 'src/app/services/post-service';
 
 @Component({
-  selector: 'app-preview-post',
-  templateUrl: './preview-post.component.html',
-  styleUrls: ['./preview-post.component.css'],
+    selector: 'app-preview-post',
+    templateUrl: './preview-post.component.html',
+    styleUrls: ['./preview-post.component.css'],
+    standalone: false
 })
 export class PreviewPostComponent implements OnInit {
   constructor(

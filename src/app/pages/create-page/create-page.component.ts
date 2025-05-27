@@ -16,9 +16,10 @@ import { UserModel } from 'src/app/models/user-models';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 
 @Component({
-  selector: 'app-create-page',
-  templateUrl: './create-page.component.html',
-  styleUrls: ['./create-page.component.css'],
+    selector: 'app-create-page',
+    templateUrl: './create-page.component.html',
+    styleUrls: ['./create-page.component.css'],
+    standalone: false
 })
 export class CreatePageComponent implements OnInit {
   constructor(

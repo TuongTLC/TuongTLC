@@ -12,10 +12,11 @@ import { PostCommentService } from 'src/app/services/post-comment-service';
 import { PostService } from 'src/app/services/post-service';
 
 @Component({
-  selector: 'app-post-page',
-  templateUrl: './post-page.component.html',
-  styleUrls: ['./post-page.component.css'],
-  encapsulation: ViewEncapsulation.None,
+    selector: 'app-post-page',
+    templateUrl: './post-page.component.html',
+    styleUrls: ['./post-page.component.css'],
+    encapsulation: ViewEncapsulation.None,
+    standalone: false
 })
 export class PostPageComponent implements OnInit {
   constructor(

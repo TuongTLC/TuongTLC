@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-popup-modal',
-  templateUrl: './popup-modal.component.html',
-  styleUrls: ['./popup-modal.component.css'],
+    selector: 'app-popup-modal',
+    templateUrl: './popup-modal.component.html',
+    styleUrls: ['./popup-modal.component.css'],
+    standalone: false
 })
 export class PopupModalComponent {
   @Input() title = '';

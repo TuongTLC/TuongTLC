@@ -4,9 +4,10 @@ import { VerifyCodeModel } from 'src/app/models/user-models';
 import { UserService } from 'src/app/services/user-services';
 
 @Component({
-  selector: 'app-verify-email',
-  templateUrl: './verify-email.component.html',
-  styleUrls: ['./verify-email.component.css'],
+    selector: 'app-verify-email',
+    templateUrl: './verify-email.component.html',
+    styleUrls: ['./verify-email.component.css'],
+    standalone: false
 })
 export class VerifyEmailComponent {
   constructor(private userService: UserService, private router: Router) {}

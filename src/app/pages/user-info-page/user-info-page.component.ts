@@ -4,9 +4,10 @@ import { UserService } from '../../services/user-services';
 import { UserModel, UserUpdateModel } from '../../models/user-models';
 
 @Component({
-  selector: 'app-user-info-page',
-  templateUrl: './user-info-page.component.html',
-  styleUrls: ['./user-info-page.component.css'],
+    selector: 'app-user-info-page',
+    templateUrl: './user-info-page.component.html',
+    styleUrls: ['./user-info-page.component.css'],
+    standalone: false
 })
 export class UserInfoPageComponent implements OnInit {
   userInfo: UserModel = new UserModel();
