@@ -8,7 +8,7 @@
    min-height: fit-content;
    margin: 0;
    padding: 0;
-   background-image: url("/assets//wal.jpg");
+   background-image: url("/assets/wal.jpg");
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
@@ -30,10 +30,10 @@
 
  @font-face {
    font-family: Itim;
-   src: url(/assets//Itim-Regular.ttf) format("opentype");
+   src: url(/assets/Itim-Regular.ttf) format("opentype");
  }
 
  @font-face {
    font-family: YellowTail;
-   src: url(/assets//Yellowtail-Regular.ttf) format("opentype");
+   src: url(/assets/Yellowtail-Regular.ttf) format("opentype");
  }
