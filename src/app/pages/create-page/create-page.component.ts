@@ -14,21 +14,99 @@ import {
 import { FileModel } from 'src/app/models/file-model';
 import { UserModel } from 'src/app/models/user-models';
 import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
+import Quill from 'quill';
+import { ImageHandler, Options } from 'ngx-quill-upload';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-    selector: 'app-create-page',
-    templateUrl: './create-page.component.html',
-    styleUrls: ['./create-page.component.css'],
-    standalone: false
+  selector: 'app-create-page',
+  templateUrl: './create-page.component.html',
+  styleUrls: ['./create-page.component.css'],
+  standalone: false,
 })
 export class CreatePageComponent implements OnInit {
+  modules: any;
   constructor(
     private postService: PostService,
     private categoryService: CategoryService,
     private tagService: TagService,
     private fileService: FileService,
-    private clipboardService: ClipboardService
-  ) {}
+    private clipboardService: ClipboardService,
+    private http: HttpClient
+  ) {
+    Quill.register('modules/imageHandler', ImageHandler);
+    this.modules = {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        [{ header: 1 }, { header: 2 }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ script: 'sub' }, { script: 'super' }],
+        [{ indent: '-1' }, { indent: '+1' }],
+        [{ direction: 'rtl' }],
+        [{ size: ['small', false, 'large', 'huge'] }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ color: [] }, { background: [] }],
+        [{ font: [] }],
+        [{ align: [] }],
+        ['clean'],
+        ['image'],
+      ],
+      imageHandler: {
+        upload: (file: File) => {
+          return new Promise<string>((resolve, reject) => {
+            const token = sessionStorage.getItem('token');
+            if (!token) {
+              reject('No auth token');
+              return;
+            }
+            if (
+              !(
+                file.type === 'image/jpeg' ||
+                file.type === 'image/png' ||
+                file.type === 'image/jpg'
+              )
+            ) {
+              reject('Unsupported type');
+              return;
+            }
+            if (file.size > 2 * 1024 * 1024) {
+              reject('Size too large');
+              return;
+            }
+            const uploadData = new FormData();
+            uploadData.append('files', file, file.name);
+            this.http
+              .post<any>(
+                'https://api.tuongtlc.site/file/upload-files',
+                uploadData,
+                {
+                  headers: { Authorization: 'Bearer ' + token },
+                }
+              )
+              .subscribe({
+                next: (result) => {
+                  // Expecting result to be an array of string URLs
+                  if (
+                    Array.isArray(result) &&
+                    result.length > 0 &&
+                    typeof result[0] === 'string'
+                  ) {
+                    resolve(result[0]);
+                  } else {
+                    reject('No URL returned');
+                  }
+                },
+                error: (err) => {
+                  reject('Upload failed');
+                },
+              });
+          });
+        },
+        accepts: ['png', 'jpg', 'jpeg'],
+      } as Options,
+    };
+  }
   postModel: postCreateModel = {
     postName: '',
     summary: '',
@@ -201,8 +279,7 @@ export class CreatePageComponent implements OnInit {
       next: (res) => {
         this.categories = res;
       },
-      error: () => {
-      },
+      error: () => {},
     });
   }
 
@@ -212,8 +289,7 @@ export class CreatePageComponent implements OnInit {
         this.tags = res;
         this.scrollTopDiv();
       },
-      error: () => {
-      },
+      error: () => {},
     });
   }
   ngOnInit() {
@@ -302,8 +378,7 @@ export class CreatePageComponent implements OnInit {
         this.getUserUrls();
         this.selectedFiles = [];
       },
-      error: () => {
-      },
+      error: () => {},
     });
   }
   getUserUrls() {
@@ -312,8 +387,7 @@ export class CreatePageComponent implements OnInit {
       next: (res) => {
         this.uploadUrlList = res;
       },
-      error: () => {
-      },
+      error: () => {},
     });
   }
   removeFile(fileUrl: string) {
@@ -321,8 +395,7 @@ export class CreatePageComponent implements OnInit {
       next: () => {
         this.getUserUrls();
       },
-      error: () => {
-      },
+      error: () => {},
     });
   }
 }
