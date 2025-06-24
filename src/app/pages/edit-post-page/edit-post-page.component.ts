@@ -12,6 +12,9 @@ import { CategoryService } from 'src/app/services/category-service';
 import { FileService } from 'src/app/services/file-service';
 import { PostService } from 'src/app/services/post-service';
 import { TagService } from 'src/app/services/tag-service';
+import Quill from 'quill';
+import { ImageHandler, Options } from 'ngx-quill-upload';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-edit-post-page',
@@ -28,8 +31,66 @@ export class EditPostPageComponent implements OnInit {
     private fileService: FileService,
     private clipboardService: ClipboardService,
     private categoryService: CategoryService,
-    private tagService: TagService
-  ) {}
+    private tagService: TagService,
+    private http: HttpClient
+  ) {
+    Quill.register('modules/imageHandler', ImageHandler);
+    this.modules = {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        [{ 'header': 1 }, { 'header': 2 }],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'script': 'sub'}, { 'script': 'super' }],
+        [{ 'indent': '-1'}, { 'indent': '+1' }],
+        [{ 'direction': 'rtl' }],
+        [{ 'size': ['small', false, 'large', 'huge'] }],
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'font': [] }],
+        [{ 'align': [] }],
+        ['clean'],
+        ['image']
+      ],
+      imageHandler: {
+        upload: (file: File) => {
+          return new Promise<string>((resolve, reject) => {
+            const token = sessionStorage.getItem('token');
+            if (!token) {
+              reject('No auth token');
+              return;
+            }
+            if (!(file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg')) {
+              reject('Unsupported type');
+              return;
+            }
+            if (file.size > 2 * 1024 * 1024) {
+              reject('Size too large');
+              return;
+            }
+            const uploadData = new FormData();
+            uploadData.append('files', file, file.name);
+            this.http.post<any>('https://api.tuongtlc.site/file/upload-files', uploadData, {
+              headers: { Authorization: 'Bearer ' + token }
+            }).subscribe({
+              next: (result) => {
+                // Expecting result to be an array of string URLs
+                if (Array.isArray(result) && result.length > 0 && typeof result[0] === 'string') {
+                  resolve(result[0]);
+                } else {
+                  reject('No URL returned');
+                }
+              },
+              error: (err) => {
+                reject('Upload failed');
+              }
+            });
+          });
+        },
+        accepts: ['png', 'jpg', 'jpeg']
+      } as Options
+    };
+  }
   postId = '';
   categories: CategoryModel[] = [];
   tags: TagModel[] = [];
@@ -307,4 +368,5 @@ export class EditPostPageComponent implements OnInit {
     }
     return error;
   }
+  modules: any;
 }

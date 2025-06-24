@@ -110,6 +110,7 @@
             (onEditorChanged)="editorChange($event)"
             [ngModel]="getPostModel.postInfo.content"
             [placeholder]="'Enter your text here...'"
+            [modules]="modules"
           >
           </quill-editor>
         </div>

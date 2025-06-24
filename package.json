@@ -24,6 +24,7 @@
     "ng": "^0.0.0",
     "ngx-clipboard": "^16.0.0",
     "ngx-quill": "^27.0.2",
+    "ngx-quill-upload": "^2.0.0",
     "ngx-spinner": "^16.0.2",
     "quill": "^2.0.0",
     "rxjs": "~7.8.0",
