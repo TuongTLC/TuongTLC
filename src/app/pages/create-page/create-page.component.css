@@ -50,6 +50,16 @@
   display: none;
 }
 
+.uploadMonthSection {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 1vh;
+  padding: 12px;
+  background: #fafbfc;
+  clear: both;
+  overflow: auto;
+}
+
 .uploadImgBox {
   height: 20vh;
   min-height: fit-content;
@@ -57,6 +67,7 @@
   min-width: fit-content;
   float: left;
   margin: 1vh;
+  display: inline-table;
 }
 
 .innerDiv {
@@ -87,6 +98,7 @@
 }
 
 .quillEditor {
+  color: black;
   width: 98%;
   padding: 1%;
 }
@@ -230,6 +242,7 @@ img:hover {
   .uploadImgBox {
     width: 96%;
     margin: 0;
+    display: block;
   }
 
 }
