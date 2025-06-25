@@ -15,12 +15,13 @@ import { TagService } from 'src/app/services/tag-service';
 import Quill from 'quill';
 import { ImageHandler, Options } from 'ngx-quill-upload';
 import { HttpClient } from '@angular/common/http';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
-    selector: 'app-edit-post-page',
-    templateUrl: './edit-post-page.component.html',
-    styleUrls: ['./edit-post-page.component.css'],
-    standalone: false
+  selector: 'app-edit-post-page',
+  templateUrl: './edit-post-page.component.html',
+  styleUrls: ['./edit-post-page.component.css'],
+  standalone: false,
 })
 export class EditPostPageComponent implements OnInit {
   constructor(
@@ -32,25 +33,26 @@ export class EditPostPageComponent implements OnInit {
     private clipboardService: ClipboardService,
     private categoryService: CategoryService,
     private tagService: TagService,
-    private http: HttpClient
+    private http: HttpClient,
+    private cdf: ChangeDetectorRef
   ) {
     Quill.register('modules/imageHandler', ImageHandler);
     this.modules = {
       toolbar: [
         ['bold', 'italic', 'underline', 'strike'],
         ['blockquote', 'code-block'],
-        [{ 'header': 1 }, { 'header': 2 }],
-        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'script': 'sub'}, { 'script': 'super' }],
-        [{ 'indent': '-1'}, { 'indent': '+1' }],
-        [{ 'direction': 'rtl' }],
-        [{ 'size': ['small', false, 'large', 'huge'] }],
-        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-        [{ 'color': [] }, { 'background': [] }],
-        [{ 'font': [] }],
-        [{ 'align': [] }],
+        [{ header: 1 }, { header: 2 }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ script: 'sub' }, { script: 'super' }],
+        [{ indent: '-1' }, { indent: '+1' }],
+        [{ direction: 'rtl' }],
+        [{ size: ['small', false, 'large', 'huge'] }],
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ color: [] }, { background: [] }],
+        [{ font: [] }],
+        [{ align: [] }],
         ['clean'],
-        ['image']
+        ['image'],
       ],
       imageHandler: {
         upload: (file: File) => {
@@ -60,7 +62,13 @@ export class EditPostPageComponent implements OnInit {
               reject('No auth token');
               return;
             }
-            if (!(file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg')) {
+            if (
+              !(
+                file.type === 'image/jpeg' ||
+                file.type === 'image/png' ||
+                file.type === 'image/jpg'
+              )
+            ) {
               reject('Unsupported type');
               return;
             }
@@ -70,25 +78,36 @@ export class EditPostPageComponent implements OnInit {
             }
             const uploadData = new FormData();
             uploadData.append('files', file, file.name);
-            this.http.post<any>('https://api.tuongtlc.site/file/upload-files', uploadData, {
-              headers: { Authorization: 'Bearer ' + token }
-            }).subscribe({
-              next: (result) => {
-                // Expecting result to be an array of string URLs
-                if (Array.isArray(result) && result.length > 0 && typeof result[0] === 'string') {
-                  resolve(result[0]);
-                } else {
-                  reject('No URL returned');
+            this.http
+              .post<string[]>(
+                'https://api.tuongtlc.site/file/upload-files',
+                uploadData,
+                {
+                  headers: { Authorization: 'Bearer ' + token },
                 }
-              },
-              error: (err) => {
-                reject('Upload failed');
-              }
-            });
+              )
+              .subscribe({
+                next: (result) => {
+                  if (
+                    Array.isArray(result) &&
+                    result.length > 0 &&
+                    typeof result[0] === 'string'
+                  ) {
+                    resolve(result[0]);
+                    this.getUserUrls();
+                    this.cdf.detectChanges();
+                  } else {
+                    reject('No URL returned');
+                  }
+                },
+                error: () => {
+                  reject('Upload failed');
+                },
+              });
           });
         },
-        accepts: ['png', 'jpg', 'jpeg']
-      } as Options
+        accepts: ['png', 'jpg', 'jpeg'],
+      } as Options,
     };
   }
   postId = '';
@@ -186,8 +205,7 @@ export class EditPostPageComponent implements OnInit {
       next: (res) => {
         this.categories = res;
       },
-      error: () => {
-      },
+      error: () => {},
     });
   }
   getTags() {
@@ -196,8 +214,7 @@ export class EditPostPageComponent implements OnInit {
       next: (res) => {
         this.tags = res;
       },
-      error: () => {
-      },
+      error: () => {},
     });
   }
   @ViewChild('innerDiv')
@@ -242,8 +259,7 @@ export class EditPostPageComponent implements OnInit {
       next: () => {
         this.getUserUrls();
       },
-      error: () => {
-      },
+      error: () => {},
     });
   }
   getUserUrls() {
@@ -252,8 +268,7 @@ export class EditPostPageComponent implements OnInit {
       next: (res) => {
         this.uploadUrlList = res;
       },
-      error: () => {
-      },
+      error: () => {},
     });
   }
   removeFile(fileUrl: string) {
@@ -261,8 +276,7 @@ export class EditPostPageComponent implements OnInit {
       next: () => {
         this.getUserUrls();
       },
-      error: () => {
-      },
+      error: () => {},
     });
   }
   copiedUrl = '';
