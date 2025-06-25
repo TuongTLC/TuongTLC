@@ -16,6 +16,7 @@ import Quill from 'quill';
 import { ImageHandler, Options } from 'ngx-quill-upload';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef } from '@angular/core';
+import { QuillEditorComponent } from 'ngx-quill';
 
 @Component({
   selector: 'app-edit-post-page',
@@ -262,11 +263,33 @@ export class EditPostPageComponent implements OnInit {
       error: () => {},
     });
   }
+  groupedUploadUrlList: { [month: string]: FileModel[] } = {};
+  groupedUploadUrlListKeys: string[] = [];
+
   getUserUrls() {
     this.uploadUrlList = [];
     this.fileService.getFiles().subscribe({
       next: (res) => {
         this.uploadUrlList = res;
+        this.groupedUploadUrlList = {};
+        res.forEach((file) => {
+          const date = new Date(file.uploadDate);
+          const month = date.toLocaleString('default', { month: 'long' });
+          const year = date.getFullYear();
+          const key = `${month} ${year}`;
+          if (!this.groupedUploadUrlList[key]) {
+            this.groupedUploadUrlList[key] = [];
+          }
+          this.groupedUploadUrlList[key].push(file);
+        });
+        this.groupedUploadUrlListKeys = Object.keys(this.groupedUploadUrlList).sort((a, b) => {
+          // Sort by year and month descending
+          const [monthA, yearA] = a.split(' ');
+          const [monthB, yearB] = b.split(' ');
+          const dateA = new Date(`${monthA} 1, ${yearA}`);
+          const dateB = new Date(`${monthB} 1, ${yearB}`);
+          return dateB.getTime() - dateA.getTime();
+        });
       },
       error: () => {},
     });
@@ -383,4 +406,42 @@ export class EditPostPageComponent implements OnInit {
     return error;
   }
   modules: any;
+  @ViewChild('quillEditor', { static: false }) quillEditorComponent:
+    | QuillEditorComponent
+    | undefined;
+  insertImageToEditor(url: string) {
+    if (this.quillEditorComponent && this.quillEditorComponent.quillEditor) {
+      const quill = this.quillEditorComponent.quillEditor;
+      const range = quill.getSelection(true);
+      quill.insertEmbed(range ? range.index : 0, 'image', url, 'user');
+      this.copiedUrl = url;
+      timer(2000).subscribe(() => {
+        this.copiedUrl = '';
+      });
+    }
+  }
+  addAsThumbnail(url: string) {
+    this.getPostModel.postInfo.thumbnail = url;
+  }
+  thumbnailFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append('files', file);
+      this.fileService.uploadFiles(formData).subscribe(
+        (res: any) => {
+          if (
+            Array.isArray(res) &&
+            res.length > 0 &&
+            typeof res[0] === 'string'
+          ) {
+            this.getPostModel.postInfo.thumbnail = res[0];
+            this.getUserUrls();
+          }
+        },
+        () => {}
+      );
+    }
+  }
 }
