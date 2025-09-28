@@ -78,7 +78,7 @@ export class CreatePageComponent implements OnInit {
             uploadData.append('files', file, file.name);
             this.http
               .post<any>(
-                'https://api.tuongtlc.site/file/upload-files',
+                'https://api.tuongtlc.com/file/upload-files',
                 uploadData,
                 {
                   headers: { Authorization: 'Bearer ' + token },
