@@ -1,3 +1,3 @@
 export const environment = {
-  BASE_URL: 'https://api.tuongtlc.site',
+  BASE_URL: 'https://api.tuongtlc.som',
 };
