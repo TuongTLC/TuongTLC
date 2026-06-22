@@ -7,6 +7,8 @@ import { postCreateModel } from 'src/app/models/post-model';
 import { timer } from 'rxjs';
 import { ClipboardService } from 'ngx-clipboard';
 import { PostService } from 'src/app/services/post-service';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 import {
   CategoryCreateModel,
   CategoryModel,
@@ -30,6 +32,7 @@ export class CreatePageComponent implements OnInit {
     private postService: PostService,
     private categoryService: CategoryService,
     private tagService: TagService,
+    private spinner: NgxSpinnerService,
     private fileService: FileService,
     private clipboardService: ClipboardService,
     private http: HttpClient
@@ -195,6 +198,7 @@ export class CreatePageComponent implements OnInit {
     }
   }
   save() {
+
     this.postModel.categoriesIds = [];
     this.selectedCategories.forEach((category) => {
       this.postModel.categoriesIds?.push(category.id);
@@ -203,19 +207,23 @@ export class CreatePageComponent implements OnInit {
     this.selectedTags.forEach((tag) => {
       this.postModel.tagsIds?.push(tag.id);
     });
+
     if (!this.validatePost()) {
-      this.postService.createPost(this.postModel).subscribe({
+      this.spinner.show();
+        this.postService.createPost(this.postModel).subscribe({
         next: () => {
           this.popupTitle = 'Post save successful!';
           this.popupMessage =
             'Your post have been save and will be reviewed by admin!';
           this.showIt = true;
           this.resetPostModel();
+          this.spinner.hide();
         },
         error: () => {
           this.popupTitle = 'Post save failed!';
           this.popupMessage = 'Something happen while trying to save post!';
           this.showIt = true;
+          this.spinner.hide();
         },
       });
     }
