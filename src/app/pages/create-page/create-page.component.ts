@@ -19,6 +19,7 @@ import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill';
 import Quill from 'quill';
 import { ImageHandler, Options } from 'ngx-quill-upload';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/ext';
 
 @Component({
   selector: 'app-create-page',
@@ -27,7 +28,7 @@ import { HttpClient } from '@angular/common/http';
   standalone: false,
 })
 export class CreatePageComponent implements OnInit {
-  modules: any;
+  modules: Record<string, unknown>;
   constructor(
     private postService: PostService,
     private categoryService: CategoryService,
@@ -80,8 +81,8 @@ export class CreatePageComponent implements OnInit {
             const uploadData = new FormData();
             uploadData.append('files', file, file.name);
             this.http
-              .post<any>(
-                'https://api.tuongtlc.com/file/upload-files',
+              .post<string[]>(
+                environment.BASE_URL + '/file/upload-files',
                 uploadData,
                 {
                   headers: { Authorization: 'Bearer ' + token },
@@ -100,7 +101,7 @@ export class CreatePageComponent implements OnInit {
                     reject('No URL returned');
                   }
                 },
-                error: (err) => {
+                error: () => {
                   reject('Upload failed');
                 },
               });
@@ -198,7 +199,6 @@ export class CreatePageComponent implements OnInit {
     }
   }
   save() {
-
     this.postModel.categoriesIds = [];
     this.selectedCategories.forEach((category) => {
       this.postModel.categoriesIds?.push(category.id);
@@ -210,7 +210,15 @@ export class CreatePageComponent implements OnInit {
 
     if (!this.validatePost()) {
       this.spinner.show();
-        this.postService.createPost(this.postModel).subscribe({
+      const create$ = this.postService.createPost(this.postModel);
+      if (!create$) {
+        this.spinner.hide();
+        this.popupTitle = 'Unauthorized!';
+        this.popupMessage = 'Please login to create post!';
+        this.showIt = true;
+        return;
+      }
+      create$.subscribe({
         next: () => {
           this.popupTitle = 'Post save successful!';
           this.popupMessage =
@@ -237,7 +245,10 @@ export class CreatePageComponent implements OnInit {
     this.postModel.tagsIds = [];
   }
   editorChange(event: EditorChangeContent | EditorChangeSelection) {
-    this.postModel.content = event['editor']['root']['innerHTML'];
+    const quill = (event['editor'] as unknown as { root: HTMLElement })?.root;
+    if (quill) {
+      this.postModel.content = quill.innerHTML;
+    }
   }
   saveDraft() {
     this.postModel.categoriesIds = [];
@@ -434,7 +445,7 @@ export class CreatePageComponent implements OnInit {
       const formData = new FormData();
       formData.append('files', file);
       this.fileService.uploadFiles(formData).subscribe(
-        (res: any) => {
+        (res: string[] | unknown) => {
           if (
             Array.isArray(res) &&
             res.length > 0 &&
@@ -448,7 +459,7 @@ export class CreatePageComponent implements OnInit {
       );
     }
   }
-  @ViewChild('quillEditor', { static: false }) quillEditorComponent: any;
+  @ViewChild('quillEditor', { static: false }) quillEditorComponent: { quillEditor: Quill } | undefined;
 
   insertImageToEditor(url: string) {
     if (this.quillEditorComponent && this.quillEditorComponent.quillEditor) {

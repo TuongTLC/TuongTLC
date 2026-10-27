@@ -8,8 +8,9 @@ import { WelcomePageComponent } from './pages/welcome-page/welcome-page.componen
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { AboutPageComponent } from './pages/about-page/about-page.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { PopupModalComponent } from './components/popup-modal/popup-modal.component';
 import { PasswordPageComponent } from './pages/password-page/password-page.component';
 import { UserInfoPageComponent } from './pages/user-info-page/user-info-page.component';
@@ -30,7 +31,6 @@ import { QuillModule } from 'ngx-quill';
         HomePageComponent,
         ErrorPageComponent,
         NavbarComponent,
-        WelcomePageComponent,
         LoginPageComponent,
         RegisterPageComponent,
         AboutPageComponent,
@@ -52,5 +52,8 @@ import { QuillModule } from 'ngx-quill';
         ReactiveFormsModule,
         ClipboardModule,
         NgxSpinnerModule,
-        BrowserAnimationsModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        BrowserAnimationsModule], providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    ] })
 export class AppModule {}

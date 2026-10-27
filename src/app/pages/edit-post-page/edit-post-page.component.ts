@@ -17,6 +17,7 @@ import { ImageHandler, Options } from 'ngx-quill-upload';
 import { HttpClient } from '@angular/common/http';
 import { ChangeDetectorRef } from '@angular/core';
 import { QuillEditorComponent } from 'ngx-quill';
+import { environment } from 'src/ext';
 
 @Component({
   selector: 'app-edit-post-page',
@@ -81,7 +82,7 @@ export class EditPostPageComponent implements OnInit {
             uploadData.append('files', file, file.name);
             this.http
               .post<string[]>(
-                'https://api.tuongtlc.com/file/upload-files',
+                environment.BASE_URL + '/file/upload-files',
                 uploadData,
                 {
                   headers: { Authorization: 'Bearer ' + token },
@@ -342,7 +343,10 @@ export class EditPostPageComponent implements OnInit {
     }
   }
   editorChange(event: EditorChangeContent | EditorChangeSelection) {
-    this.updateModel.content = event['editor']['root']['innerHTML'];
+    const quill = (event['editor'] as unknown as { root: HTMLElement })?.root;
+    if (quill) {
+      this.updateModel.content = quill.innerHTML;
+    }
   }
   postNameError = false;
   postSummaryError = false;
@@ -405,7 +409,7 @@ export class EditPostPageComponent implements OnInit {
     }
     return error;
   }
-  modules: any;
+  modules: Record<string, unknown>;
   @ViewChild('quillEditor', { static: false }) quillEditorComponent:
     | QuillEditorComponent
     | undefined;
@@ -430,7 +434,7 @@ export class EditPostPageComponent implements OnInit {
       const formData = new FormData();
       formData.append('files', file);
       this.fileService.uploadFiles(formData).subscribe(
-        (res: any) => {
+        (res: string[] | unknown) => {
           if (
             Array.isArray(res) &&
             res.length > 0 &&

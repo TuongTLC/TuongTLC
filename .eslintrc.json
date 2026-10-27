@@ -12,6 +12,9 @@
       ],
       "rules": {
         "no-console": "warn",
+        "@angular-eslint/prefer-standalone": "off",
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
         "@angular-eslint/directive-selector": [
           "error",
           {

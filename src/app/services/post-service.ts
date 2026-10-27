@@ -24,6 +24,7 @@ export class PostService {
   createPost(postModel: postCreateModel) {
     if (!this.auth.checkToken()) {
       this.router.navigate(['/login']);
+      return;
     }
     const token = sessionStorage.getItem('token');
     return this.http.post(

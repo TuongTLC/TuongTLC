@@ -14,6 +14,8 @@ import { ListViewComponent } from './pages/list-view/list-view.component';
 import { EditPostPageComponent } from './pages/edit-post-page/edit-post-page.component';
 import { AdminConsoleComponent } from './pages/admin-console/admin-console.component';
 import { PreviewPostComponent } from './pages/preview-post/preview-post.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', component: WelcomePageComponent },
@@ -21,13 +23,13 @@ const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
   { path: 'about', component: AboutPageComponent },
-  { path: 'create', component: CreatePageComponent },
+  { path: 'create', component: CreatePageComponent, canActivate: [AuthGuard] },
   { path: 'post', component: PostPageComponent },
-  { path: 'user-info', component: UserInfoPageComponent },
-  { path: 'password', component: PasswordPageComponent },
-  { path: 'list-view', component: ListViewComponent },
-  { path: 'edit-post', component: EditPostPageComponent },
-  { path: 'admin-console', component: AdminConsoleComponent },
+  { path: 'user-info', component: UserInfoPageComponent, canActivate: [AuthGuard] },
+  { path: 'password', component: PasswordPageComponent, canActivate: [AuthGuard] },
+  { path: 'list-view', component: ListViewComponent, canActivate: [AuthGuard] },
+  { path: 'edit-post', component: EditPostPageComponent, canActivate: [AuthGuard] },
+  { path: 'admin-console', component: AdminConsoleComponent, canActivate: [AdminGuard] },
   { path: 'preview-post', component: PreviewPostComponent },
   { path: '**', component: ErrorPageComponent },
 ];
